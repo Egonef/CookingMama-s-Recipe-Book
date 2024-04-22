@@ -1,5 +1,9 @@
 
 //import './App.css';
+//Not used; Landing in routes/landing.js is used instead
+
+
+/*
 import { useState } from 'react';
 import Navbar from "./components/Navbar";
 import CuadroInicio from "./components/CuadroInicio";
@@ -58,4 +62,4 @@ function App() {
 export default App;
 
 
-
+*/

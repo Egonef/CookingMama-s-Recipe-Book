@@ -1,5 +1,6 @@
 import connectDB from './config/db.js'
 import userRoutes from './routes/userRoute.js'
+import recipeRoutes from './routes/recipeRoute.js'
 import express from 'express'
 import dotenv  from 'dotenv'
 
@@ -12,6 +13,8 @@ const app = express()
 
 //Creating API for user
 app.use('/api/users', userRoutes)
+
+app.use('/api/recipes',recipeRoutes);
 
 const PORT = process.env.PORT || 5000
 

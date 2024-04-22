@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const userSchema = mongoose.Schema({
+const recipeSchema = mongoose.Schema({
     firstName: {
         type: String,
     },
@@ -30,6 +30,6 @@ const userSchema = mongoose.Schema({
     timestamps: true
 })
 
-const User = mongoose.model('User', userSchema)
+const Recipe = mongoose.model('Recipe', recipeSchema)
 
-export default User
+export default Recipe
