@@ -1,9 +1,10 @@
-import Recipe from '../models/recipeModel.js'
+import Recipe from '../models/recipesModel.js'
 import asyncHandler from 'express-async-handler'
 
 export const getRecipes = asyncHandler(async(req, res) => {
-    const recipes = await Recipe.find({})
-    res.json(recipes)
+    //const recipes = await Recipe.find({})
+    //res.json(recipes)
+    res.json("Hola pepe")
 })
 
 export const getRecipeById  = asyncHandler(async(req, res) => {

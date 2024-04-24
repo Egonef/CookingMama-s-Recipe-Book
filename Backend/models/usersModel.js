@@ -7,11 +7,7 @@ const userSchema = mongoose.Schema({
     secondName:{
         type: String,
     },
-<<<<<<< HEAD
-    username: {
-=======
     userName: {
->>>>>>> b829fd7a16961964305fa4414660e4fd609ebea1
         type: String,
         required: true,
         unique:true
@@ -28,21 +24,8 @@ const userSchema = mongoose.Schema({
     isAdmin: {
         type: Boolean,
         required: true,
-<<<<<<< HEAD
-        default: false
-    },
-    favoriteRecipes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Recipe'
-    }],
-    ownRecipes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Recipe'
-    }],
-=======
         defualt: false
     },
->>>>>>> b829fd7a16961964305fa4414660e4fd609ebea1
 }, {
     timestamps: true
 })
