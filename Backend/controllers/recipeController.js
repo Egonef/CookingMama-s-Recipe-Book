@@ -7,7 +7,8 @@ export const getRecipes = asyncHandler(async(req, res) => {
 })
 
 export const getRecipeById  = asyncHandler(async(req, res) => {
-    const recipe = await Recipe.findById(req.params.id)
+    const id = req.params.id
+    const recipe = await Recipe.findById(id)
 
     if(recipe){
         res.json(recipe)
@@ -21,26 +22,32 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
 
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     //TODO
+    res.status(404)
 })
 
-export const setRecipesSavedByUser  = asyncHandler(async(req, res) => {
+export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     //TODO
+    res.status(404)
 })
 
+export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
+    //TODO
+    res.status(404)
+})
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
-    
+    res.status(404)
 })
 
 export const publishRecipe  = asyncHandler(async(req, res) => {
-    
+    res.status(404)
 })
 
 export const draftRecipe  = asyncHandler(async(req, res) => {
-    
+    res.status(404)
 })
 
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
-    
+    res.status(404)
 })
 export const addRecipe = asyncHandler(async (req, res) => {
 
