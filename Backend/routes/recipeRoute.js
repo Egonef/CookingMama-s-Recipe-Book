@@ -4,19 +4,19 @@ const router = express.Router()
 
 
 
-router.route('/recipes/popular').get(ctr.getRecipes)
-router.route('/recipe/:id').get(ctr.getRecipeById)
+router.route('/popular').get(ctr.getRecipes)
+router.route('/:id').get(ctr.getRecipeById)
 // Rutas para salvar
-router.route('/recipe/saved').get(ctr.getRecipesSavedByUser)
+router.route('/saved').get(ctr.getRecipesSavedByUser)
 
-router.route('/recipe/saved').post(ctr.setRecipeSavedByUser)
-router.route('/recipe/saved').delete(ctr.setRecipeUnsavedByUser)
+router.route('/saved').post(ctr.setRecipeSavedByUser)
+router.route('/saved').delete(ctr.setRecipeUnsavedByUser)
 //Rutas para recetas propias
-router.route('/recipe/myOwn/').get(ctr.getRecipesCreatedByUser)
+router.route('/myOwn/').get(ctr.getRecipesCreatedByUser)
 
-router.route('/recipe/myOwn/').post(ctr.publishRecipe)
-router.route('/recipe/myOwn/').patch(ctr.draftRecipe)
-router.route('/recipe/myOwn/').delete(ctr.deleteOwnRecipe)
+router.route('/myOwn/').post(ctr.publishRecipe)
+router.route('/myOwn/').patch(ctr.draftRecipe)
+router.route('/myOwn/').delete(ctr.deleteOwnRecipe)
 
 
 

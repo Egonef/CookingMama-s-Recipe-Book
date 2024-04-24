@@ -3,10 +3,11 @@ import express from 'express'
 const router = express.Router()
 
 
-// express router method to create route for getting all users
-router.route('/users').get(getUsers)
 
-// express router method to create route for getting users by id
-router.route('/user/:id').get(getUserById)
+router.route('/').get(getUsers)
+router.route('/').post(createUser)
+
+router.route('/:id').get(getUserById)
+
 
 export default router

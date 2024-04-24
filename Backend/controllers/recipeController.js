@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler'
 
 // Devolvera una lista estatica de recetas por ahora
 export const getRecipes = asyncHandler(async(req, res) => {
-    
+    res.status(200).send("hola mundo")
 })
 
 export const getRecipeById  = asyncHandler(async(req, res) => {
