@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 router.route('/').get(getUsers)
-router.route('/').post(createUser)
+//router.route('/').post(createUser)
 
 router.route('/:id').get(getUserById)
 
