@@ -1,10 +1,9 @@
 import Recipe from '../models/recipesModel.js'
 import asyncHandler from 'express-async-handler'
 
+// Devolvera una lista estatica de recetas por ahora
 export const getRecipes = asyncHandler(async(req, res) => {
-    //const recipes = await Recipe.find({})
-    //res.json(recipes)
-    res.json("Hola pepe")
+    
 })
 
 export const getRecipeById  = asyncHandler(async(req, res) => {
@@ -19,7 +18,34 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
     }
 })
 
+
+export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
+    //TODO
+})
+
+export const setRecipesSavedByUser  = asyncHandler(async(req, res) => {
+    //TODO
+})
+
+export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
+    
+})
+
+export const publishRecipe  = asyncHandler(async(req, res) => {
+    
+})
+
+export const draftRecipe  = asyncHandler(async(req, res) => {
+    
+})
+
+export const deleteOwnRecipe = asyncHandler(async(req, res) => {
+    
+})
 export const addRecipe = asyncHandler(async (req, res) => {
+
+    //TODO
+
     // Extraer los datos de la receta del cuerpo de la solicitud
     //const { title, description, ingredients, instructions } = req.body;
 
