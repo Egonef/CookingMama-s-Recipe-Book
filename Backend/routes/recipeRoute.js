@@ -3,12 +3,25 @@ import express from 'express'
 const router = express.Router()
 
 
-// express router method to create route for getting all users
-router.route('/').get(getRecipes)
 
-// express router method to create route for getting users by id
-router.route('/find/:id').get(getRecipeById)
+router.route('/recipes/popular').get(getRecipes)
+router.route('/recipe/:id').get(getRecipeById)
+// Rutas para salvar
+router.route('/recipe/saved').get(getRecipesSavedByUser)
 
-router.route('/agregar').get(addRecipe)
+router.route('/recipe/saved').post(setRecipeSavedByUser)
+router.route('/recipe/saved').delete(setRecipeUnsavedByUser)
+//Rutas para recetas propias
+router.route('/recipe/myOwn/').get(getRecipesCreatedByUser)
+
+router.route('/recipe/myOwn/').post(publishRecipe)
+router.route('/recipe/myOwn/').patch(draftRecipe)
+router.route('/recipe/myOwn/').delete(deleteOwnRecipe)
+
+
+
+
+
+
 
 export default router

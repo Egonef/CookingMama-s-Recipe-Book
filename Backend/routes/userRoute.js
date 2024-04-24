@@ -4,9 +4,9 @@ const router = express.Router()
 
 
 // express router method to create route for getting all users
-router.route('/').get(getUsers)
+router.route('/users').get(getUsers)
 
 // express router method to create route for getting users by id
-router.route('/:id').get(getUserById)
+router.route('/user/:id').get(getUserById)
 
 export default router
