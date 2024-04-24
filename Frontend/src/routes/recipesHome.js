@@ -1,6 +1,7 @@
 import Navbar from "./../components/Navbar";
 import RecipeCard from "../components/RecipeCard";
 import Searchbar from "../components/Searchbar";
+import RecipeCardTest from "../components/RecipeCardTest";
 export default function RecipesHome() {
     return (
         <div>
@@ -11,6 +12,7 @@ export default function RecipesHome() {
                 </div>
                 <div className="flex flex-row justify-evenly items-center flex-wrap mt-10 mx-16">
                     <RecipeCard />
+                    <RecipeCardTest />
                     <RecipeCard />
                     <RecipeCard />
                     <RecipeCard />
