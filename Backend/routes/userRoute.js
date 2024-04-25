@@ -1,13 +1,12 @@
-import { getUsers, getUserById } from "../controllers/userController.js";
+import * as ctr from "../controllers/userController.js";
 import express from 'express'
 const router = express.Router()
 
 
+router.route('/').get(ctr.getUsers)
+//router.route('/').post(ctr.createUser)
 
-router.route('/').get(getUsers)
-//router.route('/').post(createUser)
-
-router.route('/:id').get(getUserById)
+router.route('/:id').get(ctr.getUserById)
 
 
 export default router
