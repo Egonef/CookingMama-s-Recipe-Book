@@ -3,7 +3,14 @@ import asyncHandler from 'express-async-handler'
 
 // Devolvera una lista estatica de recetas por ahora
 export const getRecipes = asyncHandler(async(req, res) => {
-    res.status(200).send("hola mundo")
+    const recipe = await Recipe.find({})
+    console.log(recipe)
+    if(recipe){
+        res.status(200).json(recipe)
+    }else{
+        res.status(404).json({message: "Recipe not found"})
+        console.error('Recipe not found')
+    }
 })
 
 export const getRecipeById  = asyncHandler(async(req, res) => {
@@ -21,7 +28,8 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
 
 
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
-    //TODO
+    //const id = req.params.id
+    //const recipe = await User.find({id:id},"saved").populate
     res.status(404)
 })
 
