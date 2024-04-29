@@ -31,7 +31,7 @@ function Landing() {
 
         setTimeout(() => {
             divLibro.style.scale = '15';
-        }, 1500);
+        }, 1000);
 
         setTimeout(() => {
             setShowCuadroInicio(false);
@@ -48,9 +48,9 @@ function Landing() {
 	return (
 		<div id='main' className=" h-dvh bg-[#FCF8E8] ">
 			<Navbar />
-			<div id='ContenedorMain' className=" flex flex-row justify-evenly items-center mt-10">
+			<div id='ContenedorMain' className=" flex flex-row justify-evenly items-center mt-7">
 				{showCuadroInicio && <CuadroInicio />}
-				<div id='divLibro' className='h-[45rem] w-[45rem] '>
+				<div id='divLibro' className='h-[45rem] w-[45rem] sm:h-[25rem] sm:w-[20rem]'>
 					<Canvas className=" bg-[#FCF8E8]" camera={{ fov: 20, position: [0, 200, 100] }}>
 					<ambientLight intensity={2} />
 					<Librov4  hideCuadroInicio={hideCuadroInicio} />
