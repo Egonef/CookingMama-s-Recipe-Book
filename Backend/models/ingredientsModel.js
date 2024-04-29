@@ -1,13 +1,21 @@
 import mongoose from 'mongoose';
 
 const ingredientSchema = mongoose.Schema({
-    nombre: {
+    name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
-    unit: String, // Por ejemplo, gramos, litros, tazas, etc.
-    
+    quantity: {
+        type: String,
+        required: true
+    },
+    unit: {
+        type: String
+    },
+    recipeIds: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Recipe'
+    }]
 });
 
 const Ingredient = mongoose.model('Ingredient', ingredientSchema);
