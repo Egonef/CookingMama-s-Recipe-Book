@@ -44,7 +44,10 @@ const recipeSchema = mongoose.Schema({
     },
     intolerances: {
         type: String,
-    } // Lista de alergenos asociados al ingrediente (opcional)
+    }, // Lista de alergenos asociados al ingrediente (opcional)
+    popularity: {
+        type: Number,
+    }
 }, {
     timestamps: true
 })
