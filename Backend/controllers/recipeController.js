@@ -2,6 +2,8 @@ import Recipe from '../models/recipesModel.js'
 import asyncHandler from 'express-async-handler'
 
 // Devolvera una lista estatica de recetas por ahora
+
+//Abi
 export const getRecipes = asyncHandler(async(req, res) => {
     const recipe = await Recipe.find({})
     console.log(recipe)
@@ -26,22 +28,23 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
     }
 })
 
-
+//Abi
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     //const id = req.params.id
     //const recipe = await User.find({id:id},"saved").populate
     res.status(404)
 })
-
+//Migui
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     //TODO
     res.status(404)
 })
-
+//Migui
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
     //TODO
     res.status(404)
 })
+//Migui
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
     res.status(404)
 })
@@ -57,6 +60,7 @@ export const draftRecipe  = asyncHandler(async(req, res) => {
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
     res.status(404)
 })
+//Abi o Migui
 export const addRecipe = asyncHandler(async (req, res) => {
 
     //TODO
