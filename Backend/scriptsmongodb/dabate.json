@@ -1,13 +1,4 @@
-mongod
-
-mongo
-
-use CookingMama
-
-db.Recipe
-
-db.Recipe.insertMany(
-    [
+{ "Recipe": [
   {
     "id": "1",
     "title": "Pollo al horno con verduras",
@@ -398,9 +389,5 @@ db.Recipe.insertMany(
   "maxReadyTime": 240,
   "intolerances": "",
   "popularity": 0
-},
-])
-
-db.Ingredient
-
-exit
+  }]
+}
