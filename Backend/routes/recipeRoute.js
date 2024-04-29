@@ -1,14 +1,27 @@
-import { getRecipes, getRecipeById , addRecipe } from "../controllers/recipeController.js";
+import * as ctr from "../controllers/recipeController.js";
 import express from 'express'
 const router = express.Router()
 
 
-// express router method to create route for getting all users
-router.route('/').get(getRecipes)
 
-// express router method to create route for getting users by id
-router.route('/find/:id').get(getRecipeById)
+router.route('/popular').get(ctr.getRecipes)
+router.route('/:id').get(ctr.getRecipeById)
+// Rutas para salvar
+router.route('/saved').get(ctr.getRecipesSavedByUser)
 
-router.route('/agregar').get(addRecipe)
+router.route('/saved').post(ctr.setRecipeSavedByUser)
+router.route('/saved').delete(ctr.setRecipeUnsavedByUser)
+//Rutas para recetas propias
+router.route('/myOwn/').get(ctr.getRecipesCreatedByUser)
+
+router.route('/myOwn/').post(ctr.publishRecipe)
+router.route('/myOwn/').patch(ctr.draftRecipe)
+router.route('/myOwn/').delete(ctr.deleteOwnRecipe)
+
+
+
+
+
+
 
 export default router

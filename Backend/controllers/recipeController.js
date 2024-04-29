@@ -1,13 +1,21 @@
-import Recipe from '../models/recipeModel.js'
+import Recipe from '../models/recipesModel.js'
 import asyncHandler from 'express-async-handler'
 
+// Devolvera una lista estatica de recetas por ahora
 export const getRecipes = asyncHandler(async(req, res) => {
-    const recipes = await Recipe.find({})
-    res.json(recipes)
+    const recipe = await Recipe.find({})
+    console.log(recipe)
+    if(recipe){
+        res.status(200).json(recipe)
+    }else{
+        res.status(404).json({message: "Recipe not found"})
+        console.error('Recipe not found')
+    }
 })
 
 export const getRecipeById  = asyncHandler(async(req, res) => {
-    const recipe = await Recipe.findById(req.params.id)
+    const id = req.params.id
+    const recipe = await Recipe.findById(id)
 
     if(recipe){
         res.json(recipe)
@@ -18,7 +26,41 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
     }
 })
 
+
+export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
+    //const id = req.params.id
+    //const recipe = await User.find({id:id},"saved").populate
+    res.status(404)
+})
+
+export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
+    //TODO
+    res.status(404)
+})
+
+export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
+    //TODO
+    res.status(404)
+})
+export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
+    res.status(404)
+})
+
+export const publishRecipe  = asyncHandler(async(req, res) => {
+    res.status(404)
+})
+
+export const draftRecipe  = asyncHandler(async(req, res) => {
+    res.status(404)
+})
+
+export const deleteOwnRecipe = asyncHandler(async(req, res) => {
+    res.status(404)
+})
 export const addRecipe = asyncHandler(async (req, res) => {
+
+    //TODO
+
     // Extraer los datos de la receta del cuerpo de la solicitud
     //const { title, description, ingredients, instructions } = req.body;
 
