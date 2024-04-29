@@ -1,7 +1,10 @@
 import Recipe from '../models/recipesModel.js'
+import User from '../models/usersModel.js'
 import asyncHandler from 'express-async-handler'
 
 // Devolvera una lista estatica de recetas por ahora
+
+//Abi
 export const getRecipes = asyncHandler(async(req, res) => {
     const recipe = await Recipe.find({})
     console.log(recipe)
@@ -26,23 +29,101 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
     }
 })
 
-
+//Abi
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     //const id = req.params.id
     //const recipe = await User.find({id:id},"saved").populate
     res.status(404)
 })
-
+//Migui
+//Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     //TODO
-    res.status(404)
-})
+    const userId = req.user.id;
+    const { recipeId } = req.body;
+    try {
+        // Encontrar al usuario por su ID
+        const user = await User.findById(userId);
 
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        const recipe = await Recipe.findById(recipeId);
+
+        if(!recipe){
+            return res.status(404).json({ message: 'Receta no encontrada' });
+        }
+
+        // Verificar si la receta ya está guardada por el usuario
+        if (user.savedRecipes.includes(recipeId)) {
+            return res.status(400).json({ message: 'Recipe already saved by user' });
+        }
+
+        // Guardar la receta en el array de recetas guardadas del usuario
+        user.savedRecipes.push(recipeId);
+        await user.save();
+
+        res.status(200).json({ message: 'Recipe saved successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+})
+//Migui
+//Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
     //TODO
-    res.status(404)
+    const userId = req.user.id;
+    const { recipeId } = req.body;
+    try {
+        // Encontrar al usuario por su ID
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        const recipe = await Recipe.findById(recipeId);
+
+        if(!recipe){
+            return res.status(404).json({ message: 'Receta no encontrada' });
+        }
+
+        // Verificar si la receta no está guardada por el usuario
+        if (!user.savedRecipes.includes(recipeId)) {
+            return res.status(400).json({ message: 'La receta no está guardada en el usuario' });
+        }
+
+        // Eliminar la receta del array de recetas guardadas del usuario
+        user.savedRecipes.remove(recipeId);
+        await user.save();
+
+        res.status(200).json({ message: 'Recipe saved successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 })
+//Migui
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
+   
+    const userId = req.user.id;
+    try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        const userRecipes = await Recipe.find({ _id: { $in: user.ownRecipes } });
+        res.status(200).json(userRecipes);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+    const user = await User.findById(userId);
     res.status(404)
 })
 
@@ -57,6 +138,7 @@ export const draftRecipe  = asyncHandler(async(req, res) => {
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
     res.status(404)
 })
+//Abi o Migui
 export const addRecipe = asyncHandler(async (req, res) => {
 
     //TODO

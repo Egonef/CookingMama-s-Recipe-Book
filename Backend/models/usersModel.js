@@ -24,8 +24,16 @@ const userSchema = mongoose.Schema({
     isAdmin: {
         type: Boolean,
         required: true,
-        defualt: false
+        default: false
     },
+    favoriteRecipes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Recipe'
+    }],
+    ownRecipes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Recipe'
+    }],
 }, {
     timestamps: true
 })

@@ -16,8 +16,17 @@ const recipeSchema = mongoose.Schema({
         required:true
     },
     ingredients: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Ingredient'
+        name: {
+            type: String,
+            required: true
+        },
+        quantity: {
+            type: String,
+            required: true
+        },
+        unit: {
+            type: String
+        }
     }],
     steps: {
         type: String,
@@ -35,7 +44,10 @@ const recipeSchema = mongoose.Schema({
     },
     intolerances: {
         type: String,
-    } // Lista de alergenos asociados al ingrediente (opcional)
+    }, // Lista de alergenos asociados al ingrediente (opcional)
+    popularity: {
+        type: Number,
+    }
 }, {
     timestamps: true
 })
