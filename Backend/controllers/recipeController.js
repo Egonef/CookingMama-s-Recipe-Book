@@ -37,6 +37,7 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
 //Migui
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     //TODO
+    //const { title, description, ingredients, instructions } = req.body;
     res.status(404)
 })
 //Migui
