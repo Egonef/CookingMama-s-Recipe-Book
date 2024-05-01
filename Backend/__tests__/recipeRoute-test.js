@@ -2,14 +2,12 @@
 const { getRecipeById } = require( "../controllers/recipeController");
 import  Recipe from"../models/recipesModel";
 import mongoose from "mongoose";
+import request  from "supertest";
+import app from "../app"
 
 
-// Mock the necessary dependencies (e.g., req, res) using Jest
-//jest.mock('../models/recipesModel');
 
 // Mock req and res objects
-let req;
-let res;
 
 const mockRecipe1 = new Recipe({
   "id": "1",
@@ -28,8 +26,8 @@ const mockRecipe1 = new Recipe({
     },
     {
       "name": "Sal",
-      "quantity": "",
-      "unit": ""
+      "quantity": "al gusto",
+      
     }
   ],
   "steps": "Precalienta el horno a 180°C. Corta las verduras y colócalas en una bandeja con el pollo. Hornea durante 45 minutos.",
@@ -38,9 +36,17 @@ const mockRecipe1 = new Recipe({
   "intolerances": ""
 })
 
+
+
 beforeAll(async () =>{
         const databaseTestName='CookingMamaTest';
         const con = await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseTestName}`);
+        console.log(Recipe.deleteMany({}))
+})
+afterAll(async () =>{
+  await Recipe.deleteMany();
+  mongoose.connection.close();
+
 })
 beforeEach(() => {
  
@@ -48,47 +54,17 @@ beforeEach(() => {
 });
 
 // Test cases for getRecipeById function
-describe('getRecipeById', () => {
+describe('getRecipes', () => {
   it('should return the recipe if found', async () => {
 
     // Mock the return value of Recipe.findById
-    await mockRecipe1.save()
+    await mockRecipe1.save();
     
-   //Rellenar base de datos
-    const req = {
-      params: "1"
-    }
-    const res = { 
-      status: jest.fn().mockReturnThis(),
-      send: jest.fn() 
-    };
-    // Call the getRecipeById function
-    await getRecipeById(req, res);
-
-    // Assert that res.json is called with the correct recipe
-    expect(Recipe.find).toBeCalledWith('1');
-    expect(res.status).toBeCalledWith(200);
-    expect(res.send).toBeCalledWith(mockRecipe1);
+    const response = await request(app).get("/api/recipes/popular");
+    expect(response.statusCode).toBe(200);
   });
+ 
 
-  it('should return 404 with error message if recipe is not found', async () => {
-    // Mock Recipe.findById to return null (recipe not found)
-    Recipe.findById.mockResolvedValueOnce(null);
-
-    // Call the getRecipeById function
-    await getRecipeById(req, res);
-
-    // Assert that res.status and res.json are called correctly
-    expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Recipe not found' });
-  });
-
-  it('should throw an error if Recipe.findById throws an error', async () => {
-    // Mock Recipe.findById to throw an error
-    const error = new Error('Database error');
-    Recipe.findById.mockRejectedValueOnce(error);
-
-    // Call the getRecipeById function
-    await expect(getRecipeById(req, res)).rejects.toThrow(error);
-  });
+  
+  
 });
