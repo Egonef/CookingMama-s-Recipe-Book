@@ -23,7 +23,7 @@ export default function RecipeCard( { recipeNumber }) {
 
 
     return (
-        <motion.div whileHover={{ scale: 1.1 }} className=" bg-orange-200 relative lg:h-96 lg:w-96  mx-14 my-14 rounded-md">
+        <motion.div whileHover={{ scale: 1.1 }} className=" bg-orange-200 relative lg:h-96 lg:w-96  mx-14 my-14 rounded-md ">
             {recipe ? <img src={recipe.image} alt={recipe.title} className="h-3/5 w-full object-cover rounded-t-md" /> : 'Loading...'}
             <div className="p-4">
                 {recipe ? <h1 className="  text-[1.6rem]">{recipe.title}</h1> : 'Loading...'}
