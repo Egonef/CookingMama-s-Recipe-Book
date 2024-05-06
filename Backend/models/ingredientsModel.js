@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const ingredientSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     quantity: {
         type: String,
