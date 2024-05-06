@@ -7,7 +7,7 @@ const ingredientSchema = mongoose.Schema({
     },
     quantity: {
         type: String,
-        required: true
+        // required: true  comprobar que la receta contenga una cantidad
     },
     unit: {
         type: String
@@ -18,6 +18,6 @@ const ingredientSchema = mongoose.Schema({
     }]
 });
 
-const Ingredient = mongoose.model('Ingredient', ingredientSchema,"Ingredient");
+const Ingredient = mongoose.model('Ingredient', ingredientSchema, "Ingredient");
 
 export default Ingredient;
