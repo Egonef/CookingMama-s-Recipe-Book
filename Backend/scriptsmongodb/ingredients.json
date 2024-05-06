@@ -1,0 +1,127 @@
+{
+  "Ingredient": [
+    {
+      "name": "Chocolate negro"
+    },
+    {
+      "name": "Nata para montar"
+    },
+    {
+        "name": "Azúcar"
+    },
+    {
+        "name": "Huevo"
+    },
+    {
+        "name": "Hojaldre"
+    },
+    {
+        "name": "Manzana"
+    },
+    {
+        "name": "Canela"
+    },
+    {
+        "name": "Mantequilla"
+    },
+    {
+      "name": "Salmón"
+    },
+    {
+      "name": "Brócoli"
+    },
+    {
+      "name": "Zanahoria"
+    },
+    {
+      "name": "Calabacín"
+    },
+    {
+      "name": "Aceite de oliva"
+    },
+    {
+      "name": "Sal"
+    },
+    {
+      "name": "Pimienta"
+    },
+    {
+      "name": "Limón"
+    },
+    {
+      "name": "Spaghetti"
+    },
+    {
+      "name": "Bacon"
+    },
+    {
+      "name": "Queso Parmesano"
+    },
+    {
+      "name": "Pimienta negra molida"
+    },
+    {
+      "name": "Pollo"
+    },
+    {
+      "name": "Verdura"
+    },
+    {
+      "name": "Lechuga romana"
+    },
+    {
+      "name": "Pan"
+    },
+    {
+      "name": "Aderezo César"
+    },
+    {
+      "name": "Tomate"
+    },
+    {
+      "name": "Pepino"
+    },
+    {
+      "name": "Cebolla roja"
+    },
+    {
+      "name": "Aceitunas negras"
+    },
+    {
+      "name": "Queso feta"
+    },
+    {
+      "name": "Zumo de limón"
+    },
+    {
+      "name": "Orégano"
+    },
+    {
+      "name": "Fresa"
+    },
+    {
+      "name": "Piña"
+    },
+    {
+      "name": "Kiwi"
+    },
+    {
+      "name": "Uva"
+    },
+    {
+      "name": "Naranja"
+    },
+    {
+      "name": "Miel"
+    },
+    {
+      "name": "Menta fresca"
+    },
+    {
+      "name": "Patata"
+    },
+    {
+      "name": "Romero fresco"
+    } 
+  ]
+}
