@@ -8,5 +8,9 @@ router.route('/').get(ctr.getUsers)
 
 router.route('/:id').get(ctr.getUserById)
 
+router.route('/login').post()
+
+router.route('/register').post()
+
 
 export default router
