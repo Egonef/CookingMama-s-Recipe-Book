@@ -1,5 +1,4 @@
-{ "Recipe": [
-  {
+[  {
     "id": "1",
     "title": "Pollo al horno con verduras",
     "cuisine": "Mediterránea",
@@ -389,6 +388,5 @@
   "maxReadyTime": 240,
   "intolerances": "",
   "popularity": 0
-  }]
-}
-
+  }
+]
