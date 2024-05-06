@@ -29,6 +29,19 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
     }
 })
 
+export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
+    const id = req.params.id
+    const recipe = await Recipe.findById(id)
+
+    if(recipe){
+        res.json(recipe)
+    }else{
+        res.status(404).json({message: "Recipe not found"})
+        res.status(404)
+        throw new Error('Recipe not found')
+    }
+})
+
 //Abi
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     //const id = req.params.id
