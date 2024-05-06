@@ -1,5 +1,6 @@
 import Recipe from '../models/recipesModel.js'
 import User from '../models/usersModel.js'
+import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
 
 // Devolvera una lista estatica de recetas por ahora
@@ -29,15 +30,27 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
 })
 
 export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
-    const id = req.params.id
-    const recipe = await Recipe.findById(id)
+    const ingredientName = req.params.ingredient;
 
-    if(recipe){
-        res.json(recipe)
-    }else{
-        res.status(404).json({message: "Recipe not found"})
-        res.status(404)
-        throw new Error('Recipe not found')
+    // Busca el ingrediente por su nombre
+    const ingredient = await Ingredient.findOne({ name: ingredientName });
+
+    if (!ingredient) {
+        res.status(404).json({ message: "Ingredient not found" });
+        throw new Error('Ingredient not found');
+    }
+
+    // Obtiene los IDs de las recetas asociadas con este ingrediente
+    const recipeIds = ingredient.recipeIds;
+
+    // Busca las recetas que tienen el ID del ingrediente
+    const recipes = await Recipe.find({ _id: { $in: recipeIds } });
+
+    if (recipes && recipes.length > 0) {
+        res.json(recipes);
+    } else {
+        res.status(404).json({ message: "Recipes not found" });
+        throw new Error('Recipes not found');
     }
 })
 

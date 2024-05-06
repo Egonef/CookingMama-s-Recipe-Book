@@ -186,7 +186,7 @@
         "unit": "unidad"
       },
       {
-        "name": "Patatas",
+        "name": "Patata",
         "quantity": "4",
         "unit": "unidades"
       },
@@ -238,7 +238,7 @@
         "unit": "gramos"
       },
       {
-        "name": "Huevos",
+        "name": "Huevo",
         "quantity": "2",
         "unit": "unidades"
       },
@@ -391,3 +391,4 @@
   "popularity": 0
   }]
 }
+
