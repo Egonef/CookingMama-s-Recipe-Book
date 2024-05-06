@@ -41,16 +41,17 @@ const mockRecipe1 = new Recipe({
 beforeAll(async () =>{
         const databaseTestName='CookingMamaTest';
         const con = await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseTestName}`);
-        console.log(Recipe.deleteMany({}))
+        //console.log(Recipe.deleteMany({}))
 })
 afterAll(async () =>{
   await Recipe.deleteMany();
   mongoose.connection.close();
 
 })
-beforeEach(() => {
+beforeEach(async () => {
  
-  
+  //await Recipe.deleteMany();
+
 });
 
 // Test cases for getRecipeById function
@@ -64,7 +65,25 @@ describe('getRecipes', () => {
     expect(response.statusCode).toBe(200);
   });
  
+});
 
-  
-  
+describe('getRecipesByID', () => {
+  it('should return the recipe if found', async () => {
+
+    // Mock the return value of Recipe.findById
+    await mockRecipe1.save();
+    
+    const response = await request(app).get("/api/recipes/1");
+    expect(response.statusCode).toBe(200);
+  });
+
+  it('should return error when not found', async () => {
+
+    // Mock the return value of Recipe.findById
+    await mockRecipe1.save();
+    
+    const response = await request(app).get("/api/recipes/2");
+    expect(response.statusCode).toBe(404);
+  });
+ 
 });

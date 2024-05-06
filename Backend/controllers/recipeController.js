@@ -6,20 +6,20 @@ import asyncHandler from 'express-async-handler'
 
 //Abi
 export const getRecipes = asyncHandler(async(req, res) => {
-    const recipe = await Recipe.find({})
-    console.log(recipe)
+    const recipe = await Recipe.find();
     if(recipe){
-        res.status(200).json(recipe)
+        res.status(200).json(recipe);
     }else{
-        res.status(404).json({message: "Recipe not found"})
-        console.error('Recipe not found')
+        res.status(404).json({message: "Recipe not found"});
+        console.error('Recipe not found');
     }
 })
 
 export const getRecipeById  = asyncHandler(async(req, res) => {
     const id = req.params.id
-    const recipe = await Recipe.findById(id)
-
+    //const id = 1
+    const recipe = await Recipe.findOne({"id":id})
+    console.log("receta recibida:" + recipe);
     if(recipe){
         res.json(recipe)
     }else{

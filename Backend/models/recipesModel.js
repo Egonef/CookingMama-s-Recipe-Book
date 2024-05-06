@@ -52,7 +52,7 @@ const recipeSchema = mongoose.Schema({
     timestamps: true
 })
 
-const Recipe = mongoose.model('Recipe', recipeSchema)
+const Recipe = mongoose.model('Recipe', recipeSchema,"Recipe")
 
 export default Recipe
 
