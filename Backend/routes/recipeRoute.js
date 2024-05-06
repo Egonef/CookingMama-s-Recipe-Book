@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.route('/popular').get(ctr.getRecipes)
 router.route('/:id').get(ctr.getRecipeById)
+router.route('/ingredient/:ingredient').get(ctr.getRecipeByIngredient)
 // Rutas para salvar
 router.route('/saved').get(ctr.getRecipesSavedByUser)
 
