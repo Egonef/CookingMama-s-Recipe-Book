@@ -222,6 +222,53 @@
     "popularity": 0
     },
     {
+      "id": "7",
+      "title": "Sandwich de Pollo y Aguacate",
+      "cuisine": "Internacional",
+      "ingredients": [
+        {
+          "name": "Pechuga de pollo",
+          "quantity": "200",
+          "unit": "gramos"
+        },
+        {
+          "name": "Aguacate",
+          "quantity": "1",
+          "unit": "unidad"
+        },
+        {
+          "name": "Tomate",
+          "quantity": "1",
+          "unit": "unidad"
+        },
+        {
+          "name": "Lechuga",
+          "quantity": "2",
+          "unit": "hojas"
+        },
+        {
+          "name": "Pan",
+          "quantity": "2",
+          "unit": "rebanadas"
+        },
+        {
+          "name": "Mayonesa",
+          "quantity": "al gusto",
+          "unit": ""
+        },
+        {
+          "name": "Mostaza",
+          "quantity": "al gusto",
+          "unit": ""
+        }
+      ],
+      "steps": "Cocina la pechuga de pollo y córtala en tiras. Unta mayonesa y mostaza en las rebanadas de pan. Coloca las tiras de pollo, rodajas de aguacate, tomate y lechuga entre las rebanadas de pan. Sirve y disfruta.",
+      "image": "https://www.cocinacaserayfacil.net/wp-content/uploads/2017/06/sandwich-pollo-aguacate.jpg",
+      "maxReadyTime": 15,
+      "intolerances": "",
+      "popularity": 0
+    },  
+    {
     "id": "7",
     "title": "Spaghetti Carbonara",
     "cuisine": "Italiana",
