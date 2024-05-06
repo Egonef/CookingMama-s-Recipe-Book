@@ -7,7 +7,7 @@ const ingredientSchema = mongoose.Schema({
     },
     quantity: {
         type: String,
-        required: true
+        // required: true  comprobar que la receta contenga una cantidad
     },
     unit: {
         type: String
