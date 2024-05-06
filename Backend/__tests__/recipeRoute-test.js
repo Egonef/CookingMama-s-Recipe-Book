@@ -4,12 +4,13 @@ import  Recipe from"../models/recipesModel";
 import mongoose from "mongoose";
 import request  from "supertest";
 import app from "../app"
+import User from "../models/usersModel";
 
 
 
-// Mock req and res objects
 
-const mockRecipe1 = new Recipe({
+
+const recetaDefault1 = new Recipe({
   "id": "1",
   "title": "Pollo al horno con verduras",
   "cuisine": "Mediterránea",
@@ -36,15 +37,29 @@ const mockRecipe1 = new Recipe({
   "intolerances": ""
 })
 
+const usuarioConRecetaGuardada = new User({
+  "firstName":"Jose",
+  "secondName": "Garcia Perez",
+  "userName":"palolo",
+  "email":"palolo@gmail.com",
+  "password":"1234",
+  "isAdmin": false,
+  "favouriteRecipes":[1]
+})
+
 
 
 beforeAll(async () =>{
         const databaseTestName='CookingMamaTest';
         const con = await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseTestName}`);
-        //console.log(Recipe.deleteMany({}))
+        await Recipe.deleteMany({})
+        await User.deleteMany({})
+        await recetaDefault1.save();
+        await usuarioConRecetaGuardada.save();
 })
 afterAll(async () =>{
   await Recipe.deleteMany();
+  await User.deleteMany({})
   mongoose.connection.close();
 
 })
@@ -57,12 +72,9 @@ beforeEach(async () => {
 // Test cases for getRecipeById function
 describe('getRecipes', () => {
   it('should return the recipe if found', async () => {
-
-    // Mock the return value of Recipe.findById
-    await mockRecipe1.save();
-    
     const response = await request(app).get("/api/recipes/popular");
     expect(response.statusCode).toBe(200);
+    
   });
  
 });
@@ -70,20 +82,31 @@ describe('getRecipes', () => {
 describe('getRecipesByID', () => {
   it('should return the recipe if found', async () => {
 
-    // Mock the return value of Recipe.findById
-    await mockRecipe1.save();
-    
     const response = await request(app).get("/api/recipes/1");
     expect(response.statusCode).toBe(200);
   });
 
   it('should return error when not found', async () => {
-
-    // Mock the return value of Recipe.findById
-    await mockRecipe1.save();
-    
     const response = await request(app).get("/api/recipes/2");
     expect(response.statusCode).toBe(404);
   });
  
 });
+
+
+describe('getRecipesSavedByUser', ()=> {
+  it("Should return the recipes if the user and the recipes exist", async ()=>{
+    const response = await request(app).get("/api/recipes/saved");
+    expect(response.statusCode).toBe(404);
+    //Comprobar que tenga el numero correcto de recetas
+    expect(response.body)
+  });
+    
+  
+  it("Should return error if the user doesnt exist", async()=>{
+    const response = await request(app).get("/api/recipes/saved");
+    expect(response.statusCode).toBe(404);
+    //Comprobar que devuelve condigo de error correcto
+    expect(response.body)
+  });
+})

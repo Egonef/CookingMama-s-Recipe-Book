@@ -17,9 +17,8 @@ export const getRecipes = asyncHandler(async(req, res) => {
 
 export const getRecipeById  = asyncHandler(async(req, res) => {
     const id = req.params.id
-    //const id = 1
     const recipe = await Recipe.findOne({"id":id})
-    console.log("receta recibida:" + recipe);
+    //console.log("receta recibida:" + recipe);
     if(recipe){
         res.json(recipe)
     }else{
