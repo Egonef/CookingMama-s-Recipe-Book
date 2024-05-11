@@ -3,9 +3,10 @@ import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
 
-// Devolvera una lista estatica de recetas por ahora
 
-//Abi
+    // GETS GENERICOS
+
+///api/recipes/popular
 export const getRecipes = asyncHandler(async(req, res) => {
     const recipe = await Recipe.find();
     if(recipe){
@@ -16,11 +17,15 @@ export const getRecipes = asyncHandler(async(req, res) => {
     }
 })
 
+////api/recipes/:id
 export const getRecipeById  = asyncHandler(async(req, res) => {
     const id = req.params.id
     const recipe = await Recipe.findOne({"id":id})
     //console.log("receta recibida:" + recipe);
     if(recipe){
+        recipe.popularity = (recipe.popularity || 0) + 1;
+        await recipe.save();
+
         res.json(recipe)
     }else{
         res.status(404).json({message: "Recipe not found"})
@@ -29,8 +34,11 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
     }
 })
 
+///api/recipes/ingredient/:ingredient
 export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
     const ingredientName = req.params.ingredient;
+    //Hay que actualizar el valor del array de RecipeIds de un Ingrediente cada vez que
+    // añada una receta con dicho ingrediente
 
     // Busca el ingrediente por su nombre
     const ingredient = await Ingredient.findOne({ name: ingredientName });
@@ -47,6 +55,9 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
     const recipes = await Recipe.find({ _id: { $in: recipeIds } });
 
     if (recipes && recipes.length > 0) {
+        recipes.popularity = (recipes.popularity || 0) + 1;
+        await recipes.save();
+
         res.json(recipes);
     } else {
         res.status(404).json({ message: "Recipes not found" });
@@ -54,13 +65,18 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
     }
 })
 
-//Abi
+
+    // RECETAS GUARDADAS
+
+////api/recipes/saved
+//Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     //const id = req.params.id
     //const recipe = await User.find({id:id},"saved").populate
     res.status(404)
 })
-//Migui
+
+////api/recipes/saved
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     //TODO
@@ -95,7 +111,8 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 })
-//Migui
+
+////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
     //TODO
@@ -130,7 +147,12 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 })
-//Migui
+
+
+    // RECETAS DE USUARIO
+
+////api/recipes/myOwn
+// Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
    
     const userId = req.user.id;
@@ -152,18 +174,25 @@ export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
     res.status(404)
 })
 
+////api/recipes/myOwn
+// Publicar recetas
 export const publishRecipe  = asyncHandler(async(req, res) => {
     res.status(404)
 })
 
+////api/recipes/myOwn
+// Crear borradores recetas
 export const draftRecipe  = asyncHandler(async(req, res) => {
     res.status(404)
 })
 
+////api/recipes/myOwn
+// Eliminar recetas propias
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
     res.status(404)
 })
-//Abi o Migui
+
+//Anadir receta (No existe como tal en los casos de uso. Sería de administrador)
 export const addRecipe = asyncHandler(async (req, res) => {
 
     //TODO
