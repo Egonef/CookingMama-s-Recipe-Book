@@ -20,19 +20,3 @@ describe("getRecipesCreatedByUser", ()=>{
 },10000);
 
 
-describe("getRecipesCreatedByUser", ()=>{
-
-  it("Should return good ",async ()=>{
-    const response = await request(app).delete("/api/recipes/saved");
-    expect(response.statusCode).toBe(404);
-    //Comprobar que devuelve condigo de error correcto
-    expect(response.body)
-  });
-
-  it("Should return error if the user doesnt exist ",async()=>{
-    const response = await request(app).delete("/api/recipes/saved");
-    expect(response.statusCode).toBe(404);
-    //Comprobar que devuelve condigo de error correcto
-    expect(response.body)
-  });
-},10000);
