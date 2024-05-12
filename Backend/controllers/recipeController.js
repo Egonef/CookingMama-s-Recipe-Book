@@ -84,7 +84,7 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
 
         // Verificar si la receta ya está guardada por el usuario
         if (user.savedRecipes.includes(recipeId)) {
-            return res.status(400).json({ message: 'Recipe already saved by user' });
+            return res.status(400).json({ message: 'Receta ya salvada por usuario' });
         }
 
         // Guardar la receta en el array de recetas guardadas del usuario
@@ -100,7 +100,7 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
 //Migui
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    //TODO
+    //TODO este es el formato en el que se recogen los datos?
     const userId = req.user.id;
     const { recipeId } = req.body;
     try {

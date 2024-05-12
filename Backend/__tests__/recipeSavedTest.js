@@ -12,77 +12,93 @@ describe('getRecipesSavedByUser', ()=> {
   expect(request.statusCode).toBe(200)                                      
   expect(Array.isArray(response.body)).toBe(true);
   expect(response.body.length).toBe(1);
-  
+  //TODO: COmprobar el cuerpo
   });
     
   
   it("Should return error if the user doesnt exist", async()=>{
     const response = await request(app).get("/api/recipes/saved")
                                         .query({userEmail:'nouser@gmail.com'})
-    expect(request.statusCode).toBe(401)                                      
-                         
+    expect(request.statusCode).toBe(401)
+    //TODO                 
   });
 },10000)
 
-describe('setRecipesSavedByUser', ()=> {
+
+
+describe('setRecipeSavedByUser', ()=> {
   it("Should return error if the user not found", async ()=>{
-    const response = await request(app).post("/api/recipes/saved");
-    
-    
+    const response = await request(app).post("/api/recipes/saved").query({userID : '999',
+                                                                          recipeID: '1'});
+    expect(response.statusCode).toBe(404)
+    expect(response.body).toHaveProperty('message','Usuario no encontrado')
   });
     
   it("Should return error if the recipe is not found", async()=>{
-    const response = await request(app).get("/api/recipes/saved");
-    expect(response.statusCode).toBe(404);
-    //Comprobar que devuelve condigo de error correcto
-    expect(response.body)
+
+    const response = await request(app).post("/api/recipes/saved").query({userID : '1',
+                                                                          recipeID: '999'});
+    expect(response.statusCode).toBe(404)
+    expect(response.body).toHaveProperty('message','Receta no encontrada')
   });
+
   it("Should return error if the recipe is already saved", async()=>{
-    const response = await request(app).get("/api/recipes/saved");
-    expect(response.statusCode).toBe(404);
-    //Comprobar que devuelve condigo de error correcto
-    expect(response.body)
+
+    const response = await request(app).post("/api/recipes/saved").query({userID : '1',
+                                                                          recipeID: '1'});
+    expect(response.statusCode).toBe(404)
+    expect(response.body).toHaveProperty('message','Receta ya salvada por usuario')
   });
 
   it("Should return good when all is correct", async()=>{
-    const response = await request(app).get("/api/recipes/saved");
+
+    const response = await request(app).post("/api/recipes/saved").query({userID : '1',
+                                                                          recipeID: '2'});
     expect(response.statusCode).toBe(200);
-    //Comprobar que devuelve condigo de error correcto
-    expect(response.body.length).toBeGreaterThan(0)
-    expect(response.body[0].id).toBe("")
-    
   });
+
 },10000);
 
 
-describe('setRecipesSavedByUser', ()=> {
+describe('setRecipeUnSavedByUser', ()=> {
+  
+
   it("Should return error if the user not found", async ()=>{
-    const response = await request(app).post("/api/recipes/saved");
-    expect(response.statusCode).toBe(404);
-    //Comprobar que tenga el numero correcto de recetas
-    expect(response.body)
+    const response = await request(app).delete("/api/recipes/saved").query({userID : '999',
+                                                                          recipeID: '1'});
+    expect(response.statusCode).toBe(404)
+    expect(response.body).toHaveProperty('message','Usuario no encontrado')
   });
     
+
+
   it("Should return error if the recipe is not found", async()=>{
-    const response = await request(app).delete("/api/recipes/saved");
-    expect(response.statusCode).toBe(404);
-    //Comprobar que devuelve condigo de error correcto
-    expect(response.body)
+    
+    const response = await request(app).delete("/api/recipes/saved").query({userID : '1',
+                                                                          recipeID: '999'});
+    expect(response.statusCode).toBe(404)
+    expect(response.body).toHaveProperty('message','Receta no encontrada')
   });
-  it("Should return error if the recipe is already saved", async()=>{
-    const response = await request(app).delete("/api/recipes/saved");
-    expect(response.statusCode).toBe(404);
-    //Comprobar que devuelve condigo de error correcto
-    expect(response.body)
+
+
+  it("Should return error if the recipe is not saved", async()=>{
+
+    const response = await request(app).post("/api/recipes/saved").query({userID : '1',
+                                                                          recipeID: '999'});
+    expect(response.statusCode).toBe(404)
+    expect(response.body).toHaveProperty('message','Receta no salvada por usuario')
   });
+
 
   it("Should return good when all is correct", async()=>{
-    const response = await request(app).delete("/api/recipes/saved");
-    expect(response.statusCode).toBe(404);
-    //Comprobar que devuelve condigo de error correcto
-    expect(response.body)
-  },10000);
 
+    const response = await request(app).post("/api/recipes/saved").query({userID : '1',
+                                                                          recipeID: '1'});
+    expect(response.statusCode).toBe(200);
+
+    
+    
+  });
   
 })
 

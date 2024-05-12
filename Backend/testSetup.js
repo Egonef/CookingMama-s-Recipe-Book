@@ -10,6 +10,7 @@ beforeAll(async () =>{
   await Recipe.deleteMany({})
   await User.deleteMany({})
   await recetaDefault1.save();
+  await recetaDefault2.save();
   await usuarioConRecetaGuardada.save();
 })
 afterAll(async () =>{
@@ -51,6 +52,24 @@ const recetaDefault1 = new Recipe({
   "maxReadyTime": 60,
   "intolerances": ""
 })
+
+const recetaDefault2 = new Recipe({
+  "id": "2",
+  "title": "Bocadillo de calamares",
+  "cuisine": "Mediterránea",
+  "ingredients": [
+    {
+      "name": "Calamares",
+      "quantity": "500",
+      "unit": "gramos"
+    }
+  ],
+  "steps": "Precalienta el horno a 180°C. Corta las verduras y colócalas en una bandeja con el pollo. Hornea durante 45 minutos.",
+  "image": "https://www.bing.com/images/search?view=detailV2&ccid=B0odvtU6&id=0C04476577AB023732580CDAB067ABDECF369B42&thid=OIP.B0odvtU6vJ5v5ShPpfrDpAHaE8&mediaurl=https%3a%2f%2fwww.saluddiez.com%2fwp-content%2fuploads%2f2020%2f06%2ffried-meat-on-white-plate-2338407-1170x780.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.074a1dbed53abc9e6fe5284fa5fac3a4%3frik%3dQps2z96rZ7DaDA%26pid%3dImgRaw%26r%3d0&exph=780&expw=1170&q=pollo+al+horno&simid=608001691478999317&FORM=IRPRST&ck=16E5F4CC0D1FE6F89C481739D8D05755&selectedIndex=1&itb=0",
+  "maxReadyTime": 60,
+  "intolerances": ""
+})
+
 
 const usuarioConRecetaGuardada = new User({
   "firstName":"UserName",
