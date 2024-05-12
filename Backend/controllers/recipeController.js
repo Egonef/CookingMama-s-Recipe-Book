@@ -80,25 +80,31 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     //TODO
-    const userId = req.user.id;
-    const { recipeId } = req.body;
+    const userId = req.query.userID;
+    //console.log("user: " + userId)
+    const recipeId  = req.query.recipeID;
+    //console.log("recipe: " + recipeId)
     try {
         // Encontrar al usuario por su ID
-        const user = await User.findById(userId);
+        const user = await User.find({id: userId});
 
-        if (!user) {
+        if (!user || user.length==0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
-        const recipe = await Recipe.findById(recipeId);
+        const recipe = await Recipe.find({id:recipeId});
 
-        if(!recipe){
+        if(!recipe || recipe.length==0){
             return res.status(404).json({ message: 'Receta no encontrada' });
         }
 
+        const helperFunc = function hasObjectWithPropertyValue(arr, propName, propValue) {
+            return arr.some(obj => obj[propName] === propValue);
+        }
+        console.log(user)
         // Verificar si la receta ya está guardada por el usuario
-        if (user.savedRecipes.includes(recipeId)) {
-            return res.status(400).json({ message: 'Recipe already saved by user' });
+        if (!user.favoriteRecipes.includes(recipeId)) {
+            return res.status(400).json({ message: 'Receta ya salvada por usuario' });
         }
 
         // Guardar la receta en el array de recetas guardadas del usuario
@@ -115,20 +121,20 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    //TODO
+    //TODO este es el formato en el que se recogen los datos?
     const userId = req.user.id;
     const { recipeId } = req.body;
     try {
         // Encontrar al usuario por su ID
         const user = await User.findById(userId);
 
-        if (!user) {
+        if (!user || user.length == 0 ) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
         const recipe = await Recipe.findById(recipeId);
 
-        if(!recipe){
+        if(!recipe || recipe.length == 0){
             return res.status(404).json({ message: 'Receta no encontrada' });
         }
 

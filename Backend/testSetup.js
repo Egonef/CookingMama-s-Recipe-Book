@@ -10,6 +10,7 @@ beforeAll(async () =>{
   await Recipe.deleteMany({})
   await User.deleteMany({})
   await recetaDefault1.save();
+  await recetaDefault2.save();
   await usuarioConRecetaGuardada.save();
 })
 afterAll(async () =>{
@@ -51,6 +52,70 @@ const recetaDefault1 = new Recipe({
   "maxReadyTime": 60,
   "intolerances": ""
 })
+
+const recetaDefault2 = new Recipe({
+  "id": "2",
+  "title": "Ensalada Griega",
+  "cuisine": "Mediterránea",
+  "ingredients": [
+    {
+      "name": "Tomate",
+      "quantity": "2",
+      "unit": "unidades"
+    },
+    {
+      "name": "Pepino",
+      "quantity": "1",
+      "unit": "unidad"
+    },
+    {
+      "name": "Cebolla roja",
+      "quantity": "1/2",
+      "unit": "unidad"
+    },
+    {
+      "name": "Aceitunas negras",
+      "quantity": "100",
+      "unit": "gramos"
+    },
+    {
+      "name": "Queso feta",
+      "quantity": "100",
+      "unit": "gramos"
+    },
+    {
+      "name": "Aceite de oliva",
+      "quantity": "2",
+      "unit": "cucharadas"
+    },
+    {
+      "name": "Zumo de limón",
+      "quantity": "1",
+      "unit": "cucharada"
+    },
+    {
+      "name": "Orégano",
+      "quantity": "1/2",
+      "unit": "cucharada"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "unit": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "unit": ""
+    }
+  ],
+  "steps": "Corta los tomates, pepinos y cebolla. Mezcla con las aceitunas y el queso feta. Aliña con aceite de oliva, zumo de limón, orégano, sal y pimienta. Mezcla bien y sirve.",
+  "image": "https://nutricionvitae.com/wp-content/uploads/2021/03/ensalada-griega.jpg",
+  "maxReadyTime": 20,
+  "intolerances": "",
+  "popularity": 0
+})
+
 
 const usuarioConRecetaGuardada = new User({
   "firstName":"UserName",
