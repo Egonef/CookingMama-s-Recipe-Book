@@ -8,9 +8,9 @@ import asyncHandler from 'express-async-handler'
 
 ///api/recipes/popular
 export const getRecipes = asyncHandler(async(req, res) => {
-    const recipe = await Recipe.find();
-    if(recipe){
-        res.status(200).json(recipe);
+    const recipes = await Recipe.find();
+    if(recipes){
+        res.status(200).json(recipes);
     }else{
         res.status(404).json({message: "Recipe not found"});
         console.error('Recipe not found');
@@ -19,9 +19,11 @@ export const getRecipes = asyncHandler(async(req, res) => {
 
 ////api/recipes/:id
 export const getRecipeById  = asyncHandler(async(req, res) => {
-    const id = req.params.id
-    const recipe = await Recipe.findOne({"id":id})
-    //console.log("receta recibida:" + recipe);
+
+    
+        const id = req.params.id
+    const recipe = await Recipe.findById(id)
+    console.log("receta recibida:" + recipe);
     if(recipe){
         recipe.popularity = (recipe.popularity || 0) + 1;
         await recipe.save();
@@ -29,9 +31,11 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
         res.json(recipe)
     }else{
         res.status(404).json({message: "Recipe not found"})
-        res.status(404)
-        throw new Error('Recipe not found')
+        
+        
     }
+    
+    
 })
 
 ///api/recipes/ingredient/:ingredient
@@ -45,7 +49,7 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
 
     if (!ingredient) {
         res.status(404).json({ message: "Ingredient not found" });
-        throw new Error('Ingredient not found');
+        return 
     }
 
     // Obtiene los IDs de las recetas asociadas con este ingrediente
@@ -85,13 +89,13 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     //console.log("recipe: " + recipeId)
     try {
         // Encontrar al usuario por su ID
-        const user = await User.findById({userId});
+        const user = await User.findById(userId);
 
         if (!user || user.length==0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
-        const recipe = await Recipe.find({id:recipeId});
+        const recipe = await Recipe.findById(recipeId);
 
         if(!recipe || recipe.length==0){
             return res.status(404).json({ message: 'Receta no encontrada' });

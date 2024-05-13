@@ -4,14 +4,24 @@ import  Recipe from"./models/recipesModel";
 import mongoose from "mongoose";
 import User from "./models/usersModel";
 
+
+let idRecetaDefault1 = null;
+let idRecetaDefault2 = null;
+let idUsuario1 = null;
+
+
 beforeAll(async () =>{
   const databaseTestName='CookingMamaTest';
   const con = await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseTestName}`);
   await Recipe.deleteMany({})
   await User.deleteMany({})
-  await recetaDefault1.save();
-  await recetaDefault2.save();
-  await usuarioConRecetaGuardada.save();
+  recetaDefault1 = await recetaDefault1.save();
+  idRecetaDefault1 = recetaDefault1._id
+  recetaDefault2 = await recetaDefault2.save();
+  idRecetaDefault2 = recetaDefault2._id
+  usuarioConRecetaGuardada = await usuarioConRecetaGuardada.save();
+  idUsuario1 = usuarioConRecetaGuardada._id
+  console.log("IDs al final del beforeAll:" + idRecetaDefault1 + "," + idRecetaDefault2 + ","+ idUsuario1);
 })
 afterAll(async () =>{
 await Recipe.deleteMany();
@@ -26,8 +36,7 @@ beforeEach(async () => {
 });
 
 
-const recetaDefault1 = new Recipe({
-  "id": "1",
+var recetaDefault1 = new Recipe({
   "title": "Pollo al horno con verduras",
   "cuisine": "Mediterránea",
   "ingredients": [
@@ -52,9 +61,7 @@ const recetaDefault1 = new Recipe({
   "maxReadyTime": 60,
   "intolerances": ""
 })
-
-const recetaDefault2 = new Recipe({
-  "id": "2",
+var recetaDefault2 = new Recipe({
   "title": "Ensalada Griega",
   "cuisine": "Mediterránea",
   "ingredients": [
@@ -116,8 +123,7 @@ const recetaDefault2 = new Recipe({
   "popularity": 0
 })
 
-
-const usuarioConRecetaGuardada = new User({
+var usuarioConRecetaGuardada = new User({
   "firstName":"UserName",
   "secondName": "User2Name",
   "userName":"user1",
@@ -127,7 +133,7 @@ const usuarioConRecetaGuardada = new User({
   "favouriteRecipes":[1]
 })
 
-
+export default {idRecetaDefault1, idRecetaDefault2, idUsuario1}
   
 
 

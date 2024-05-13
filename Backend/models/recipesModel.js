@@ -1,11 +1,6 @@
 import mongoose from 'mongoose'
 
 const recipeSchema = mongoose.Schema({
-    id:{
-        type: String,
-        required: true,
-        unique:true
-    },
     title: {
         type: String,
         required: true,

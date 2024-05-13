@@ -1,27 +1,32 @@
 // Import the necessary modules and functions for testing
 import request  from "supertest";
 import app from "../app"
-import recetaDefault1 from "../testSetup"
+import *  as stp from "../testSetup"
+import mongoose from 'mongoose';
+
 // Test cases for getRecipeById function
 describe('getRecipes', () => {
   it('should return the recipe if found', async () => {
     const response = await request(app).get("/api/recipes/popular");
     expect(response.statusCode).toBe(200);
+    expect(response.body.length).toBeGreaterThan(0)
     
   });
  
 },10000);
 
 describe('getRecipesByID', () => {
+
   it('should return the recipe if found', async () => {
 
-    const response = await request(app).get("/api/recipes/1");
+    const response = await request(app).get("/api/recipes/" + stp.idRecetaDefault1);
+    console.log("id receta 1 al iniciar test:"+ stp.idRecetaDefault1);
     expect(response.statusCode).toBe(200);
     //expect(response.body).toBe(recetaDefault1.toJSON())
   });
 
   it('should return error when not found', async () => {
-    const response = await request(app).get("/api/recipes/2");
+    const response = await request(app).get("/api/recipes/" +  "662a29c87649ab8290495d09");
     expect(response.statusCode).toBe(404);
   });
  
