@@ -79,7 +79,7 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
-    //TODO
+    
     const userId = req.query.userID;
     //console.log("user: " + userId)
     const recipeId  = req.query.recipeID;
@@ -98,10 +98,8 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
             return res.status(404).json({ message: 'Receta no encontrada' });
         }
 
-        const helperFunc = function hasObjectWithPropertyValue(arr, propName, propValue) {
-            return arr.some(obj => obj[propName] === propValue);
-        }
-        console.log(user)
+        
+        //TODO esta comprobación no funciona
         // Verificar si la receta ya está guardada por el usuario
         if (!user.favoriteRecipes.includes(recipeId)) {
             return res.status(400).json({ message: 'Receta ya salvada por usuario' });
@@ -121,7 +119,7 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    //TODO este es el formato en el que se recogen los datos?
+    //TODO cambiar como se reccibe los argumentos
     const userId = req.user.id;
     const { recipeId } = req.body;
     try {
@@ -160,7 +158,7 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
-   
+    //cambiar como se recibe los argumentos
     const userId = req.user.id;
     try {
         const user = await User.findById(userId);
@@ -184,47 +182,25 @@ export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
 // Publicar recetas
 export const publishRecipe  = asyncHandler(async(req, res) => {
     res.status(404)
+    //TODO completar
 })
 
 ////api/recipes/myOwn
 // Crear borradores recetas
 export const draftRecipe  = asyncHandler(async(req, res) => {
     res.status(404)
+    //TODO
 })
 
 ////api/recipes/myOwn
 // Eliminar recetas propias
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
     res.status(404)
+    //TODO
 })
 
 //Anadir receta (No existe como tal en los casos de uso. Sería de administrador)
 export const addRecipe = asyncHandler(async (req, res) => {
 
     //TODO
-
-    // Extraer los datos de la receta del cuerpo de la solicitud
-    //const { title, description, ingredients, instructions } = req.body;
-
-    // Muestra de ejemplo
-    const newRecipeData = {
-        title: 'Tarta de manzana',
-        description: 'Deliciosa tarta de manzana casera',
-        ingredients: ['manzanas', 'azúcar', 'harina', 'mantequilla'],
-        instructions: '1. Pelar y cortar las manzanas...\n2. Mezclar el azúcar, la harina y la mantequilla...\n3. Hornear a 180°C durante 45 minutos...'
-    };
-
-    // Crear una nueva instancia de Recipe con los datos proporcionados
-    const newRecipe = new Recipe({
-        title,
-        description,
-        ingredients,
-        instructions
-    });
-
-    // Guardar la nueva receta en la base de datos
-    const createdRecipe = await newRecipe.save();
-
-    // Responder con la nueva receta creada
-    res.status(201).json(createdRecipe);
 });
