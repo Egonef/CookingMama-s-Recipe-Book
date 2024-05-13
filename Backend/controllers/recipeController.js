@@ -86,7 +86,7 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     //console.log("recipe: " + recipeId)
     try {
         // Encontrar al usuario por su ID
-        const user = await User.find({id: userId});
+        const user = await User.findById({userId});
 
         if (!user || user.length==0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });

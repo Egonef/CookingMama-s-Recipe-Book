@@ -30,23 +30,19 @@ export const login  = asyncHandler(async(req, res) => {
 
     const { email, password } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: email });
 
     if (!existingUser) {
         // Si el usuario no existe, responde con un mensaje de error
         res.status(404).json({message: "Invalid email"})
-        res.status(404)
-        throw new Error('Invalid email')
     }
 
     // Verifica si la contraseña proporcionada coincide con la contraseña almacenada
-    const isPasswordValid = await existingUser.comparePassword(password);
+    const isPasswordValid = password == existingUser.password;
 
     if (!isPasswordValid) {
         // Si la contraseña no coincide, responde con un mensaje de error
         res.status(404).json({message: "Invalid password"})
-        res.status(404)
-        throw new Error('Invalid password')
     }
 
     res.status(201).json(existingUser);
