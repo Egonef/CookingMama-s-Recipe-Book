@@ -35,8 +35,7 @@ const recipeSchema = mongoose.Schema({
     },
     image: {
         type: String,
-        required: true,
-        unique:true
+        required: true
     },
     maxReadyTime: {
         type: Number,
