@@ -71,8 +71,7 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
-    //const id = req.params.id
-    //const recipe = await User.find({id:id},"saved").populate
+    //TODO
     res.status(404)
 })
 

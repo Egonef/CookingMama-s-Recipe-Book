@@ -73,7 +73,7 @@ export const register  = asyncHandler(async(req, res) => {
 
     // Guarda el nuevo usuario en la base de datos
     await newUser.save();
-
+    //TODO comprobar si hay errores al guardar
     // Responde con el nuevo usuario creado
     res.status(201).json(newUser);
 })
