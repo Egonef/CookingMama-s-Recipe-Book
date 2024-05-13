@@ -3,11 +3,9 @@ import { motion } from "framer-motion"
 import React, { useState, useEffect } from 'react';
 import recipeData from './dabate.json';
 import Pill from "./pill";
-import ExpandedCard from "./ExpandedCard";
 
-export default function RecipeCard( { recipeNumber }) {
+export default function ExpadedCard( { recipeNumber, closeCard }) {
     const [recipe, setRecipe] = useState(null)
-    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         /*
@@ -23,23 +21,16 @@ export default function RecipeCard( { recipeNumber }) {
         setRecipe(recipeData.Recipe[recipeNumber])
     }, []);
 
-    const handleClick = () => {
-        setExpanded(true);
-    }
-
-    const handleClose = () => {
-        setExpanded(false);
-    }
 
     return (
-        <motion.div whileHover={expanded ? {} : { scale: 1.1 }}  onClick={handleClick} className=" bg-orange-200 relative lg:h-96 lg:w-96  mx-14 my-14 rounded-md ">
+        <motion.div className=" bg-orange-200 fixed top-[3%] left-[2%] z-50 lg:h-[32rem] lg:w-[79rem] rounded-md">
+            <button className="absolute top-0 right-0 p-2" onClick={closeCard}>X</button>
             {recipe ? <img src={recipe.image} alt={recipe.title} className="h-3/5 w-full object-cover rounded-t-md" /> : 'Loading...'}
             <div className="p-4">
                 {recipe ? <h1 className="  text-[1.6rem]">{recipe.title}</h1> : 'Loading...'}
                 {recipe ? <p className="text-[1rem]">Tiempo estimado: {recipe.maxReadyTime} min</p> : 'Loading...'}
                 <Pill intolerancia={recipe ? recipe.intolerances : null} />
             </div>
-            {expanded && <ExpandedCard recipe={recipe} closeCard={handleClose} />}
         </motion.div>
     )
 }
