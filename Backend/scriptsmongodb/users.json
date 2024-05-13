@@ -1,0 +1,102 @@
+[
+    {
+        "firstName": "John",
+        "secondName": "Doe",
+        "userName": "john_doe123",
+        "email": "john.doe@example.com",
+        "password": "password123",
+        "isAdmin": true,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "Alice",
+        "secondName": "Smith",
+        "userName": "alice_smith456",
+        "email": "alice.smith@example.com",
+        "password": "password456",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "Michael",
+        "secondName": "Johnson",
+        "userName": "michael_j",
+        "email": "michael.j@example.com",
+        "password": "password789",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "Emily",
+        "secondName": "Brown",
+        "userName": "emily_brown",
+        "email": "emily.brown@example.com",
+        "password": "passwordabc",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "David",
+        "secondName": "Martinez",
+        "userName": "david_mart",
+        "email": "david.martinez@example.com",
+        "password": "passworddef",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "Olivia",
+        "secondName": "Garcia",
+        "userName": "olivia_g",
+        "email": "olivia.g@example.com",
+        "password": "passwordghi",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "James",
+        "secondName": "Wilson",
+        "userName": "james_wil",
+        "email": "james.wilson@example.com",
+        "password": "passwordjkl",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "Sophia",
+        "secondName": "Anderson",
+        "userName": "sophia_a",
+        "email": "sophia.anderson@example.com",
+        "password": "passwordmno",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "William",
+        "secondName": "Taylor",
+        "userName": "will_t",
+        "email": "will.t@example.com",
+        "password": "passwordpqr",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    },
+    {
+        "firstName": "Emma",
+        "secondName": "Thomas",
+        "userName": "emma_t",
+        "email": "emma.t@example.com",
+        "password": "passwordstu",
+        "isAdmin": false,
+        "favoriteRecipes": [],
+        "ownRecipes": []
+    }
+]
