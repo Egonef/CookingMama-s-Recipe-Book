@@ -50,7 +50,7 @@ function Landing() {
 			<Navbar />
 			<div id='ContenedorMain' className=" flex flex-row justify-evenly items-center mt-7">
 				{showCuadroInicio && <CuadroInicio />}
-				<div id='divLibro' className='lg:h-[45rem] lg:w-[45rem] sm:h-[25rem] sm:w-[20rem] '>
+				<div id='divLibro' className='2xl:h-[45rem]2 xl:w-[45rem] lg:h-[25rem] lg:w-[20rem] '>
 					<Canvas className=" bg-[#FCF8E8]" camera={{ fov: 20, position: [0, 200, 100] }}>
 					<ambientLight intensity={2} />
 					<Librov4  hideCuadroInicio={hideCuadroInicio} />
