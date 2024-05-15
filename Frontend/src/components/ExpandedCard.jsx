@@ -1,29 +1,24 @@
 import { motion } from "framer-motion"
-//import axios from 'axios'
 import React, { useState, useEffect } from 'react';
-import recipeData from './dabate.json';
 import Pill from "./pill";
+import axios from 'axios'
 
 export default function ExpadedCard( { recipeNumber, closeCard }) {
     const [recipe, setRecipe] = useState(null)
 
     useEffect(() => {
-        /*
-        axios.get('http://localhost:5000/api/recipes/popular')  // Reemplaza con la URL de tu API
-            .then(response => {
-                setRecipe(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-        */
-        console.log(recipeNumber);
-        setRecipe(recipeData.Recipe[recipeNumber])
-    }, []);
+        axios.get('http://localhost:5000/api/recipes/' + recipeNumber)  // Reemplaza con la URL de tu API
+        .then(response => {
+            setRecipe(response.data);
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
+}, []);
 
 
     return (
-        <motion.div className=" bg-orange-200 fixed top-[3%] left-[2%] z-50 lg:h-[32rem] lg:w-[79rem] rounded-md">
+        <motion.div className=" bg-orange-200 fixed md:top-[3%] md:left-[2%] lg:top-[10%] lg:left-[15%] z-50 md:h-[28rem] md:w-[70rem]  lg:h-[50rem] lg:w-[85rem] rounded-md" >
             <button className="absolute top-0 right-0 p-2" onClick={closeCard}>X</button>
             {recipe ? <img src={recipe.image} alt={recipe.title} className="h-3/5 w-full object-cover rounded-t-md" /> : 'Loading...'}
             <div className="p-4">

@@ -35,7 +35,7 @@ export default function RecipeCard( { recipeNumber }) {
                 {recipe ? <p className="text-[1rem]">Tiempo estimado: {recipe.maxReadyTime} min</p> : 'Loading...'}
                 <Pill intolerancia={recipe ? recipe.intolerances : null} />
             </div>
-            {expanded && <ExpandedCard recipe={recipe} closeCard={handleClose} />}
+            {expanded && <ExpandedCard recipeNumber={recipe._id} closeCard={handleClose} />}
         </motion.div>
     )
 }
