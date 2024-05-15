@@ -37,6 +37,8 @@
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     },
-    "setupFilesAfterEnv": ["<rootDir>/testSetup.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/testSetup.js"
+    ]
   }
 }

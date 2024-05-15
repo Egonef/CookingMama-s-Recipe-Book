@@ -1,7 +1,9 @@
+
 import Recipe from '../models/recipesModel.js'
 import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
+
 
 
     // GETS GENERICOS
@@ -9,6 +11,7 @@ import asyncHandler from 'express-async-handler'
 ///api/recipes/popular
 export const getRecipes = asyncHandler(async(req, res) => {
     const recipes = await Recipe.find();
+    console.log("recetas recibidas:" + recipes);
     if(recipes){
         res.status(200).json(recipes);
     }else{
@@ -31,8 +34,6 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
         res.json(recipe)
     }else{
         res.status(404).json({message: "Recipe not found"})
-        
-        
     }
     
     

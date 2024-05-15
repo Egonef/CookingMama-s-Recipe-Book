@@ -1,7 +1,6 @@
 import { motion } from "framer-motion"
-//import axios from 'axios'
+import axios from 'axios'
 import React, { useState, useEffect } from 'react';
-import recipeData from './dabate.json';
 import Pill from "./pill";
 import ExpandedCard from "./ExpandedCard";
 
@@ -10,17 +9,14 @@ export default function RecipeCard( { recipeNumber }) {
     const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
-        /*
+
         axios.get('http://localhost:5000/api/recipes/popular')  // Reemplaza con la URL de tu API
             .then(response => {
-                setRecipe(response.data);
+                setRecipe(response.data[recipeNumber]);
             })
             .catch(error => {
                 console.error('There was an error!', error);
             });
-        */
-        console.log(recipeNumber);
-        setRecipe(recipeData.Recipe[recipeNumber])
     }, []);
 
     const handleClick = () => {
