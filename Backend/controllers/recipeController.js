@@ -24,10 +24,10 @@ export const getRecipes = asyncHandler(async(req, res) => {
 export const getRecipeById  = asyncHandler(async(req, res) => {
 
     
-        const id = req.params.id
-        console.log("Id receta en controller "+ id);
+    const id = req.params.id
+       
     const recipe = await Recipe.findById(id)
-    console.log("receta recibida:" + recipe);
+    
     if(recipe){
         recipe.popularity = (recipe.popularity || 0) + 1;
         await recipe.save();
@@ -92,7 +92,7 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     try {
         // Encontrar al usuario por su ID
         const user = await User.findById(userId);
-
+        console.log(user)
         if (!user || user.length==0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }

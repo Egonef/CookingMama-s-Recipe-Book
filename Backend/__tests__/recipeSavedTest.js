@@ -8,7 +8,7 @@ describe('getRecipesSavedByUser', ()=> {
   it("Should return the recipes if the user and the recipes exist", async ()=>{
 
     const response = await request(app).get("/api/recipes/saved")
-                                        .query({userEmail:'user1@gmail.com'})
+                                        .query({userID: "000000087852431f2bf8ae17"})
   expect(response.statusCode).toBe(200)                                      
   expect(Array.isArray(response.body)).toBe(true);
   expect(response.body.length).toBe(1);
@@ -18,7 +18,7 @@ describe('getRecipesSavedByUser', ()=> {
   
   it("Should return error if the user doesnt exist", async()=>{
     const response = await request(app).get("/api/recipes/saved")
-                                        .query({userEmail:'nouser@gmail.com'})
+                                        .query({userEmail:"662a29c87649ab8290495d08"})
     expect(request.statusCode).toBe(401)
     //TODO                 
   });
