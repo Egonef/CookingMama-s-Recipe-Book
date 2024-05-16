@@ -1,7 +1,7 @@
 // Import the necessary modules and functions for testing
 import request  from "supertest";
 import app from "../app"
-import *  as stp from "../testSetup"
+import {idRecetaDefault1, RecetaDefault1}  from "../testSetup"
 import mongoose from 'mongoose';
 
 // Test cases for getRecipeById function
@@ -10,7 +10,7 @@ describe('getRecipes', () => {
     const response = await request(app).get("/api/recipes/popular");
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBeGreaterThan(0)
-    
+  
   });
  
 },10000);
@@ -18,15 +18,15 @@ describe('getRecipes', () => {
 describe('getRecipesByID', () => {
 
   it('should return the recipe if found', async () => {
-
-    const response = await request(app).get("/api/recipes/" + stp.idRecetaDefault1);
-    console.log("id receta 1 al iniciar test:"+ stp.idRecetaDefault1);
+    //console.log("idRecetaDefault en test:"+ idRecetaDefault1);
+    //console.log("RecetaDefault1._id en test" + RecetaDefault1._id)
+    const response = await request(app).get("/api/recipes/" + "0000000116b91f66fbb3fd6c");
     expect(response.statusCode).toBe(200);
     //expect(response.body).toBe(recetaDefault1.toJSON())
   });
 
   it('should return error when not found', async () => {
-    const response = await request(app).get("/api/recipes/" +  "662a29c87649ab8290495d09");
+    const response = await request(app).get("/api/recipes/" +  "662a29c87649ab8290495d08");
     expect(response.statusCode).toBe(404);
   });
  

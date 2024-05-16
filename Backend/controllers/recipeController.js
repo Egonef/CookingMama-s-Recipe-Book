@@ -11,7 +11,7 @@ import asyncHandler from 'express-async-handler'
 ///api/recipes/popular
 export const getRecipes = asyncHandler(async(req, res) => {
     const recipes = await Recipe.find();
-    console.log("recetas recibidas:" + recipes);
+    //console.log("recetas recibidas:" + recipes);
     if(recipes){
         res.status(200).json(recipes);
     }else{
@@ -25,6 +25,7 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
 
     
         const id = req.params.id
+        console.log("Id receta en controller "+ id);
     const recipe = await Recipe.findById(id)
     console.log("receta recibida:" + recipe);
     if(recipe){
