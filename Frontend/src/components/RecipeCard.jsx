@@ -7,6 +7,7 @@ import ExpandedCard from "./ExpandedCard";
 export default function RecipeCard( { recipeNumber }) {
     const [recipe, setRecipe] = useState(null)
     const [expanded, setExpanded] = useState(false);
+    var expandControl = false;
 
     useEffect(() => {
 
@@ -20,11 +21,18 @@ export default function RecipeCard( { recipeNumber }) {
     }, []);
 
     const handleClick = () => {
-        setExpanded(true);
+        if (expandControl === false) {
+            setExpanded(true);
+            expandControl = true;
+            console.log("Tarjeta abierta")
+        }
     }
 
-    const handleClose = () => {
+    const handleClose = async () => {
         setExpanded(false);
+        console.log("Tarjeta cerrada")
+        await new Promise(r => setTimeout(r, 5000));
+        expandControl = false;
     }
 
     return (
@@ -35,7 +43,7 @@ export default function RecipeCard( { recipeNumber }) {
                 {recipe ? <p className="text-[1rem]">Tiempo estimado: {recipe.maxReadyTime} min</p> : 'Loading...'}
                 <Pill intolerancia={recipe ? recipe.intolerances : null} />
             </div>
-            {expanded && <ExpandedCard recipeNumber={recipe._id} closeCard={handleClose} />}
+            {expanded && <ExpandedCard recipeNumber={2} closeCard={handleClose} />}
         </motion.div>
     )
 }
