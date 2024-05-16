@@ -18,7 +18,7 @@ export default function ExpadedCard( { recipeNumber, closeCard }) {
 
 
     return (
-        <motion.div className=" bg-orange-200 fixed md:top-[3%] md:left-[2%] lg:top-[10%] lg:left-[15%] z-50 md:h-[28rem] md:w-[70rem]  lg:h-[50rem] lg:w-[85rem] rounded-md" >
+        <motion.div className=" bg-orange-200 fixed xl:top-[10%] xl:left-[8%] 2xl:top-[10%] 2xl:left-[15%] z-50 xl:h-[28rem] xl:w-[70rem]  2xl:h-[50rem] 2xl:w-[85rem] rounded-md" >
             <button className="absolute top-0 right-0 p-2" onClick={closeCard}>X</button>
             {recipe ? <img src={recipe.image} alt={recipe.title} className="h-3/5 w-full object-cover rounded-t-md" /> : 'Loading...'}
             <div className="p-4">
