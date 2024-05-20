@@ -88,17 +88,17 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     const userId = req.query.userID;
     //console.log("user: " + userId)
     const recipeId  = req.query.recipeID;
-    //console.log("recipe: " + recipeId)
+    
     try {
         // Encontrar al usuario por su ID
         const user = await User.findById(userId);
-        console.log(user)
+        
         if (!user || user.length==0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
         const recipe = await Recipe.findById(recipeId);
-
+        
         if(!recipe || recipe.length==0){
             return res.status(404).json({ message: 'Receta no encontrada' });
         }
@@ -106,12 +106,13 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
         
         //TODO esta comprobación no funciona
         // Verificar si la receta ya está guardada por el usuario
-        if (!user.favoriteRecipes.includes(recipeId)) {
+        
+        if (user.favoriteRecipes.includes(recipeId)) {
             return res.status(400).json({ message: 'Receta ya salvada por usuario' });
         }
 
         // Guardar la receta en el array de recetas guardadas del usuario
-        user.savedRecipes.push(recipeId);
+        user.favoriteRecipes.push(recipeId);
         await user.save();
 
         res.status(200).json({ message: 'Recipe saved successfully' });
@@ -124,9 +125,10 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    //TODO cambiar como se reccibe los argumentos
-    const userId = req.user.id;
-    const { recipeId } = req.body;
+    
+    const userId = req.query.userID;
+    //console.log("user: " + userId)
+    const recipeId  = req.query.recipeID;
     try {
         // Encontrar al usuario por su ID
         const user = await User.findById(userId);
@@ -140,14 +142,13 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
         if(!recipe || recipe.length == 0){
             return res.status(404).json({ message: 'Receta no encontrada' });
         }
-
         // Verificar si la receta no está guardada por el usuario
-        if (!user.savedRecipes.includes(recipeId)) {
-            return res.status(400).json({ message: 'La receta no está guardada en el usuario' });
+        if (!user.favoriteRecipes.includes(recipeId)) {
+            return res.status(400).json({ message: 'Receta no salvada por el usuario' });
         }
 
         // Eliminar la receta del array de recetas guardadas del usuario
-        user.savedRecipes.remove(recipeId);
+        user.favoriteRecipes.remove(recipeId);
         await user.save();
 
         res.status(200).json({ message: 'Recipe saved successfully' });

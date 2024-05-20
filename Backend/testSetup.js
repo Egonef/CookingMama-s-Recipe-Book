@@ -14,8 +14,10 @@ beforeAll(async () =>{
   await User.deleteMany({})
 
   
-  recetaDefault1 = await recetaDefault1.save();
-  recetaDefault2 = await recetaDefault2.save();
+  await recetaDefault1.save();
+  await recetaDefault2.save();
+  await recetaDefault3.save();
+  
   usuarioConRecetaGuardada = await usuarioConRecetaGuardada.save();
   //console.log("IDs al final del beforeAll:" + recetaDefault1._id + "," + recetaDefault2._id + "," + usuarioConRecetaGuardada._id);
 })
@@ -122,6 +124,59 @@ var recetaDefault2 = new Recipe({
   "popularity": 0
 })
 
+
+var recetaDefault3 = new Recipe({
+  "_id": "00000003ce8a2ad7cfaddf90",
+  "title": "Ensalada de Frutas",
+  "cuisine": "Internacional",
+  "ingredients": [
+    {
+      "name": "Fresa",
+      "quantity": "200",
+      "unit": "gramos"
+    },
+    {
+      "name": "Piña",
+      "quantity": "1/2",
+      "unit": "unidad"
+    },
+    {
+      "name": "Kiwi",
+      "quantity": "2",
+      "unit": "unidades"
+    },
+    {
+      "name": "Uva",
+      "quantity": "100",
+      "unit": "gramos"
+    },
+    {
+      "name": "Naranja",
+      "quantity": "1",
+      "unit": "unidad"
+    },
+    {
+      "name": "Miel",
+      "quantity": "2",
+      "unit": "cucharadas"
+    },
+    {
+      "name": "Zumo de limón",
+      "quantity": "1",
+      "unit": "cucharada"
+    },
+    {
+      "name": "Menta fresca",
+      "quantity": "al gusto",
+      "unit": ""
+    }
+  ],
+  "steps": "Corta las frutas en trozos. Mezcla con miel y zumo de limón. Decora con hojas de menta fresca. Sirve frío.",
+  "image": "https://th.bing.com/th/id/OIP.7oRyfn4GFXCRCRVZJ1Ec7wHaFB?rs=1&pid=ImgDetMain",
+  "maxReadyTime": 15,
+  "intolerances": "",
+  "popularity": 0
+  })
 var usuarioConRecetaGuardada = new User({
   "_id" : "000000087852431f2bf8ae17",
   "firstName":"UserName",
@@ -130,7 +185,7 @@ var usuarioConRecetaGuardada = new User({
   "email":"user1@gmail.com",
   "password":"1234",
   "isAdmin": false,
-  "favouriteRecipes":[1]
+  "favoriteRecipes":["0000000116b91f66fbb3fd6c"]
 })
 
 
