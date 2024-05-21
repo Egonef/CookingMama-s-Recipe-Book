@@ -45,6 +45,7 @@ export const login  = asyncHandler(async(req, res) => {
         res.status(404).json({message: "Invalid password"})
     }
 
+    req.session.user=existingUser;
     res.status(201).json(existingUser);
 })
 
@@ -71,6 +72,12 @@ export const register  = asyncHandler(async(req, res) => {
     await newUser.save();
     //TODO comprobar si hay errores al guardar
     // Responde con el nuevo usuario creado
+    req.session.user=newUser;
     res.status(201).json(newUser);
 })
- 
+export const getAdmin = asyncHandler(async(req, res) => {
+    if (req.session.user.isAdmin == true)
+        res.send(true);
+    else
+        res.send(false)
+});
