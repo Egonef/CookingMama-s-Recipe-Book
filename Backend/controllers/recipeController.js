@@ -20,7 +20,7 @@ export const getRecipes = asyncHandler(async(req, res) => {
     }
 })
 
-////api/recipes/:id
+////api/recipes/id/:id
 export const getRecipeById  = asyncHandler(async(req, res) => {
 
     
