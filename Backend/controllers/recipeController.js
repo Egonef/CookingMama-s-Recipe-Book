@@ -5,8 +5,29 @@ import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
 
 
+// FUNCIONES DE LLAMADAS A APIS
 
-    // GETS GENERICOS
+const apiKeyTranslation = '1940e7c5-d32c-426d-9ce4-78f5eb26cff7:fx';
+
+async function translateText(text, targetLanguage) {
+    try {
+        const response = await axios.post(`https://api-free.deepl.com/v2/translate`, null, {
+            params: {
+                text: text,
+                target_lang: targetLanguage,
+                auth_key: apiKeyTranslation
+            }
+        });
+
+        const translatedText = response.data.translations[0].text;
+        console.log(`Translated Text: ${translatedText}`);
+        return translatedText;
+    } catch (error) {
+        console.error('Error translating text:', error);
+    }
+}
+
+// GETS GENERICOS
 
 ///api/recipes/popular
 export const getRecipes = asyncHandler(async(req, res) => {
@@ -22,20 +43,12 @@ export const getRecipes = asyncHandler(async(req, res) => {
 
 ////api/recipes/:id
 export const getRecipeById  = asyncHandler(async(req, res) => {
-<<<<<<< HEAD
-    const id = String (req.params.id)
-
-    console.log("id recibido:" + id);
-    const recipe = await Recipe.findOne({"id":id})
-    console.log("receta recibida:" + recipe);
-=======
 
     
     const id = req.params.id
        
     const recipe = await Recipe.findById(id)
     
->>>>>>> 013c9b5b9c19e0b98594ceecd51b9b490afe78bd
     if(recipe){
         recipe.popularity = (recipe.popularity || 0) + 1;
         await recipe.save();
