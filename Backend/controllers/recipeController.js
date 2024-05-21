@@ -77,8 +77,21 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
-    //TODO
-    res.status(404)
+    
+    const userId = req.query.userID;
+    console.log("User id" + userId);
+    
+    const user = await User.findById(userId)
+
+    if(!user){
+        res.status(404)
+        return
+    }
+    const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
+    console.log("Saved recipes" + recipes)
+    return res.status(200)
+   
+    
 })
 
 ////api/recipes/saved
@@ -165,10 +178,10 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
 // Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
     //cambiar como se recibe los argumentos
-    const userId = req.user.id;
+    const userId = req.params.userID;
     try {
         const user = await User.findById(userId);
-
+        console.log("user" + user);
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }

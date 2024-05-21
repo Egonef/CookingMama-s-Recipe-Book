@@ -185,7 +185,8 @@ var usuarioConRecetaGuardada = new User({
   "email":"user1@gmail.com",
   "password":"1234",
   "isAdmin": false,
-  "favoriteRecipes":["0000000116b91f66fbb3fd6c"]
+  "favoriteRecipes":["0000000116b91f66fbb3fd6c"],
+  "ownRecipes": ["00000003ce8a2ad7cfaddf90"]
 })
 
 

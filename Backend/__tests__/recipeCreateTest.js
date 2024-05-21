@@ -8,7 +8,7 @@ describe("getRecipesCreatedByUser", ()=>{
     const response = await request(app).get("/api/recipes/myOwn").query({userID:"000000087852431f2bf8ae17"});
     expect(response.statusCode).toBe(200);
     //Comprobar que devuelve condigo de error correcto
-    expect(response.body)
+    
   });
 
   it("Should return error if the user doesnt exist ",async()=>{

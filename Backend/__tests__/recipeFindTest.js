@@ -35,7 +35,7 @@ describe('getRecipesByID', () => {
 describe('getRecipesByIngredient', () => {
   it('should return the recipe if found', async () => {
 
-    const response = await request(app).get("/api/recipes/ingredient/tomato");
+    const response = await request(app).get("/api/recipes/ingredient/pollo");
     expect(response.statusCode).toBe(200);
     expect(response.body)
 
@@ -43,7 +43,7 @@ describe('getRecipesByIngredient', () => {
 
     // Check if at least one recipe contains 'tomato' as an ingredient
     const recipesWithTomato = response.body.filter(recipe => {
-      return recipe.ingredients.some(ingredient => ingredient.name.toLowerCase() === 'tomato');
+      return recipe.ingredients.some(ingredient => ingredient.name.toLowerCase() === 'pollo');
     });
   
     // At least one recipe should have 'tomato' as an ingredient
