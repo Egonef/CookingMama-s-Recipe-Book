@@ -1,4 +1,34 @@
 import mongoose from 'mongoose'
+//const mongoose = require('mongoose');
+
+// URL de conexión a tu base de datos en MongoDB Atlas
+//const uri = 'mongodb+srv://i12gaava:ProjectCookingMama@cookingmama.ja3p6r6.mongodb.net/?retryWrites=true&w=majority&appName=CookingMama';
+/**const uri = "mongodb+srv://i12gaava:ProjectCookingMama@cookingmama.ja3p6r6.mongodb.net/?retryWrites=true&w=majority&appName=CookingMama";
+
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+const connectDB = async () => {
+    try {
+      // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
+      await mongoose.connect(uri, clientOptions);
+      await mongoose.connection.db.admin().command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } finally {
+      // Ensures that the client will close when you finish/error
+    }
+  }
+  export default connectDB
+
+// Conectar a la base de datos
+const connectDB = async () => {
+    const con = await mongoose.connect(uri)
+    .then(() => console.log('Conexión establecida con MongoDB Atlas'))
+    .catch(error => console.error('Error al conectar con MongoDB Atlas:', error));
+}
+
+export default connectDB
+*/
+
 
 const connectDB = async () => {
     try {
@@ -10,5 +40,6 @@ const connectDB = async () => {
         process.exit(1)
     }
 }
+
 
 export default connectDB

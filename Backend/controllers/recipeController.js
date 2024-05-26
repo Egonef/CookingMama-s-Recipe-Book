@@ -19,9 +19,11 @@ export const getRecipes = asyncHandler(async(req, res) => {
 
 ////api/recipes/:id
 export const getRecipeById  = asyncHandler(async(req, res) => {
-    const id = req.params.id
+    const id = String (req.params.id)
+
+    console.log("id recibido:" + id);
     const recipe = await Recipe.findOne({"id":id})
-    //console.log("receta recibida:" + recipe);
+    console.log("receta recibida:" + recipe);
     if(recipe){
         recipe.popularity = (recipe.popularity || 0) + 1;
         await recipe.save();
