@@ -78,11 +78,11 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     
-    const userId = req.query.userID;
-    console.log("User id" + userId);
+    //const userId = req.query.userID;
+    //console.log("User id" + userId);
     
-    const user = await User.findById(userId)
-
+    const user = await User.findById(userId);
+    
     if(!user){
         res.status(404)
         return
@@ -178,10 +178,9 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
 // Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
     //cambiar como se recibe los argumentos
-    const userId = req.params.userID;
+    const userId = req.query.userID;
     try {
         const user = await User.findById(userId);
-        console.log("user" + user);
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
@@ -193,8 +192,7 @@ export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
     }
-    const user = await User.findById(userId);
-    res.status(404)
+    
 })
 
 ////api/recipes/myOwn
