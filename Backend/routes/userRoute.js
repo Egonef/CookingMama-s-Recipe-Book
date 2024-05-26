@@ -4,13 +4,10 @@ const router = express.Router()
 
 
 router.route('/').get(ctr.getUsers)
-//router.route('/').post(ctr.createUser)
-
 router.route('/:id').get(ctr.getUserById)
 
-router.route('/login').post()
-
-router.route('/register').post()
+router.route('/login').post(ctr.login)
+router.route('/register').post(ctr.register)
 
 
 export default router

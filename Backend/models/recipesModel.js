@@ -1,11 +1,6 @@
 import mongoose from 'mongoose'
 
 const recipeSchema = mongoose.Schema({
-    id:{
-        type: String,
-        required: true,
-        unique:true
-    },
     title: {
         type: String,
         required: true,
@@ -31,12 +26,10 @@ const recipeSchema = mongoose.Schema({
     steps: {
         type: String,
         required: true,
-        
     },
     image: {
         type: String,
-        required: true,
-        unique:true
+        required: true
     },
     maxReadyTime: {
         type: Number,

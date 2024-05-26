@@ -4,14 +4,22 @@ import  Recipe from"./models/recipesModel";
 import mongoose from "mongoose";
 import User from "./models/usersModel";
 
+
+// id invalida -> "662a29c87649ab8290495d08"
+
 beforeAll(async () =>{
   const databaseTestName='CookingMamaTest';
   const con = await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseTestName}`);
   await Recipe.deleteMany({})
   await User.deleteMany({})
+
+  
   await recetaDefault1.save();
   await recetaDefault2.save();
-  await usuarioConRecetaGuardada.save();
+  await recetaDefault3.save();
+  
+  usuarioConRecetaGuardada = await usuarioConRecetaGuardada.save();
+  //console.log("IDs al final del beforeAll:" + recetaDefault1._id + "," + recetaDefault2._id + "," + usuarioConRecetaGuardada._id);
 })
 afterAll(async () =>{
 await Recipe.deleteMany();
@@ -25,9 +33,8 @@ beforeEach(async () => {
 
 });
 
-
-const recetaDefault1 = new Recipe({
-  "id": "1",
+var recetaDefault1 = new Recipe({
+  "_id" : "0000000116b91f66fbb3fd6c",
   "title": "Pollo al horno con verduras",
   "cuisine": "Mediterránea",
   "ingredients": [
@@ -43,7 +50,8 @@ const recetaDefault1 = new Recipe({
     },
     {
       "name": "Sal",
-      "quantity": "al gusto",
+      "quantity": "500",
+      "unit":"Kilos"
       
     }
   ],
@@ -52,9 +60,9 @@ const recetaDefault1 = new Recipe({
   "maxReadyTime": 60,
   "intolerances": ""
 })
-
-const recetaDefault2 = new Recipe({
-  "id": "2",
+//
+var recetaDefault2 = new Recipe({
+  "_id" : "00000002ce8a2ad7cfaddf90",
   "title": "Ensalada Griega",
   "cuisine": "Mediterránea",
   "ingredients": [
@@ -101,12 +109,12 @@ const recetaDefault2 = new Recipe({
     {
       "name": "Sal",
       "quantity": "al gusto",
-      "unit": ""
+      "unit": "12"
     },
     {
       "name": "Pimienta",
       "quantity": "al gusto",
-      "unit": ""
+      "unit": "12"
     }
   ],
   "steps": "Corta los tomates, pepinos y cebolla. Mezcla con las aceitunas y el queso feta. Aliña con aceite de oliva, zumo de limón, orégano, sal y pimienta. Mezcla bien y sirve.",
@@ -117,14 +125,68 @@ const recetaDefault2 = new Recipe({
 })
 
 
-const usuarioConRecetaGuardada = new User({
+var recetaDefault3 = new Recipe({
+  "_id": "00000003ce8a2ad7cfaddf90",
+  "title": "Ensalada de Frutas",
+  "cuisine": "Internacional",
+  "ingredients": [
+    {
+      "name": "Fresa",
+      "quantity": "200",
+      "unit": "gramos"
+    },
+    {
+      "name": "Piña",
+      "quantity": "1/2",
+      "unit": "unidad"
+    },
+    {
+      "name": "Kiwi",
+      "quantity": "2",
+      "unit": "unidades"
+    },
+    {
+      "name": "Uva",
+      "quantity": "100",
+      "unit": "gramos"
+    },
+    {
+      "name": "Naranja",
+      "quantity": "1",
+      "unit": "unidad"
+    },
+    {
+      "name": "Miel",
+      "quantity": "2",
+      "unit": "cucharadas"
+    },
+    {
+      "name": "Zumo de limón",
+      "quantity": "1",
+      "unit": "cucharada"
+    },
+    {
+      "name": "Menta fresca",
+      "quantity": "al gusto",
+      "unit": ""
+    }
+  ],
+  "steps": "Corta las frutas en trozos. Mezcla con miel y zumo de limón. Decora con hojas de menta fresca. Sirve frío.",
+  "image": "https://th.bing.com/th/id/OIP.7oRyfn4GFXCRCRVZJ1Ec7wHaFB?rs=1&pid=ImgDetMain",
+  "maxReadyTime": 15,
+  "intolerances": "",
+  "popularity": 0
+  })
+var usuarioConRecetaGuardada = new User({
+  "_id" : "000000087852431f2bf8ae17",
   "firstName":"UserName",
   "secondName": "User2Name",
   "userName":"user1",
   "email":"user1@gmail.com",
   "password":"1234",
   "isAdmin": false,
-  "favouriteRecipes":[1]
+  "favoriteRecipes":["0000000116b91f66fbb3fd6c"],
+  "ownRecipes": ["00000003ce8a2ad7cfaddf90"]
 })
 
 

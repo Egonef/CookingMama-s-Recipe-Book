@@ -1,16 +1,19 @@
+
 import Recipe from '../models/recipesModel.js'
 import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
 
 
+
     // GETS GENERICOS
 
 ///api/recipes/popular
 export const getRecipes = asyncHandler(async(req, res) => {
-    const recipe = await Recipe.find();
-    if(recipe){
-        res.status(200).json(recipe);
+    const recipes = await Recipe.find();
+    //console.log("recetas recibidas:" + recipes);
+    if(recipes){
+        res.status(200).json(recipes);
     }else{
         res.status(404).json({message: "Recipe not found"});
         console.error('Recipe not found');
@@ -19,11 +22,20 @@ export const getRecipes = asyncHandler(async(req, res) => {
 
 ////api/recipes/:id
 export const getRecipeById  = asyncHandler(async(req, res) => {
+<<<<<<< HEAD
     const id = String (req.params.id)
 
     console.log("id recibido:" + id);
     const recipe = await Recipe.findOne({"id":id})
     console.log("receta recibida:" + recipe);
+=======
+
+    
+    const id = req.params.id
+       
+    const recipe = await Recipe.findById(id)
+    
+>>>>>>> 013c9b5b9c19e0b98594ceecd51b9b490afe78bd
     if(recipe){
         recipe.popularity = (recipe.popularity || 0) + 1;
         await recipe.save();
@@ -31,9 +43,9 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
         res.json(recipe)
     }else{
         res.status(404).json({message: "Recipe not found"})
-        res.status(404)
-        throw new Error('Recipe not found')
     }
+    
+    
 })
 
 ///api/recipes/ingredient/:ingredient
@@ -47,7 +59,7 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
 
     if (!ingredient) {
         res.status(404).json({ message: "Ingredient not found" });
-        throw new Error('Ingredient not found');
+        return 
     }
 
     // Obtiene los IDs de las recetas asociadas con este ingrediente
@@ -73,44 +85,55 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
-    //const id = req.params.id
-    //const recipe = await User.find({id:id},"saved").populate
-    res.status(404)
+    
+    //const userId = req.query.userID;
+    //console.log("User id" + userId);
+    
+    const user = await User.findById(userId);
+    
+    if(!user){
+        res.status(404)
+        return
+    }
+    const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
+    console.log("Saved recipes" + recipes)
+    return res.status(200)
+   
+    
 })
 
 ////api/recipes/saved
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
-    //TODO
+    
     const userId = req.query.userID;
     //console.log("user: " + userId)
     const recipeId  = req.query.recipeID;
-    //console.log("recipe: " + recipeId)
+    
     try {
         // Encontrar al usuario por su ID
-        const user = await User.find({id: userId});
-
+        const user = await User.findById(userId);
+        
         if (!user || user.length==0) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
-        const recipe = await Recipe.find({id:recipeId});
-
+        const recipe = await Recipe.findById(recipeId);
+        
         if(!recipe || recipe.length==0){
             return res.status(404).json({ message: 'Receta no encontrada' });
         }
 
-        const helperFunc = function hasObjectWithPropertyValue(arr, propName, propValue) {
-            return arr.some(obj => obj[propName] === propValue);
-        }
-        console.log(user)
+        
+        //TODO esta comprobación no funciona
         // Verificar si la receta ya está guardada por el usuario
-        if (!user.favoriteRecipes.includes(recipeId)) {
+        
+        if (user.favoriteRecipes.includes(recipeId)) {
             return res.status(400).json({ message: 'Receta ya salvada por usuario' });
         }
 
         // Guardar la receta en el array de recetas guardadas del usuario
-        user.savedRecipes.push(recipeId);
+        user.favoriteRecipes.push(recipeId);
         await user.save();
 
         res.status(200).json({ message: 'Recipe saved successfully' });
@@ -123,9 +146,10 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    //TODO este es el formato en el que se recogen los datos?
-    const userId = req.user.id;
-    const { recipeId } = req.body;
+    
+    const userId = req.query.userID;
+    //console.log("user: " + userId)
+    const recipeId  = req.query.recipeID;
     try {
         // Encontrar al usuario por su ID
         const user = await User.findById(userId);
@@ -139,14 +163,13 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
         if(!recipe || recipe.length == 0){
             return res.status(404).json({ message: 'Receta no encontrada' });
         }
-
         // Verificar si la receta no está guardada por el usuario
-        if (!user.savedRecipes.includes(recipeId)) {
-            return res.status(400).json({ message: 'La receta no está guardada en el usuario' });
+        if (!user.favoriteRecipes.includes(recipeId)) {
+            return res.status(400).json({ message: 'Receta no salvada por el usuario' });
         }
 
         // Eliminar la receta del array de recetas guardadas del usuario
-        user.savedRecipes.remove(recipeId);
+        user.favoriteRecipes.remove(recipeId);
         await user.save();
 
         res.status(200).json({ message: 'Recipe saved successfully' });
@@ -162,11 +185,10 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
-   
-    const userId = req.user.id;
+    //cambiar como se recibe los argumentos
+    const userId = req.query.userID;
     try {
         const user = await User.findById(userId);
-
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
@@ -178,55 +200,32 @@ export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
     }
-    const user = await User.findById(userId);
-    res.status(404)
+    
 })
 
 ////api/recipes/myOwn
 // Publicar recetas
 export const publishRecipe  = asyncHandler(async(req, res) => {
     res.status(404)
+    //TODO completar
 })
 
 ////api/recipes/myOwn
 // Crear borradores recetas
 export const draftRecipe  = asyncHandler(async(req, res) => {
     res.status(404)
+    //TODO
 })
 
 ////api/recipes/myOwn
 // Eliminar recetas propias
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
     res.status(404)
+    //TODO
 })
 
 //Anadir receta (No existe como tal en los casos de uso. Sería de administrador)
 export const addRecipe = asyncHandler(async (req, res) => {
 
     //TODO
-
-    // Extraer los datos de la receta del cuerpo de la solicitud
-    //const { title, description, ingredients, instructions } = req.body;
-
-    // Muestra de ejemplo
-    const newRecipeData = {
-        title: 'Tarta de manzana',
-        description: 'Deliciosa tarta de manzana casera',
-        ingredients: ['manzanas', 'azúcar', 'harina', 'mantequilla'],
-        instructions: '1. Pelar y cortar las manzanas...\n2. Mezclar el azúcar, la harina y la mantequilla...\n3. Hornear a 180°C durante 45 minutos...'
-    };
-
-    // Crear una nueva instancia de Recipe con los datos proporcionados
-    const newRecipe = new Recipe({
-        title,
-        description,
-        ingredients,
-        instructions
-    });
-
-    // Guardar la nueva receta en la base de datos
-    const createdRecipe = await newRecipe.save();
-
-    // Responder con la nueva receta creada
-    res.status(201).json(createdRecipe);
 });
