@@ -199,6 +199,44 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
     }
 })
 
+    //BUSCAR RECETAS
+    export const findRecipeByIngredients  = asyncHandler(async(req, res) => {
+        const ingredients = req.query.ingredients ? req.query.ingredients.split(',') : [];
+
+        if (ingredients.length === 0) {
+            return res.status(400).json({ message: "Please provide at least one ingredient" });
+        }
+    
+        try {
+            // Array para almacenar las recetas de cada ingrediente
+            let allRecipes = [];
+    
+            // Recorrer los ingredientes y obtener las recetas de cada uno
+            for (const ingredient of ingredients) {
+                const recipes = getRecipeByIngredient(ingredient);
+                allRecipes.push(recipes);
+            }
+    
+            // Calcular la intersección de todas las recetas
+            const commonRecipes = allRecipes.reduce((acc, recipes) => {
+                if (acc === null) {
+                    return recipes;
+                }
+                const recipeIds = recipes.map(recipe => recipe._id.toString());
+                return acc.filter(recipe => recipeIds.includes(recipe._id.toString()));
+            }, null);
+    
+            if (!commonRecipes || commonRecipes.length === 0) {
+                res.status(404).json({ message: "No recipes found with all specified ingredients" });
+                return;
+            }
+    
+            res.json(commonRecipes);
+        } catch (error) {
+            console.error('Error getting recipes by multiple ingredients:', error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    });
 
     // RECETAS GUARDADAS
 
