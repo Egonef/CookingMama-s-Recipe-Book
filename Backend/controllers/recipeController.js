@@ -5,7 +5,7 @@ import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
 
 
-// FUNCIONES DE LLAMADAS A APIS
+// FUNCIONES DE LLAMADA A LA API DE TRADUCCIÓN
 
 const apiKeyTranslation = '1940e7c5-d32c-426d-9ce4-78f5eb26cff7:fx';
 
@@ -26,6 +26,113 @@ async function translateText(text, targetLanguage) {
         console.error('Error translating text:', error);
     }
 }
+
+async function translateIngredients(ingredients, targetLanguage) {
+    const translatedIngredients = await Promise.all(
+        ingredients.map(ingredient => translateText(ingredient, targetLanguage))
+    );
+    return translatedIngredients;
+}
+
+// FUNCIONES DE LLAMADA A LA API DE RECETAS
+
+async function APIsearchRecipesByIngredients(ingredients) {
+    let ApiIdRecipes = [];
+
+    // Primer ciclo: Buscar recetas por ingredientes
+    for (let apiKey of apiKeys) {
+        try {
+            const response = await axios.get('https://api.spoonacular.com/recipes/findByIngredients', {
+                params: {
+                    apiKey: apiKey,
+                    ingredients: ingredients.join(','),
+                    number: 2
+                }
+            });
+
+            // Extraer y devolver los IDs de las recetas
+            ApiIdRecipes = response.data.map(recipe => recipe.id);
+            break; // Sal del ciclo si la consulta fue exitosa
+        } catch (error) {
+            if (error.response && error.response.status === 402) { // 402 Payment Required
+                console.warn(`API Key ${apiKey} has reached its limit.`);
+            } else {
+                console.error('Error al buscar recetas:', error);
+                break; // Sal del ciclo si ocurre un error que no sea relacionado con el límite de la API
+            }
+        }
+    }
+
+    let APIRecipes = [];
+
+    // Segundo ciclo: Obtener detalles de cada receta
+    if (ApiIdRecipes.length > 0) {
+        for (let apiKey of apiKeys) {
+            try {
+                const recipesPromises = ApiIdRecipes.map(async (id) => {
+                    const recipeDetailsResponse = await axios.get(`https://api.spoonacular.com/recipes/${id}/information`, {
+                        params: {
+                            apiKey: apiKey,
+                            includeNutrition: false // No incluir información nutricional para simplificar la respuesta
+                        }
+                    });
+
+                    const recipeDetails = recipeDetailsResponse.data;
+                    return {
+                        id: recipeDetails.id,
+                        title: recipeDetails.title,
+                        instructions: recipeDetails.instructions,
+                        ingredients: recipeDetails.extendedIngredients.map(ingredient => ingredient.original),
+                        photo: recipeDetails.image,
+                        cuisineType: recipeDetails.cuisines.join(', '),
+                        preparationTime: recipeDetails.readyInMinutes,
+                        allergens: recipeDetails.allergens || []
+                    };
+                });
+
+                // Esperar a que todas las solicitudes de recetas se completen
+                APIRecipes = await Promise.all(recipesPromises);
+                break; // Sal del ciclo si la consulta fue exitosa
+            } catch (error) {
+                if (error.response && error.response.status === 402) { // 402 Payment Required
+                    console.warn(`API Key ${apiKey} has reached its limit.`);
+                } else {
+                    console.error('Error al buscar detalles de recetas:', error);
+                    break; // Sal del ciclo si ocurre un error que no sea relacionado con el límite de la API
+                }
+            }
+        }
+    }
+
+    return APIRecipes;
+}
+
+//FUNCIONES DE TRANSFORMACION DE RESULTADO DE LA API
+
+function transformIngredients(ingredient) {
+    // Limpiar el nombre del ingrediente para eliminar información irrelevante
+    const irrelevantWords = [
+        'finamente picad[oa]s?', 'finamente cortad[oa]s?', 'picad[oa]s?', 'cortad[oa]s?', 'enlatad[oa]s?', 'rallad[oa]s?', 'madur[oa]s?','triturad[oa]s?',
+        'rebanad[oa]s?', 'aplastad[oa]s?', 'molid[oa]s?', 'enter[oa]s?', 'fresco[s]?', 'grand[ea]s?', 'pequeñ[oa]s?', 'median[oa]s?', 'extr[ae]',
+        'pintado[s]?', 'roj[oa]s?', 'verde[s]?', 'amarill[oa]s?', 'blanc[oa]s?', 'negro[s]?', 'azul[ea]s?', 'gris[ea]s?', 'morad[oa]s?', 'marrón[ea]s?',
+        'dorad[oa]s?', 'platead[oa]s?', 'turques[ae]s?', 'naranj[oa]s?'];
+
+    // Crear una expresión regular que elimine las palabras irrelevantes
+    const irrelevantWordsRegex = new RegExp(`\\b(${irrelevantWords.join('|')})\\b`, 'gi');
+    const cleanedIngredient = ingredient.replace(irrelevantWordsRegex, '').replace(/\s\s+/g, ' ').trim();
+    
+    return {
+        name: cleanedIngredient,
+        quantity: '',
+        unit: ''
+    };
+}
+
+function cleanTitle(title) {
+    // Remove parts of the title that are not part of the actual title
+    return title.replace(/:.*$/, '');
+}
+
 
 // GETS GENERICOS
 
