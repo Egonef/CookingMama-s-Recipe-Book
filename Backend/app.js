@@ -3,7 +3,8 @@ import recipeRoutes from './routes/recipeRoute.js'
 import express from 'express'
 import cors from 'cors'
 
-var session = require('express-session')
+//var session = require('express-session')
+import session from 'express-session'
 
 const app = express()
 

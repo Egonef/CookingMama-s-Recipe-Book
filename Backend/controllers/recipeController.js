@@ -3,6 +3,8 @@ import Recipe from '../models/recipesModel.js'
 import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
+import axios from 'axios';
+
 
 
 // FUNCIONES DE LLAMADA A LA API DE TRADUCCIÓN
@@ -200,7 +202,8 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
 })
 
     //BUSCAR RECETAS
-    export const findRecipeByIngredients  = asyncHandler(async(req, res) => {
+    ///api/recipes/ingredients?ingredients=
+    export const findRecipesByIngredients  = asyncHandler(async(req, res) => {
         const ingredients = req.query.ingredients ? req.query.ingredients.split(',') : [];
 
         if (ingredients.length === 0) {
