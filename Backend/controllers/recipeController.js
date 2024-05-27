@@ -31,7 +31,7 @@ async function translateText(text, targetLanguage) {
 
 ///api/recipes/popular
 export const getRecipes = asyncHandler(async(req, res) => {
-    const recipes = await Recipe.find();
+    const recipes = await Recipe.find().sort({ popularity: -1 });
     //console.log("recetas recibidas:" + recipes);
     if(recipes){
         res.status(200).json(recipes);
@@ -241,4 +241,40 @@ export const deleteOwnRecipe = asyncHandler(async(req, res) => {
 export const addRecipe = asyncHandler(async (req, res) => {
 
     //TODO
+});
+
+// Asociar recetas a ingredientes
+export const updateIngredients = asyncHandler(async (req, res) => {
+    try {
+        const recipes = await Recipe.find();
+
+        for (const recipe of recipes) {
+            for (const recipeIngredient of recipe.ingredients) {
+                const ingredientName = recipeIngredient.name;
+                let ingredient = await Ingredient.findOne({ name: ingredientName });
+
+                if (ingredient) {
+                    // Si el ingrediente ya existe, agrega el ID de la receta si no está ya presente
+                    if (!ingredient.recipeIds) {
+                        ingredient.recipeIds = [];
+                    }
+                    if (!ingredient.recipeIds.includes(recipe._id.toString())) {
+                        ingredient.recipeIds.push(recipe._id.toString());
+                        await ingredient.save();
+                    }
+                } else {
+                    // Si el ingrediente no existe, crea uno nuevo con el ID de la receta
+                    ingredient = new Ingredient({
+                        name: ingredientName,
+                        recipeIds: [recipe._id.toString()]
+                    });
+                    await ingredient.save();
+                }
+            }
+        }
+        res.status(200).json({ message: "Ingredients updated successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error updating ingredients" });
+        console.error('Error updating ingredients', error);
+    }
 });

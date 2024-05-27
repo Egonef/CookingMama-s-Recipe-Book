@@ -19,7 +19,11 @@ router.route('/myOwn/').get(ctr.getRecipesCreatedByUser)
 router.route('/myOwn/').post(ctr.publishRecipe)
 router.route('/myOwn/').patch(ctr.draftRecipe)
 router.route('/myOwn/').delete(ctr.deleteOwnRecipe)
+
+router.route('/updateIngs').get(ctr.updateIngredients)
 router.route('/:id').get(ctr.getRecipeById)
+
+
 
 
 export default router
