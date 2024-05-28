@@ -126,11 +126,18 @@ function transformIngredients(ingredient) {
         'finamente picad[oa]s?', 'finamente cortad[oa]s?', 'picad[oa]s?', 'cortad[oa]s?', 'enlatad[oa]s?', 'rallad[oa]s?', 'madur[oa]s?','triturad[oa]s?',
         'rebanad[oa]s?', 'aplastad[oa]s?', 'molid[oa]s?', 'enter[oa]s?', 'fresco[s]?', 'grand[ea]s?', 'pequeñ[oa]s?', 'median[oa]s?', 'extr[ae]',
         'pintado[s]?', 'roj[oa]s?', 'verde[s]?', 'amarill[oa]s?', 'blanc[oa]s?', 'negro[s]?', 'azul[ea]s?', 'gris[ea]s?', 'morad[oa]s?', 'marrón[ea]s?',
-        'dorad[oa]s?', 'platead[oa]s?', 'turques[ae]s?', 'naranj[oa]s?'];
+        'dorad[oa]s?', 'platead[oa]s?', 'turques[ae]s?', 'naranj[oa]s?','sin espinas', 'sin piel', 'sazonados con un poco de sal y pimienta'];
 
     // Crear una expresión regular que elimine las palabras irrelevantes
     const irrelevantWordsRegex = new RegExp(`\\b(${irrelevantWords.join('|')})\\b`, 'gi');
-    const cleanedIngredient = ingredient.replace(irrelevantWordsRegex, '').replace(/\s\s+/g, ' ').trim();
+    
+    // Eliminar todo lo que va después de comas, guiones y lo que está entre paréntesis
+    let cleanedIngredient = ingredient.replace(/,.*| -.*|\(.*?\)/g, '');
+
+     // Eliminar palabras irrelevantes
+     cleanedIngredient = cleanedIngredient.replace(irrelevantWordsRegex, '').replace(/\s\s+/g, ' ').trim();
+
+     //cleanedIngredient = ingredient.replace(irrelevantWordsRegex, '').replace(/\s\s+/g, ' ').trim();
     
     return {
         name: cleanedIngredient,
@@ -282,10 +289,19 @@ export const obtenerRecetas = async (ingredientName) => {
     }
 };
 
-    //BUSCAR RECETAS
+    //BUSCAR Y FILTRAR RECETAS
+    // Caché para almacenar las recetas
+    let cachedRecipes = [];
+
+
     ///api/recipes/ingredients?ingredients=
     export const findRecipesByIngredients = asyncHandler(async(req, res) => {
-        //const ingredients = req.query.ingredients ? req.query.ingredients.split(',') : [];
+        // Comprueba si las recetas ya están en caché
+        if (cachedRecipes.length > 0) {
+        // Si las recetas están en caché, devuelve el resultado
+            return res.json(cachedRecipes);
+        }
+
         const ingredients = req.query.ingredients ? req.query.ingredients.split(',').map(ingredient => ingredient.charAt(0).toUpperCase() + ingredient.slice(1)) : [];
 
         if (ingredients.length === 0) {
@@ -294,13 +310,13 @@ export const obtenerRecetas = async (ingredientName) => {
     
         try {
             // Array para almacenar las recetas de cada ingrediente
-            let allRecipes = [];
+            let allRecipes = []; 
     
             // Recorrer los ingredientes y obtener las recetas de cada uno
             for (const ingredient of ingredients) {
                 try {
-                    //const response = await axios.get(`/api/recipes/ingredients/${ingredient}`);
-                    //const recipes = response.data;
+                    // Reasignar cachedRecipes antes de asignarle los nuevos resultados
+                    cachedRecipes = [];
                     const recipes = await obtenerRecetas(ingredient);
                     allRecipes.push(recipes);
                 } catch (error) {
@@ -309,7 +325,6 @@ export const obtenerRecetas = async (ingredientName) => {
                     allRecipes.push([]);
                 }
             }
-    
             // Calcular la intersección de todas las recetas
             const commonRecipes = allRecipes.reduce((acc, recipes) => {
                 if (acc === null) {
@@ -319,7 +334,6 @@ export const obtenerRecetas = async (ingredientName) => {
                 return acc.filter(recipe => recipeIds.includes(recipe._id.toString()));
             }, null);
 
-
             //Extraer recetas de la API Spoonacular
             const APIRecipes = await searchRecipesAndTranslate(ingredients);
             const Recipes =commonRecipes.concat(APIRecipes);
@@ -327,6 +341,9 @@ export const obtenerRecetas = async (ingredientName) => {
             if (Recipes.length === 0) {
                 res.status(404).json({ message: "No recipes found with all specified ingredients" });
             } else {
+                // Guarda las recetas en caché
+                cachedRecipes = Recipes;
+                console.log(cachedRecipes);
                 res.json(Recipes);
             }
         } catch (error) {
@@ -334,6 +351,42 @@ export const obtenerRecetas = async (ingredientName) => {
             res.status(500).json({ message: "Internal server error" });
         }
     });
+
+    ///api/recipes/filter?ingredients=...&maxReadyTime=...&cuisine=...
+    export const filterRecipes = asyncHandler(async(req, res) => {     
+        // Usa las recetas almacenadas en caché
+        const Recipes = cachedRecipes;      
+        const cuisine = req.query.cuisine;
+        const maxReadyTime = req.query.maxReadyTime ? parseInt(req.query.maxReadyTime) : null;
+        /**if (ingredients.length === 0) {
+            return res.status(400).json({ message: "Please provide at least one ingredient" });
+        }**/
+        try{
+
+        //const Recipes = await findRecipesByIngredients(req, res);
+            if (Recipes.length ===0) {
+                return res.status(404).json({ message: "Recipes not found" });
+            }
+            // Filtrar recetas por cuisine y maxReadyTime
+                let filteredRecipes = Recipes;
+                if (cuisine) {
+                    filteredRecipes = filteredRecipes.filter(recipe => recipe.cuisine.toLowerCase() === cuisine.toLowerCase());
+                }
+                if (maxReadyTime) {
+                    filteredRecipes = filteredRecipes.filter(recipe => recipe.maxReadyTime <= maxReadyTime);
+                }
+                
+                if (filteredRecipes.length === 0) {
+                    res.status(404).json({ message: "No recipes found matching the filters" });
+                } else {
+                    res.json(filteredRecipes);
+                } 
+        }catch (error) {
+            console.error('Error filtering recipes:', error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    });
+
 
     // RECETAS GUARDADAS
 
