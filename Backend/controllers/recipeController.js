@@ -22,10 +22,14 @@ async function translateText(text, targetLanguage) {
         });
 
         const translatedText = response.data.translations[0].text;
-        console.log(`Translated Text: ${translatedText}`);
+        //console.log(`Translated Text: ${translatedText}`);
         return translatedText;
     } catch (error) {
+        if (error.response && error.response.status === 402) { // 402 Payment Required
+            console.warn(`API Key ${apiKey} has reached its limit.`);
+        }else {
         console.error('Error translating text:', error);
+        }
     }
 }
 
@@ -38,6 +42,11 @@ async function translateIngredients(ingredients, targetLanguage) {
 
 // FUNCIONES DE LLAMADA A LA API DE RECETAS
 
+const apiKeys = [
+    '8c222ad1eedf45abb083854da2ed6d48',
+    '320b591ffc074aa3bb69573f63430599'
+];
+
 async function APIsearchRecipesByIngredients(ingredients) {
     let ApiIdRecipes = [];
 
@@ -48,7 +57,7 @@ async function APIsearchRecipesByIngredients(ingredients) {
                 params: {
                     apiKey: apiKey,
                     ingredients: ingredients.join(','),
-                    number: 2
+                    number: 5
                 }
             });
 
@@ -135,6 +144,53 @@ function cleanTitle(title) {
     return title.replace(/:.*$/, '');
 }
 
+async function searchRecipesAndTranslate(ingredients) {
+    try {
+        // Traducir ingredientes al inglés antes de buscar recetas
+        const translatedIngredients = await translateIngredients(ingredients, 'EN');
+
+        // Buscar recetas con los ingredientes traducidos
+        const recipes = await APIsearchRecipesByIngredients(translatedIngredients);
+
+        // Traducir los campos necesarios de las recetas al español
+        const translatedRecipes = await Promise.all(recipes.map(async recipe => {
+            const translatedTitle = await translateText(recipe.title, 'ES');
+            const translatedInstructions = await translateText(recipe.instructions, 'ES');
+            const translatedIngredients = await Promise.all(
+                recipe.ingredients.map(ingredient => translateText(ingredient, 'ES'))
+            );
+            const translatedCuisine = await translateText(recipe.cuisineType, 'ES');
+
+            return {
+                id: recipe.id,
+                title: translatedTitle,
+                instructions: translatedInstructions,
+                ingredients: translatedIngredients,
+                photo: recipe.photo,
+                cuisineType: translatedCuisine,
+                preparationTime: recipe.preparationTime,
+                allergens: recipe.allergens
+            };
+        }));
+
+        // Transformar las recetas traducidas
+        const transformedRecipes = translatedRecipes.map(recipe => ({
+            title: cleanTitle(recipe.title),
+            cuisine: recipe.cuisineType || 'Not specified',
+            ingredients: recipe.ingredients.map(transformIngredients),
+            steps: recipe.instructions.replace(/(<\/?[^>]+>|\\n|\\r|\\t)/g, ""),
+            image: recipe.photo,
+            maxReadyTime: recipe.preparationTime,
+            intolerances: recipe.allergens.join(', ') || '',
+            popularity: 0 // Default value
+        }));
+
+        return transformedRecipes;
+    } catch (error) {
+        console.error('Error searching and translating recipes:', error);
+        throw error;
+    }
+}
 
 // GETS GENERICOS
 
@@ -170,9 +226,9 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
     
 })
 
-///api/recipes/ingredient/:ingredient
+///api/recipes/ingredients/:ingredient
 export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
-    const ingredientName = req.params.ingredient;
+    const ingredientName = req.params.ingredient.charAt(0).toUpperCase()+ req.params.ingredient.slice(1);
     //Hay que actualizar el valor del array de RecipeIds de un Ingrediente cada vez que
     // añada una receta con dicho ingrediente
 
@@ -191,9 +247,8 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
     const recipes = await Recipe.find({ _id: { $in: recipeIds } });
 
     if (recipes && recipes.length > 0) {
-        recipes.popularity = (recipes.popularity || 0) + 1;
-        await recipes.save();
-
+        //recipes.popularity = (recipes.popularity || 0) + 1;
+        //await recipes.save();
         res.json(recipes);
     } else {
         res.status(404).json({ message: "Recipes not found" });
@@ -201,10 +256,37 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
     }
 })
 
+export const obtenerRecetas = async (ingredientName) => {
+    try {
+        // Buscar el ingrediente en la base de datos
+        const ingredient = await Ingredient.findOne({ name: ingredientName });
+
+        if (!ingredient) {
+            throw new Error('Ingredient not found');
+        }
+
+        // Obtener los IDs de las recetas asociadas con este ingrediente
+        const recipeIds = ingredient.recipeIds;
+
+        // Buscar las recetas que tienen el ID del ingrediente
+        const recipes = await Recipe.find({ _id: { $in: recipeIds } });
+
+        if (recipes && recipes.length > 0) {
+            return (recipes);
+        } else {
+            return []; // Devolver un array vacío si no se encuentran recetas
+        }
+    } catch (error) {
+        console.error('Error obteniendo recetas:', error);
+        throw new Error('Error obteniendo recetas');
+    }
+};
+
     //BUSCAR RECETAS
     ///api/recipes/ingredients?ingredients=
-    export const findRecipesByIngredients  = asyncHandler(async(req, res) => {
-        const ingredients = req.query.ingredients ? req.query.ingredients.split(',') : [];
+    export const findRecipesByIngredients = asyncHandler(async(req, res) => {
+        //const ingredients = req.query.ingredients ? req.query.ingredients.split(',') : [];
+        const ingredients = req.query.ingredients ? req.query.ingredients.split(',').map(ingredient => ingredient.charAt(0).toUpperCase() + ingredient.slice(1)) : [];
 
         if (ingredients.length === 0) {
             return res.status(400).json({ message: "Please provide at least one ingredient" });
@@ -216,8 +298,16 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
     
             // Recorrer los ingredientes y obtener las recetas de cada uno
             for (const ingredient of ingredients) {
-                const recipes = getRecipeByIngredient(ingredient);
-                allRecipes.push(recipes);
+                try {
+                    //const response = await axios.get(`/api/recipes/ingredients/${ingredient}`);
+                    //const recipes = response.data;
+                    const recipes = await obtenerRecetas(ingredient);
+                    allRecipes.push(recipes);
+                } catch (error) {
+                    console.error(`Error retrieving recipes for ingredient "${ingredient}":`, error);
+                    // Si no se encuentran recetas para un ingrediente, agregar un array vacío
+                    allRecipes.push([]);
+                }
             }
     
             // Calcular la intersección de todas las recetas
@@ -228,13 +318,17 @@ export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
                 const recipeIds = recipes.map(recipe => recipe._id.toString());
                 return acc.filter(recipe => recipeIds.includes(recipe._id.toString()));
             }, null);
+
+
+            //Extraer recetas de la API Spoonacular
+            const APIRecipes = await searchRecipesAndTranslate(ingredients);
+            const Recipes =commonRecipes.concat(APIRecipes);
     
-            if (!commonRecipes || commonRecipes.length === 0) {
+            if (Recipes.length === 0) {
                 res.status(404).json({ message: "No recipes found with all specified ingredients" });
-                return;
+            } else {
+                res.json(Recipes);
             }
-    
-            res.json(commonRecipes);
         } catch (error) {
             console.error('Error getting recipes by multiple ingredients:', error);
             res.status(500).json({ message: "Internal server error" });

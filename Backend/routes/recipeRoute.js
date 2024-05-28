@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.route('/popular').get(ctr.getRecipes)
 
-router.route('/ingredient/:ingredient').get(ctr.getRecipeByIngredient)
+router.route('/ingredients/:ingredient').get(ctr.getRecipeByIngredient)
 //Solicitud GET a /recipes?ingredients=tomate,ajo,aceite.
 router.route('/ingredients').get(ctr.findRecipesByIngredients)
 
