@@ -26,7 +26,7 @@ async function translateText(text, targetLanguage) {
         return translatedText;
     } catch (error) {
         if (error.response && error.response.status === 402) { // 402 Payment Required
-            console.warn(`API Key ${apiKey} has reached its limit.`);
+            console.warn(`API Key ${apiKeyTranslation} has reached its limit.`);
         }else {
         console.error('Error translating text:', error);
         }
@@ -45,7 +45,7 @@ async function translateIngredients(ingredients, targetLanguage) {
 const apiKeys = [
     '8c222ad1eedf45abb083854da2ed6d48',
     '320b591ffc074aa3bb69573f63430599',
-    '00570bddee654466ad4874540ef1b7bc'
+    '00570bddee654466ad4874540ef1b7bc' //email:b.o.a.ns.o.re@gmail.com psswd:CookingMama
 ];
 
 async function APIsearchRecipesByIngredients(ingredients) {
