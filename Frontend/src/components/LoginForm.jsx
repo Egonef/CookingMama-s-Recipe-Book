@@ -1,20 +1,37 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-
+import { Link } from "react-router-dom";
+import axios from 'axios';
 
 export default function LoginForm() {
 
+    //Estados de los inputs
     const [isMailFocused, setIsMailFocused] = useState(false);
     const [isPassFocused, setIsPassFocused] = useState(false);
 
 
     const handleMailInputChange = (event) => {
         setIsMailFocused(event.target.value !== '');
+        setEmail(event.target.value);
     };
 
     const handlePassInputChange = (event) => {
         setIsPassFocused(event.target.value !== '');
+        setPassword(event.target.value);
     };
+
+    //Estados de los campos del registro
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
+    const login = async () => {
+        const response = await axios.post('http://localhost:5000/api/users/login', {
+            email,
+            password
+        });
+        console.log(response);
+    }
 
 
     return (
@@ -33,6 +50,7 @@ export default function LoginForm() {
                         onBlur={(event) => {
                             if (event.target.value === '') {
                                 setIsMailFocused(false);
+
                             }
                         }}
                         />
@@ -54,11 +72,11 @@ export default function LoginForm() {
                         />
                     </div>
 
-                    <button className=" self-center bg-lime-700 text-white rounded-lg p-2 my-5 w-32 h-12">Iniciar sesión</button>
-                    <div className="flex flex-row justify-center items-center">
+                    <button type='button' className=" self-center bg-lime-700 text-white rounded-lg p-2 my-5 w-32 h-12" onClick={login}>Iniciar sesión</button>
+                    <Link to={"/register"} className="flex flex-row justify-center items-center">
                         <p className=' mx-2'>¿No tienes cuenta?</p>
                         <button className=" bg-transparent text-lime-900 rounded-lg p-2 my-2"><b>Regístrate</b></button>
-                    </div>
+                    </Link>
                     <div className="flex flex-col justify-center items-center my-2">
                         <p className=' text-center text-sm' >¿Olvidaste tu contraseña?</p>
                         <button className="bg-transparent text-lime-900 w-44 "><b>Recuperar contraseña</b></button>
@@ -67,8 +85,8 @@ export default function LoginForm() {
 
                 <div id='divisor' className=" bg-black w-1 h-[100%]"></div>
 
-                <div className="flex flex-col  w-1/2 h-auto ml-5">
-                    <h1 className="text-2xl">Este es el placeholder del lopgin</h1>
+                <div className="flex flex-col  w-1/2 h-auto ml-5 mt-24">
+                    <h1 className="text-2xl">¡Inicia sesión para crear tus recetas personalizadas y guardar recetas favoritas!</h1>
                 </div>
             </form>
         </div>

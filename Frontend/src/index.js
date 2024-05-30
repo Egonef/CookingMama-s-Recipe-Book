@@ -9,6 +9,7 @@ import ErrorPage from './routes/errorPage';
 import Test from './routes/test';
 import RecipesHome from './routes/recipesHome';
 import Login from './routes/login';
+import Register from './routes/register';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,15 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/error",
+    element: <ErrorPage />,
+  },
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

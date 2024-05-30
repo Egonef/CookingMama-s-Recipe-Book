@@ -1,6 +1,8 @@
 import User from '../models/usersModel.js'
 import asyncHandler from 'express-async-handler'
 
+
+// Tus rutas van aquí
     // GETS GENERICOS
 
 ///api/users
@@ -75,6 +77,7 @@ export const register  = asyncHandler(async(req, res) => {
     req.session.user=newUser;
     res.status(201).json(newUser);
 })
+
 export const getAdmin = asyncHandler(async(req, res) => {
     if (req.session.user.isAdmin == true)
         res.send(true);
