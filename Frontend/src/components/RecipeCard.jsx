@@ -11,7 +11,7 @@ export default function RecipeCard( { recipeNumber }) {
 
     useEffect(() => {
 
-        axios.get('http://localhost:5000/api/recipes/popular')  // Reemplaza con la URL de tu API
+        axios.get('http://localhost:5000/api/recipes/popular')
             .then(response => {
                 setRecipe(response.data[recipeNumber]);
             })

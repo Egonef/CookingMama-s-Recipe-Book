@@ -14,6 +14,7 @@ export default function RecipesHome() {
 
 
     useEffect(() => {
+        setNumRecipes(recipeData.Recipe.length);
         const fetchRecipes = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/recipes/ingredients?ingredients=${searchTerm}`);
@@ -39,6 +40,7 @@ export default function RecipesHome() {
                 <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 </div>
                 <div className="flex flex-row justify-evenly items-center flex-wrap gap-x-1 gap-y-4 mt-16 mx-16">
+                    {Array.from({length: numRecipes}, (_, i) => <RecipeCard key={i} recipeNumber={i} />)}
                     {filteredRecipes.map((recipe, i) => <RecipeCard key={i} recipe={recipe} />)}
                 </div>
             </div>
