@@ -1,6 +1,9 @@
+import axios from 'axios';
+
+
 // FUNCIONES DE LLAMADA A LA API DE TRADUCCIÓN
 
-const apiKeyTranslation = '1940e7c5-d32c-426d-9ce4-78f5eb26cff7:fx';
+const apiKeyTranslation = process.env.apiKeyTranslation
 
 async function translateText(text, targetLanguage) {
     try {
@@ -34,9 +37,9 @@ async function translateIngredients(ingredients, targetLanguage) {
 // FUNCIONES DE LLAMADA A LA API DE RECETAS
 
 const apiKeys = [
-    '8c222ad1eedf45abb083854da2ed6d48',
-    '320b591ffc074aa3bb69573f63430599',
-    '00570bddee654466ad4874540ef1b7bc' //email:b.o.a.ns.o.re@gmail.com psswd:CookingMama
+    process.env.apiKeysRecipe,
+    process.env.apiKeysRecipe2,
+    process.env.apiKeysRecipe3
 ];
 
 async function APIsearchRecipesByIngredients(ingredients) {
