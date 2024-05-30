@@ -19,7 +19,8 @@
     "express-async-handler": "^1.2.0",
     "express-session": "^1.18.0",
     "mongodb": "^6.6.1",
-    "mongoose": "^8.3.0"
+    "mongoose": "^8.3.0",
+    "supertest-session": "^5.0.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.4",

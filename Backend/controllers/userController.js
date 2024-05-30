@@ -81,3 +81,22 @@ export const getAdmin = asyncHandler(async(req, res) => {
     else
         res.send(false)
 });
+
+export const logout = asyncHandler(async(req, res) =>{
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Logout failed' });
+        }
+        res.clearCookie('connect.sid');
+        res.json({ message: 'Logout successful' });
+    });
+})
+
+
+export const status = asyncHandler(async(req,res) => {
+    if (req.session.user) {
+        res.json({ loggedIn: true, user: req.session.user });
+    } else {
+        res.json({ loggedIn: false });
+    }
+})
