@@ -30,3 +30,36 @@ describe('login', () => {
     
     });
   },10000);
+
+
+  describe('register', () =>{
+
+    //firstName, secondName, userName, email, password, isAdmin
+      it('Should register if the user is new', async () =>{
+        const response = await testSession.post("/api/users/register").send({
+          firstName:'nuevoUsuarioRegistrado',
+          secondName:'ApellidoNuevoUsuarioRegistrado',
+          userName:'user4',
+          password:'1234',
+          isAdmin: true,
+          email: 'user4@gmail.com'})
+
+        expect(response.statusCode).toBe(201)
+      })
+
+
+      
+      it('Shouldnt register if the user has the same email as other user', async () =>{
+       
+          const response = await testSession.post("/api/users/register").send({
+            firstName:'nuevoUsuarioRegistrado',
+            secondName:'ApellidoNuevoUsuarioRegistrado',
+            userName:'user4',
+            password:'1234',
+            isAdmin: true,
+            email: 'user1@gmail.com'})
+  
+          expect(response.statusCode).toBe(409)
+        })
+
+  })
