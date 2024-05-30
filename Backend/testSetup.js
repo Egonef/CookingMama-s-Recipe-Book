@@ -27,11 +27,7 @@ await User.deleteMany({})
 mongoose.connection.close();
 
 })
-beforeEach(async () => {
 
-//await Recipe.deleteMany();
-
-});
 
 var recetaDefault1 = new Recipe({
   "_id" : "0000000116b91f66fbb3fd6c",
