@@ -45,13 +45,13 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
 ///api/recipes/ingredients/:ingredient
 export const getRecipeByIngredient  = asyncHandler(async(req, res) => {
     const ingredientName = req.params.ingredient.charAt(0).toUpperCase()+ req.params.ingredient.slice(1);
-    //Hay que actualizar el valor del array de RecipeIds de un Ingrediente cada vez que
-    // añada una receta con dicho ingrediente
-
+    // TODO Hay que actualizar el valor del array de RecipeIds de un Ingrediente cada vez que
+    // añada una receta con dicho ingrediente 
+    console.log("nombre ingrediente: " + ingredientName)
     // Busca el ingrediente por su nombre
     const ingredient = await Ingredient.findOne({ name: ingredientName });
 
-    if (!ingredient) {
+    if (ingredient == null ) {
         res.status(404).json({ message: "Ingredient not found" });
         return 
     }

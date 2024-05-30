@@ -20,6 +20,8 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: true }
   }));
+
+app.use(express.json()) //Sirve para que se puedan conger argumentos del body directamente
 //Creating API for user
 app.use('/api/users', userRoutes)
 

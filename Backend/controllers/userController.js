@@ -31,12 +31,11 @@ export const getUserById  = asyncHandler(async(req, res) => {
 export const login  = asyncHandler(async(req, res) => {
 
     const { email, password } = req.body;
-
+    
     const existingUser = await User.findOne({ email: email });
-
-    if (!existingUser) {
+    if (existingUser == null ) {
         // Si el usuario no existe, responde con un mensaje de error
-        res.status(404).json({message: "Invalid email"})
+        return res.status(405).json({message: "Invalid email"})
     }
 
     // Verifica si la contraseña proporcionada coincide con la contraseña almacenada
@@ -44,7 +43,7 @@ export const login  = asyncHandler(async(req, res) => {
 
     if (!isPasswordValid) {
         // Si la contraseña no coincide, responde con un mensaje de error
-        res.status(404).json({message: "Invalid password"})
+        return res.status(406).json({message: "Invalid password"})
     }
 
     req.session.user=existingUser;
@@ -97,9 +96,9 @@ export const logout = asyncHandler(async(req, res) =>{
 
 
 export const status = asyncHandler(async(req,res) => {
-    if (req.session.user) {
-        res.json({ loggedIn: true, user: req.session.user });
+    if (req.session.user != null) {
+        res.status(200).json({ loggedIn: true, user: req.session.user });
     } else {
-        res.json({ loggedIn: false });
+        res.status(201).json({ loggedIn: false });
     }
 })

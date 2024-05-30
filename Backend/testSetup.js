@@ -3,6 +3,7 @@ const { getRecipeById } = require( "./controllers/recipeController");
 import  Recipe from"./models/recipesModel";
 import mongoose from "mongoose";
 import User from "./models/usersModel";
+import Ingredient from "./models/ingredientsModel";
 
 
 // id invalida -> "662a29c87649ab8290495d08"
@@ -12,26 +13,24 @@ beforeAll(async () =>{
   const con = await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseTestName}`);
   await Recipe.deleteMany({})
   await User.deleteMany({})
-
+  await Ingredient.deleteMany({})
   
   await recetaDefault1.save();
   await recetaDefault2.save();
   await recetaDefault3.save();
   
+  await ingrediente1.save();
   usuarioConRecetaGuardada = await usuarioConRecetaGuardada.save();
-  //console.log("IDs al final del beforeAll:" + recetaDefault1._id + "," + recetaDefault2._id + "," + usuarioConRecetaGuardada._id);
 })
+
 afterAll(async () =>{
-await Recipe.deleteMany();
-await User.deleteMany({})
-mongoose.connection.close();
+  await Recipe.deleteMany();
+  await User.deleteMany({})
+  await Ingredient.deleteMany({})
+  mongoose.connection.close();
 
 })
-beforeEach(async () => {
 
-//await Recipe.deleteMany();
-
-});
 
 var recetaDefault1 = new Recipe({
   "_id" : "0000000116b91f66fbb3fd6c",
@@ -75,46 +74,6 @@ var recetaDefault2 = new Recipe({
       "name": "Pepino",
       "quantity": "1",
       "unit": "unidad"
-    },
-    {
-      "name": "Cebolla roja",
-      "quantity": "1/2",
-      "unit": "unidad"
-    },
-    {
-      "name": "Aceitunas negras",
-      "quantity": "100",
-      "unit": "gramos"
-    },
-    {
-      "name": "Queso feta",
-      "quantity": "100",
-      "unit": "gramos"
-    },
-    {
-      "name": "Aceite de oliva",
-      "quantity": "2",
-      "unit": "cucharadas"
-    },
-    {
-      "name": "Zumo de limón",
-      "quantity": "1",
-      "unit": "cucharada"
-    },
-    {
-      "name": "Orégano",
-      "quantity": "1/2",
-      "unit": "cucharada"
-    },
-    {
-      "name": "Sal",
-      "quantity": "al gusto",
-      "unit": "12"
-    },
-    {
-      "name": "Pimienta",
-      "quantity": "al gusto",
-      "unit": "12"
     }
   ],
   "steps": "Corta los tomates, pepinos y cebolla. Mezcla con las aceitunas y el queso feta. Aliña con aceite de oliva, zumo de limón, orégano, sal y pimienta. Mezcla bien y sirve.",
@@ -139,36 +98,6 @@ var recetaDefault3 = new Recipe({
       "name": "Piña",
       "quantity": "1/2",
       "unit": "unidad"
-    },
-    {
-      "name": "Kiwi",
-      "quantity": "2",
-      "unit": "unidades"
-    },
-    {
-      "name": "Uva",
-      "quantity": "100",
-      "unit": "gramos"
-    },
-    {
-      "name": "Naranja",
-      "quantity": "1",
-      "unit": "unidad"
-    },
-    {
-      "name": "Miel",
-      "quantity": "2",
-      "unit": "cucharadas"
-    },
-    {
-      "name": "Zumo de limón",
-      "quantity": "1",
-      "unit": "cucharada"
-    },
-    {
-      "name": "Menta fresca",
-      "quantity": "al gusto",
-      "unit": ""
     }
   ],
   "steps": "Corta las frutas en trozos. Mezcla con miel y zumo de limón. Decora con hojas de menta fresca. Sirve frío.",
@@ -177,6 +106,16 @@ var recetaDefault3 = new Recipe({
   "intolerances": "",
   "popularity": 0
   })
+
+
+  var ingrediente1 = new Ingredient(
+    {
+      "name": "Pollo",
+      "quantity": "500",
+      "unit": "gramos",
+      "recipeIds": ["0000000116b91f66fbb3fd6c"]
+    }
+  )
 var usuarioConRecetaGuardada = new User({
   "_id" : "000000087852431f2bf8ae17",
   "firstName":"UserName",
