@@ -35,7 +35,7 @@ describe('getRecipesByID', () => {
 describe('getRecipesByIngredient', () => {
   it('should return the recipe if found', async () => {
 
-    const response = await request(app).get("/api/recipes/ingredient/pollo");
+    const response = await request(app).get("/api/recipes/ingredients/pollo");
     expect(response.statusCode).toBe(200);
     expect(response.body)
 
