@@ -31,33 +31,32 @@ describe('getRecipesByID', () => {
  
 },10000);
 
-describe('getRecipesByIngredient', () => {
+describe('Find', () => {
   it('should return the recipe if found', async () => {
 
-    const response = await request(app).get("/api/recipes/ingredients/pollo");
+    const response = await request(app).get("/api/recipes/find").query({ingredients: "pollo"})
     console.log(response)
     expect(response.statusCode).toBe(200);
-    expect(response.body)
 
     expect(Array.isArray(response.body)).toBe(true);
 
     // Check if at least one recipe contains 'tomato' as an ingredient
-    const recipesWithTomato = response.body.filter(recipe => {
+    const recipesWithChicken = response.body.filter(recipe => {
       return recipe.ingredients.some(ingredient => ingredient.name.toLowerCase() === 'pollo');
     });
   
     // At least one recipe should have 'tomato' as an ingredient
-    expect(recipesWithTomato.length).toBeGreaterThan(0);
+    expect(recipesWithChicken.length).toBeGreaterThan(0);
   
   
   });
 
   it('should return nothing when not found', async () => {
-    const response = await request(app).get("/api/recipes/ingredients/patata");
+    const response = await request(app).get("/api/recipes/find").query({ingredients: "tomate"})
     expect(response.statusCode).toBe(404);
   });
 
-  //Deberia diferneciarse en que no hay plato con esa receta y que ese ingrediente no exoista
+ 
  
 },10000);
 

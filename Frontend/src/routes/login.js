@@ -8,7 +8,7 @@ export default function Login() {
 
 
     return (
-        <div className="bg-[#C3B9AB] h-svh">
+        <div className="bg-red-200 h-svh">
             <div className=" animate-fade-in">
                 <Navbar />
                 <LoginForm />

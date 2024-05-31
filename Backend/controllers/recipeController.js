@@ -3,7 +3,7 @@ import Recipe from '../models/recipesModel.js'
 import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
-import *  as API from './apiFunctions.js'
+import *  as api from './apiFunctions.js'
 import { searchRecipesAndTranslate } from './apiFunctions.js'; // Asegúrate de que la función esté correctamente importada
 
 
@@ -64,11 +64,10 @@ export const getRecipeByIngredientAndFilter  = asyncHandler(async(req, res) => {
         recetas = recetasBD;
         
         if(APIEnabled){
-            console.log("Hecho uso de API\n");
-            const recetasAPI = await searchRecipesAndTranslate(ingredients);
-            //console.log(recetasAPI);
-            recetas = recetas.concat(recetasAPI);
-            //console.log(recetas);
+            console.log("Hecho uso de API\n")
+            const recetasAPI = await api.searchRecipesAndTranslate(ingredients);
+            console.log("recetas api: " + recetasAPI)
+            recetas = recetas.concat(recetasAPI)
         }
         
         if (recetas.length === 0) {
@@ -99,7 +98,8 @@ export const obtenerRecetasConIngrediente = async (ingredientName) => {
         const ingredient = await Ingredient.findOne({ name: ingredientName });
 
         if (!ingredient) {
-            throw new Error('Ingredient not found');
+            console.log('Ingredient not found')
+            return []
         }
 
         // Obtener los IDs de las recetas asociadas con este ingrediente
@@ -161,7 +161,7 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     
-    //const userId = req.query.userID;
+    const userId = req.query.userID;
     //console.log("User id" + userId);
     
     const user = await User.findById(userId);
@@ -303,7 +303,53 @@ export const deleteOwnRecipe = asyncHandler(async(req, res) => {
 //Anadir receta (No existe como tal en los casos de uso. Sería de administrador)
 export const addRecipe = asyncHandler(async (req, res) => {
 
-    //TODO
+    const {
+        title,
+        cuisine,
+        ingredients,
+        steps,
+        image,
+        maxReadyTime,
+        intolerances,
+        popularity,
+        userId,
+    } = req.body;
+
+    // Validate the required fields
+    if (!title || !cuisine || !ingredients || !steps || !image || !maxReadyTime) {
+        res.status(400).json({message: 'Please provide all required fields' })
+        throw new Error('Please provide all required fields');
+    }
+
+    // Check if the user already exists
+    const user = await User.findById(userId);
+    
+    if(!user){
+        res.status(401).json({message: "El usuario al que se refiere no existe"})
+    }
+
+    // Create a new recipe
+    const recipe = new Recipe({
+        title,
+        cuisine,
+        ingredients,
+        steps,
+        image,
+        maxReadyTime,
+        intolerances,
+        popularity
+    });
+    // Save the recipe to the database
+    const createdRecipe = await recipe.save();
+
+    //asociar receta a usuario
+    user.ownRecipes.push(createdRecipe._id)
+    user.save()
+
+    //actualizar ingredientes
+    await actualizarIngredientes(createdRecipe)
+    res.status(201).json(createdRecipe);
+
 });
 
 ///api/recipes/updateIngs
@@ -313,29 +359,7 @@ export const updateIngredients = asyncHandler(async (req, res) => {
         const recipes = await Recipe.find();
 
         for (const recipe of recipes) {
-            for (const recipeIngredient of recipe.ingredients) {
-                const ingredientName = recipeIngredient.name;
-                let ingredient = await Ingredient.findOne({ name: ingredientName });
-
-                if (ingredient) {
-                    // Si el ingrediente ya existe, agrega el ID de la receta si no está ya presente
-                    if (!ingredient.recipeIds) { //Esto nunca deberia pasar ya que toda receta deberia tener por lo menos una receta asociada
-                        ingredient.recipeIds = [];
-                    }
-                    console.log("receta recogida" + recipe);
-                    if (!ingredient.recipeIds.includes(recipe._id.toString())) {
-                        ingredient.recipeIds.push(recipe._id.toString());
-                        await ingredient.save();
-                    }
-                } else {
-                    // Si el ingrediente no existe, crea uno nuevo con el ID de la receta
-                    ingredient = new Ingredient({
-                        name: ingredientName,
-                        recipeIds: [recipe._id.toString()]
-                    });
-                    await ingredient.save();
-                }
-            }
+            await actualizarIngredientes(recipe)
         }
         res.status(200).json({ message: "Ingredients updated successfully" });
     } catch (error) {
@@ -343,3 +367,30 @@ export const updateIngredients = asyncHandler(async (req, res) => {
         console.error('Error updating ingredients', error);
     }
 });
+
+export const actualizarIngredientes = async (recipe) => {
+
+    for (const recipeIngredient of recipe.ingredients) {
+        const ingredientName = recipeIngredient.name;
+        let ingredient = await Ingredient.findOne({ name: ingredientName });
+
+        if (ingredient) {
+            // Si el ingrediente ya existe, agrega el ID de la receta si no está ya presente
+            if (!ingredient.recipeIds) { //Esto nunca deberia pasar ya que toda receta deberia tener por lo menos una receta asociada
+                ingredient.recipeIds = [];
+            }
+            console.log("receta recogida" + recipe);
+            if (!ingredient.recipeIds.includes(recipe._id.toString())) {
+                ingredient.recipeIds.push(recipe._id.toString());
+                await ingredient.save();
+            }
+        } else {
+            // Si el ingrediente no existe, crea uno nuevo con el ID de la receta
+            ingredient = new Ingredient({
+                name: ingredientName,
+                recipeIds: [recipe._id.toString()]
+            });
+            await ingredient.save();
+        }
+    }
+}
