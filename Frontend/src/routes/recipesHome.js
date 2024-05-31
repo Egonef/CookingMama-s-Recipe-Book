@@ -9,11 +9,11 @@ import axios from 'axios';
 export default function RecipesHome() {
 
     const [numRecipes , setNumRecipes] = useState(0);
-    const [searchTerm, setSearchTerm] = useState("");
+    //const [searchTerm, setSearchTerm] = useState("");
     const [filteredRecipes, setFilteredRecipes] = useState([]);
 
 
-    useEffect(() => {
+    /**useEffect(() => {
         setNumRecipes(recipeData.Recipe.length);
         const fetchRecipes = async () => {
             try {
@@ -30,19 +30,20 @@ export default function RecipesHome() {
             // Si no hay término de búsqueda, puedes mostrar todas las recetas o limpiar la lista
             setFilteredRecipes([]);
         }
-    }, [searchTerm]);
+    }, [searchTerm]);**/
+    useEffect(() => {
+        setNumRecipes(recipeData.Recipe.length);
+    }, []);
 
     return (
         <div className="bg-[#C3B9AB]">
             <div className=" animate-fade-in">
                 <Navbar />
                 <div className="flex flex-row items-center justify-left mx-16">
-                <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                <Searchbar />
                 </div>
                 <div className="flex flex-row justify-evenly items-center flex-wrap gap-x-1 gap-y-4 mt-16 mx-16">
-                    {Array.from({length: numRecipes}, (_, i) => <RecipeCard key={i} recipeNumber={i} />)}
-                    {filteredRecipes.map((recipe, i) => <RecipeCard key={i} recipe={recipe} />)}
-                </div>
+                    {Array.from({length: numRecipes}, (_, i) => <RecipeCard key={i} recipeNumber={i} />)}                </div>
             </div>
         </div>
     );
