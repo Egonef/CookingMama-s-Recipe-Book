@@ -1,11 +1,14 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+
 
 
 // FUNCIONES DE LLAMADA A LA API DE TRADUCCIÓN
 
-const apiKeyTranslation = process.env.apiKeyTranslation
-
-async function translateText(text, targetLanguage) {
+export async function translateText(text, targetLanguage) {
+    const apiKeyTranslation = process.env.apiKeyTranslation
+    //console.log(apiKeyTranslation);
     try {
         const response = await axios.post(`https://api-free.deepl.com/v2/translate`, null, {
             params: {
@@ -17,6 +20,7 @@ async function translateText(text, targetLanguage) {
 
         const translatedText = response.data.translations[0].text;
         //console.log(`Translated Text: ${translatedText}`);
+        
         return translatedText;
     } catch (error) {
         if (error.response && error.response.status === 402) { // 402 Payment Required
@@ -27,7 +31,7 @@ async function translateText(text, targetLanguage) {
     }
 }
 
-async function translateIngredients(ingredients, targetLanguage) {
+export async function translateIngredients(ingredients, targetLanguage) {
     const translatedIngredients = await Promise.all(
         ingredients.map(ingredient => translateText(ingredient, targetLanguage))
     );
@@ -42,11 +46,18 @@ const apiKeys = [
     process.env.apiKeysRecipe3
 ];
 
-async function APIsearchRecipesByIngredients(ingredients) {
+export async function APIsearchRecipesByIngredients(ingredients) {
     let ApiIdRecipes = [];
+
+    const apiKeys = [
+        process.env.apiKeysRecipe,
+        process.env.apiKeysRecipe2,
+        process.env.apiKeysRecipe3
+    ];
 
     // Primer ciclo: Buscar recetas por ingredientes
     for (let apiKey of apiKeys) {
+        //console.log(apiKey)
         try {
             const response = await axios.get('https://api.spoonacular.com/recipes/findByIngredients', {
                 params: {
@@ -146,7 +157,7 @@ function cleanTitle(title) {
     return title.replace(/:.*$/, '');
 }
 
-async function searchRecipesAndTranslate(ingredients) {
+export async function searchRecipesAndTranslate(ingredients) {
     try {
         // Traducir ingredientes al inglés antes de buscar recetas
         const translatedIngredients = await translateIngredients(ingredients, 'EN');
@@ -157,11 +168,11 @@ async function searchRecipesAndTranslate(ingredients) {
         // Traducir los campos necesarios de las recetas al español
         const translatedRecipes = await Promise.all(recipes.map(async recipe => {
             const translatedTitle = await translateText(recipe.title, 'ES');
-            const translatedInstructions = await translateText(recipe.instructions, 'ES');
+            const translatedInstructions = recipe.instructions ? await translateText(recipe.instructions, 'ES'): '';
             const translatedIngredients = await Promise.all(
                 recipe.ingredients.map(ingredient => translateText(ingredient, 'ES'))
             );
-            const translatedCuisine = await translateText(recipe.cuisineType, 'ES');
+            const translatedCuisine = recipe.cuisineType ? await translateText(recipe.cuisineType, 'ES') : '';
 
             return {
                 id: recipe.id,
@@ -178,7 +189,7 @@ async function searchRecipesAndTranslate(ingredients) {
         // Transformar las recetas traducidas
         const transformedRecipes = translatedRecipes.map(recipe => ({
             title: cleanTitle(recipe.title),
-            cuisine: recipe.cuisineType || 'Not specified',
+            cuisine: recipe.cuisineType || '',
             ingredients: recipe.ingredients.map(transformIngredients),
             steps: recipe.instructions.replace(/(<\/?[^>]+>|\\n|\\r|\\t)/g, ""),
             image: recipe.photo,

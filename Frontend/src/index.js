@@ -10,6 +10,7 @@ import Test from './routes/test';
 import RecipesHome from './routes/recipesHome';
 import Login from './routes/login';
 import Register from './routes/register';
+import SearchResults from './routes/searchResults'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/error",
     element: <ErrorPage />,
+  },
+  {
+    path: "/search",
+    element: <SearchResults />,
   },
 
 ]);
