@@ -36,7 +36,7 @@ export default function LoginForm() {
 
     return (
         <div className="flex justify-center w-screen h-auto 2xl:mt-44 lg:mt-10">
-            <form className=" flex flex-row justify-center shadow-md bg-red-200 w-1/2 h-96 rounded-md p-8 ">
+            <form className=" flex flex-row justify-center shadow-md bg-[#F19CBB] w-1/2 h-96 rounded-md p-8 ">
                 <div className="flex flex-col justify-center w-1/2 h-auto mr-5">
                     <div className='flex flex-col mb-2 relative'>
                         <motion.label htmlFor="email" className="block text-gray-700 text-md font-bold mb-2 absolute ml-2"

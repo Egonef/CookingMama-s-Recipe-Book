@@ -1,6 +1,6 @@
 // src/pages/SearchResults.js
 import Navbar from "../components/Navbar";
-import RecipeCard from "../components/RecipeCard";
+import RecipeCardAll from "../components/RecipeCardAll";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -12,15 +12,15 @@ function useQuery() {
 export default function SearchResults() {
     const query = useQuery();
     const searchTerm = query.get('ingredients');
-   // const searchTerm =query;
-   console.log(searchTerm); 
+    // const searchTerm =query;
+    console.log(searchTerm);
     const [recipes, setRecipes] = useState([]);
     //const location = useLocation();
 
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/recipes/ingredients?ingredients=${searchTerm}`);
+                const response = await axios.get(`http://localhost:5000/api/recipes/find?ingredients=${searchTerm}`);
                 setRecipes(response.data);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
@@ -35,11 +35,11 @@ export default function SearchResults() {
             <div className="animate-fade-in">
                 <Navbar />
                 <div className="flex flex-row justify-evenly items-center flex-wrap gap-x-1 gap-y-4 mt-16 mx-16">
-                    {recipes.length > 0 ? (
-                        recipes.map((recipe, i) => <RecipeCard key={i} recipe={recipe} />)
-                    ) : (
-                        <p>No recipes found</p>
-                    )}
+                {recipes && recipes.length > 0 ? (
+                    recipes.map((recipe, i) => <RecipeCardAll key={i} recipe={recipe} />)
+                ) : (
+                    <p>No recipes found</p>
+                )}
                 </div>
             </div>
         </div>
