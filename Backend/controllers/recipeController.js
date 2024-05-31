@@ -98,7 +98,8 @@ export const obtenerRecetasConIngrediente = async (ingredientName) => {
         const ingredient = await Ingredient.findOne({ name: ingredientName });
 
         if (!ingredient) {
-            throw new Error('Ingredient not found');
+            console.log('Ingredient not found')
+            return []
         }
 
         // Obtener los IDs de las recetas asociadas con este ingrediente
