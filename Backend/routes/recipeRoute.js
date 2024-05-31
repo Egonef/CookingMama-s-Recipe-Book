@@ -2,8 +2,9 @@ import * as ctr from "../controllers/recipeController.js";
 import express from 'express'
 const router = express.Router()
 
-
+//Rutas de popularidad
 router.route('/popular').get(ctr.getRecipes)
+router.route('/incrementPopularity/:id').get(ctr.incrementPopularity)
 
 
 //Solicitud GET a http://localhost:5000/api/recipes/find?ingredients=Pollo&cuisine=Internacional&maxReadyTime=30
@@ -24,6 +25,7 @@ router.route('/myOwn/').post(ctr.publishRecipe)
 router.route('/myOwn/').patch(ctr.draftRecipe)
 router.route('/myOwn/').delete(ctr.deleteOwnRecipe)
 
+//Rutas auxiliares
 router.route('/updateIngs').get(ctr.updateIngredients)
 router.route('/:id').get(ctr.getRecipeById)
 

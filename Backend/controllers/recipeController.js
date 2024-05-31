@@ -41,6 +41,25 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
     
 })
 
+////api/recipes/:id
+export const incrementPopularity  = asyncHandler(async(req, res) => {
+
+    const id = req.params.id
+       
+    const recipe = await Recipe.findById(id)
+    
+    if(recipe){
+        recipe.popularity = (recipe.popularity || 0) + 1;
+        await recipe.save();
+
+        res.status(201).json({message: "Popularity incremented"})
+    }else{
+        res.status(404).json({message: "Recipe not found"})
+    }
+    
+    
+})
+
 
 export const getRecipeByIngredientAndFilter  = asyncHandler(async(req, res) => {
 
