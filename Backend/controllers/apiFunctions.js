@@ -1,23 +1,29 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-
-
+import * as deepl from 'deepl-node';
 
 
 // FUNCIONES DE LLAMADA A LA API DE TRADUCCIÓN
 
-export async function translateText(text, targetLanguage) {
+export async function translateText(text, idioma, targetLanguage) {
     const apiKeyTranslation = process.env.apiKeyTranslation
+    //const translator = new deepl.Translator(apiKeyTranslation);
     //console.log(apiKeyTranslation);
     try {
         const response = await axios.post(`https://api-free.deepl.com/v2/translate`, null, {
             params: {
                 text: text,
                 target_lang: targetLanguage,
+                source_lang: idioma,
                 auth_key: apiKeyTranslation
             }
         });
 
+        //const response = await translator.translateText(text, null, targetLanguage);
+
+        //const translatedText = response.text;
+        //console.log(response)
+        //console.log(response.data)
         const translatedText = response.data.translations[0].text;
         //console.log(`Translated Text: ${translatedText}`);
         
@@ -31,9 +37,9 @@ export async function translateText(text, targetLanguage) {
     }
 }
 
-export async function translateIngredients(ingredients, targetLanguage) {
+export async function translateIngredients(ingredients, idioma, targetLanguage) {
     const translatedIngredients = await Promise.all(
-        ingredients.map(ingredient => translateText(ingredient, targetLanguage))
+        ingredients.map(ingredient => translateText(ingredient, idioma, targetLanguage))
     );
     return translatedIngredients;
 }
@@ -68,6 +74,7 @@ export async function APIsearchRecipesByIngredients(ingredients) {
             });
 
             // Extraer y devolver los IDs de las recetas
+            //console.log(response)
             ApiIdRecipes = response.data.map(recipe => recipe.id);
             break; // Sal del ciclo si la consulta fue exitosa
         } catch (error) {
@@ -154,25 +161,32 @@ function transformIngredients(ingredient) {
 
 function cleanTitle(title) {
     // Remove parts of the title that are not part of the actual title
-    return title.replace(/:.*$/, '');
+    title = title.replace(/:.*$/, '');
+    // Remove everything between ¿! and ¿?
+    title = title.replace(/¿[^?]*\?/g, '');
+    title = title.replace(/¡[^?]*\!/g, '');
+    return title.trim(); // Trim to remove any leading or trailing whitespace
 }
 
 export async function searchRecipesAndTranslate(ingredients) {
     try {
+        //console.log(ingredients)
         // Traducir ingredientes al inglés antes de buscar recetas
-        const translatedIngredients = await translateIngredients(ingredients, 'EN');
+        const translatedIngredients = await translateIngredients(ingredients, 'ES','EN');
+        
+        //console.log(translatedIngredients)
 
         // Buscar recetas con los ingredientes traducidos
         const recipes = await APIsearchRecipesByIngredients(translatedIngredients);
 
         // Traducir los campos necesarios de las recetas al español
         const translatedRecipes = await Promise.all(recipes.map(async recipe => {
-            const translatedTitle = await translateText(recipe.title, 'ES');
-            const translatedInstructions = recipe.instructions ? await translateText(recipe.instructions, 'ES'): '';
+            const translatedTitle = await translateText(recipe.title, 'EN','ES');
+            const translatedInstructions = recipe.instructions ? await translateText(recipe.instructions, 'EN', 'ES'): '';
             const translatedIngredients = await Promise.all(
-                recipe.ingredients.map(ingredient => translateText(ingredient, 'ES'))
+                recipe.ingredients.map(ingredient => translateText(ingredient, 'EN','ES'))
             );
-            const translatedCuisine = recipe.cuisineType ? await translateText(recipe.cuisineType, 'ES') : '';
+            const translatedCuisine = recipe.cuisineType ? await translateText(recipe.cuisineType,'EN', 'ES') : '';
 
             return {
                 id: recipe.id,
