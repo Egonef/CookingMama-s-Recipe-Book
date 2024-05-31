@@ -1,8 +1,24 @@
 // Objetivo: Crear el componente de la barra de navegación.
 import '@fontsource/italiana';
 import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import axios from 'axios'
+
+
+
 
 export default function Navbar() {
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/users/status')
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    }, []);
+
     return (
         <nav className=" flex justify-end w-full h-24">
             <div className=" flex flex-row mr-20 my-8 font-[italiana] font-medium text-2xl text text-[#2D3931] ">
