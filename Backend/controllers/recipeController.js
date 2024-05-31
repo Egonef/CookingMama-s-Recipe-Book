@@ -298,8 +298,34 @@ export const draftRecipe  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Eliminar recetas propias
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
-    res.status(404)
-    //TODO
+    const recipeID = req.query.recipeID
+    //borrar receta de propietarios
+    const propietarios = await User.find({ ownRecipes: { $in: recipeID } });
+    for (var propietario of propietarios){
+        propietario.ownRecipes = propietario.ownRecipes.filter(item => item !== recipeID);
+        propietario.save()
+    }
+
+    //borrar receta de quien tenga guardado la receta
+
+    const guardadores = await User.find({ favoriteRecipes: { $in: recipeID } });
+    for (var guardador of guardadores){
+        guardador.favoriteRecipes = guardador.favoriteRecipes.filter(item => item !== recipeID);
+        guardador.save()
+    }
+    //borrar ingredientes que referencien a esa receta
+    const ingredientes = await Ingredient.find({ recipeIds: { $in: recipeID } });
+    for(var ingrediente of ingredientes){
+        ingrediente.recipeIds = ingrediente.recipeIds.filter(item => item !== recipeID);
+        if(ingredient.recipeIds.length == 0 ){
+           Ingredient.deleteOne({_id:ingrediente._id})
+        }else{
+            ingrediente.save()
+        }
+    }
+    //borrar receta
+    await Recipe.deleteOne({_id:recipeID})
+    //bo
 })
 
 //Anadir receta (No existe como tal en los casos de uso. Sería de administrador)
