@@ -715,7 +715,106 @@
             "maxReadyTime": 15,
             "intolerances": "",
             "popularity": 0
-          }
-          
+          },
+{
+           "id": "26",
+              "title": "Ensalada de Tomate y Queso Feta",
+              "cuisine": "Mediterránea",
+              "ingredients": [
+                { "name": "Tomate", "quantity": "2", "unit": "unidades" },
+                { "name": "Queso feta", "quantity": "100", "unit": "gramos" },
+                { "name": "Aceite de oliva", "quantity": "2", "unit": "cucharadas" },
+                { "name": "Sal", "quantity": "al gusto", "unit": "" },
+                { "name": "Pimienta", "quantity": "al gusto", "unit": "" },
+                { "name": "Albahaca", "quantity": "al gusto", "unit": "" }
+              ],
+              "steps": "Corta los tomates en rodajas y colócalos en un plato. Desmenuza el queso feta por encima. Rocía con aceite de oliva y sazona con sal y pimienta. Decora con hojas de albahaca fresca.",
+              "image": "https://www.example.com/ensalada-tomate-queso-feta.jpg",
+              "maxReadyTime": 10,
+              "intolerances": "",
+              "popularity": 0
+            },
+            {
+              "id": "27",
+              "title": "Sándwich de Jamón y Queso",
+              "cuisine": "Internacional",
+              "ingredients": [
+                { "name": "Pan de molde", "quantity": "2", "unit": "rebanadas" },
+                { "name": "Jamón", "quantity": "2", "unit": "lonchas" },
+                { "name": "Queso", "quantity": "2", "unit": "lonchas" },
+                { "name": "Mantequilla", "quantity": "1", "unit": "cucharada" }
+              ],
+              "steps": "Unta las rebanadas de pan con mantequilla. Coloca el jamón y el queso entre las rebanadas de pan. Tuesta en una sartén hasta que el pan esté dorado y el queso derretido.",
+              "image": "https://www.example.com/sandwich-jamon-queso.jpg",
+              "maxReadyTime": 5,
+              "intolerances": "",
+              "popularity": 0
+            },
+            {
+              "id": "28",
+              "title": "Yogur con Miel y Nueces",
+              "cuisine": "Internacional",
+              "ingredients": [
+                { "name": "Yogur natural", "quantity": "1", "unit": "taza" },
+                { "name": "Miel", "quantity": "2", "unit": "cucharadas" },
+                { "name": "Nueces", "quantity": "30", "unit": "gramos" }
+              ],
+              "steps": "Coloca el yogur en un bol. Rocía con miel y añade las nueces por encima. Sirve inmediatamente.",
+              "image": "https://www.example.com/yogur-miel-nueces.jpg",
+              "maxReadyTime": 5,
+              "intolerances": "",
+              "popularity": 0
+            },
+            {
+              "id": "29",
+              "title": "Batido de Plátano y Fresa",
+              "cuisine": "Internacional",
+              "ingredients": [
+                { "name": "Plátano", "quantity": "1", "unit": "unidad" },
+                { "name": "Fresas", "quantity": "100", "unit": "gramos" },
+                { "name": "Leche", "quantity": "1", "unit": "taza" },
+                { "name": "Miel", "quantity": "1", "unit": "cucharada" }
+              ],
+              "steps": "Coloca todos los ingredientes en una licuadora y mezcla hasta obtener una consistencia suave. Sirve frío.",
+              "image": "https://www.example.com/batido-platano-fresa.jpg",
+              "maxReadyTime": 5,
+              "intolerances": "",
+              "popularity": 0
+            },
+            {
+              "id": "30",
+              "title": "Pasta con Ajo y Aceite",
+              "cuisine": "Italiana",
+              "ingredients": [
+                { "name": "Pasta", "quantity": "200", "unit": "gramos" },
+                { "name": "Ajo", "quantity": "2", "unit": "dientes" },
+                { "name": "Aceite de oliva", "quantity": "3", "unit": "cucharadas" },
+                { "name": "Sal", "quantity": "al gusto", "unit": "" },
+                { "name": "Pimienta", "quantity": "al gusto", "unit": "" },
+                { "name": "Perejil", "quantity": "al gusto", "unit": "" }
+              ],
+              "steps": "Cocina la pasta según las instrucciones del paquete. En una sartén, saltea el ajo picado en aceite de oliva. Añade la pasta cocida, sazona con sal y pimienta, y mezcla bien. Decora con perejil fresco picado.",
+              "image": "https://www.example.com/pasta-ajo-aceite.jpg",
+              "maxReadyTime": 15,
+              "intolerances": "",
+              "popularity": 0
+            },
+            {
+              "id": "31",
+              "title": "Omelette de Queso",
+              "cuisine": "Internacional",
+              "ingredients": [
+                { "name": "Huevos", "quantity": "2", "unit": "unidades" },
+                { "name": "Queso rallado", "quantity": "50", "unit": "gramos" },
+                { "name": "Sal", "quantity": "al gusto", "unit": "" },
+                { "name": "Pimienta", "quantity": "al gusto", "unit": "" },
+                { "name": "Mantequilla", "quantity": "1", "unit": "cucharadita" }
+              ],
+              "steps": "Bate los huevos con sal y pimienta. Derrite la mantequilla en una sartén y vierte los huevos batidos. Cocina a fuego medio y, cuando estén casi cuajados, añade el queso rallado. Dobla la omelette y cocina hasta que el queso se derrita.",
+              "image": "https://www.example.com/omelette-queso.jpg",
+              "maxReadyTime": 10,
+              "intolerances": "",
+              "popularity": 0
+}         
             
 ]
