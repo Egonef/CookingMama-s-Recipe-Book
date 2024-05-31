@@ -66,7 +66,8 @@ export const getRecipeByIngredientAndFilter  = asyncHandler(async(req, res) => {
         if(APIEnabled){
             console.log("Hecho uso de API\n")
             const recetasAPI = await api.searchRecipesAndTranslate(ingredients);
-            recetas.concat(recetasAPI)
+            console.log("recetas api: " + recetasAPI)
+            recetas = recetas.concat(recetasAPI)
         }
         
         if (recetas.length === 0) {
@@ -161,7 +162,7 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     
-    //const userId = req.query.userID;
+    const userId = req.query.userID;
     //console.log("User id" + userId);
     
     const user = await User.findById(userId);
