@@ -18,8 +18,7 @@ describe('getRecipes', () => {
 describe('getRecipesByID', () => {
 
   it('should return the recipe if found', async () => {
-    //console.log("idRecetaDefault en test:"+ idRecetaDefault1);
-    //console.log("RecetaDefault1._id en test" + RecetaDefault1._id)
+    
     const response = await request(app).get("/api/recipes/" + "0000000116b91f66fbb3fd6c");
     expect(response.statusCode).toBe(200);
     //expect(response.body).toBe(recetaDefault1.toJSON())
@@ -36,6 +35,7 @@ describe('getRecipesByIngredient', () => {
   it('should return the recipe if found', async () => {
 
     const response = await request(app).get("/api/recipes/ingredients/pollo");
+    console.log(response)
     expect(response.statusCode).toBe(200);
     expect(response.body)
 
