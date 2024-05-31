@@ -162,7 +162,7 @@
         "unit": "cucharada"
       },
       {
-        "name": "Menta fresca",
+        "name": "Menta",
         "quantity": "al gusto",
         "unit": ""
       }
@@ -200,7 +200,7 @@
         "unit": "cucharadas"
       },
       {
-        "name": "Romero fresco",
+        "name": "Romero",
         "quantity": "3",
         "unit": "ramitas"
       },
@@ -289,7 +289,7 @@
         "unit": "unidades"
       },
       {
-        "name": "Queso Parmesano",
+        "name": "Queso parmesano",
         "quantity": "50",
         "unit": "gramos"
       },
@@ -435,5 +435,287 @@
   "maxReadyTime": 240,
   "intolerances": "",
   "popularity": 0
-  }
+  },
+    {
+      "id": "11",
+      "title": "Pasta Alfredo con Pollo y Champiñones",
+      "cuisine": "Italiana",
+      "ingredients": [
+        {"name": "Pasta fettuccine", "quantity": "200", "unit": "gramos"},
+        {"name": "Pechuga de pollo", "quantity": "300", "unit": "gramos"},
+        {"name": "Champiñones", "quantity": "200", "unit": "gramos"},
+        {"name": "Nata para cocinar", "quantity": "200", "unit": "mililitros"},
+        {"name": "Mantequilla", "quantity": "2", "unit": "cucharadas"},
+        {"name": "Ajo", "quantity": "2", "unit": "dientes"},
+        {"name": "Queso parmesano", "quantity": "50", "unit": "gramos"},
+        {"name": "Sal", "quantity": "al gusto", "unit": ""},
+        {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
+      ],
+      "steps": "Cocina la pasta según las instrucciones del paquete. Corta el pollo en tiras y salpimienta. Saltea el pollo en mantequilla hasta que esté dorado. Agrega los champiñones y el ajo picado. Vierte la nata y deja cocinar a fuego lento hasta que la salsa espese. Incorpora la pasta cocida y escurrida. Mezcla bien y sirve con queso parmesano rallado por encima.",
+      "image": "https://www.ecestaticos.com/image/clipping/194/8ab0598d23d3c60e3c0d3ee4a438840f/una-pasta-alfredo.jpg",
+      "maxReadyTime": 30,
+      "intolerances": "",
+      "popularity": 0
+    },
+    {
+      "id": "12",
+      "title": "Sushi Rolls de Salmón y Aguacate",
+      "cuisine": "Japonesa",
+      "ingredients": [
+        {"name": "Arroz", "quantity": "300", "unit": "gramos"},
+        {"name": "Alga nori", "quantity": "4", "unit": "hojas"},
+        {"name": "Salmón", "quantity": "200", "unit": "gramos"},
+        {"name": "Aguacate", "quantity": "1", "unit": "unidad"},
+        {"name": "Vinagre de arroz", "quantity": "2", "unit": "cucharadas"},
+        {"name": "Azúcar", "quantity": "1", "unit": "cucharada"},
+        {"name": "Sal", "quantity": "1", "unit": "pizca"},
+        {"name": "Salsa de soja", "quantity": "al gusto", "unit": ""},
+        {"name": "Wasabi", "quantity": "al gusto", "unit": ""},
+        {"name": "Jengibre", "quantity": "al gusto", "unit": ""}
+      ],
+      "steps": "Cocina el arroz y mézclalo con vinagre de arroz, azúcar y sal. Extiende una capa fina de arroz sobre el alga nori. Coloca tiras de salmón y aguacate en el centro. Enrolla con la ayuda de una esterilla de bambú. Corta en rodajas y sirve con salsa de soja, wasabi y jengibre encurtido.",
+      "image": "https://www.recetin.com/wp-content/uploads/2011/05/sushi-rolls.jpg",
+      "maxReadyTime": 40,
+      "intolerances": "",
+      "popularity": 0
+    },
+    {
+      "id": "13",
+      "title": "Tacos de Carnitas",
+      "cuisine": "Mexicana",
+      "ingredients": [
+        {"name": "Paleta de cerdo", "quantity": "500", "unit": "gramos"},
+        {"name": "Manteca de cerdo", "quantity": "100", "unit": "gramos"},
+        {"name": "Cebolla", "quantity": "1", "unit": "unidad"},
+        {"name": "Ajo", "quantity": "3", "unit": "dientes"},
+        {"name": "Zumo de naranja", "quantity": "1/2", "unit": "taza"},
+        {"name": "Zumo de limón", "quantity": "1/4", "unit": "taza"},
+        {"name": "Cilantro", "quantity": "al gusto", "unit": ""},
+        {"name": "Tortillas de maíz", "quantity": "12", "unit": "unidades"},
+        {"name": "Salsa de tomate", "quantity": "al gusto", "unit": ""},
+        {"name": "Aguacate", "quantity": "2", "unit": "unidades"},
+        {"name": "Cebolla morada", "quantity": "1", "unit": "unidad"}
+      ],
+      "steps": "Corta la paleta de cerdo en trozos grandes y sazona con sal y pimienta. Dora la carne en manteca de cerdo caliente. Agrega cebolla, ajo, jugo de naranja y jugo de limón. Cocina a fuego lento hasta que la carne esté tierna. Desmenuza la carne y sirve en tortillas de maíz con cilantro picado, salsa de tomate, aguacate y cebolla morada en rodajas.",
+      "image": "https://cocina-casera.com/wp-content/uploads/2020/05/tacos-de-carnitas-1200x600.jpg",
+      "maxReadyTime": 50,
+      "intolerances": "",
+      "popularity": 0
+    },
+    {
+        "id": "14",
+        "title": "Gazpacho Andaluz",
+        "cuisine": "Mediterránea",
+        "ingredients": [
+          {"name": "Tomate", "quantity": "1", "unit": "kilo"},
+          {"name": "Pimiento verde", "quantity": "1", "unit": "unidad"},
+          {"name": "Pepino", "quantity": "1", "unit": "unidad"},
+          {"name": "Cebolla", "quantity": "1/2", "unit": "unidad"},
+          {"name": "Dientes de ajo", "quantity": "1", "unit": "unidad"},
+          {"name": "Vinagre de vino tinto", "quantity": "3", "unit": "cucharadas"},
+          {"name": "Aceite de oliva", "quantity": "50", "unit": "mililitros"},
+          {"name": "Sal", "quantity": "al gusto", "unit": ""},
+          {"name": "Pan", "quantity": "100", "unit": "gramos"}
+        ],
+        "steps": "Licua todos los ingredientes hasta obtener una textura homogénea. Ajusta la sal si es necesario. Sirve frío con trozos de pan.",
+        "image": "https://www.recetasderechupete.com/wp-content/uploads/2019/05/gazpacho-andaluz-600x400.jpg",
+        "maxReadyTime": 20,
+        "intolerances": "",
+        "popularity": 0
+      },
+      {
+        "id": "15",
+        "title": "Paella Valenciana",
+        "cuisine": "Mediterránea",
+        "ingredients": [
+          {"name": "Arroz", "quantity": "300", "unit": "gramos"},
+          {"name": "Pollo", "quantity": "300", "unit": "gramos"},
+          {"name": "Conejo", "quantity": "200", "unit": "gramos"},
+          {"name": "Judías verdes", "quantity": "200", "unit": "gramos"},
+          {"name": "Guisantes", "quantity": "100", "unit": "gramos"},
+          {"name": "Pimiento rojo", "quantity": "1", "unit": "unidad"},
+          {"name": "Tomate", "quantity": "200", "unit": "gramos"},
+          {"name": "Caldo de pollo", "quantity": "1", "unit": "litro"},
+          {"name": "Azafrán", "quantity": "1", "unit": "sobre"},
+          {"name": "Aceite de oliva", "quantity": "50", "unit": "mililitros"},
+          {"name": "Sal", "quantity": "al gusto", "unit": ""}
+        ],
+        "steps": "En una paellera, sofríe el pollo y el conejo troceados. Agrega las judías verdes, los guisantes, el pimiento y el tomate. Añade el arroz y el azafrán. Vierte el caldo caliente y cocina a fuego medio hasta que el arroz esté en su punto. Deja reposar unos minutos antes de servir.",
+        "image": "https://cdn.civitatis.com/espana/madrid/guia/paella-valenciana.jpg",
+        "maxReadyTime": 40,
+        "intolerances": "",
+        "popularity": 0
+      },
+      {
+        "id": "16",
+        "title": "Tortilla de Patatas",
+        "cuisine": "Española",
+        "ingredients": [
+          {"name": "Patata", "quantity": "4", "unit": "unidades"},
+          {"name": "Huevo", "quantity": "6", "unit": "unidades"},
+          {"name": "Cebolla", "quantity": "1", "unit": "unidad"},
+          {"name": "Aceite de oliva", "quantity": "100", "unit": "mililitros"},
+          {"name": "Sal", "quantity": "al gusto", "unit": ""},
+          {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
+        ],
+        "steps": "Pela y corta las patatas y la cebolla en rodajas finas. Fríelas en abundante aceite hasta que estén doradas. Bate los huevos y añade las patatas y la cebolla. Vierte la mezcla en una sartén caliente y cocina a fuego lento hasta que cuaje por un lado. Dale la vuelta y cocina por el otro lado. Sirve caliente.",
+        "image": "https://cdn.shopify.com/s/files/1/0470/2959/7912/files/Tortilla_de_Patatas_Cuadrada.jpg?v=1608832000",
+        "maxReadyTime": 30,
+        "intolerances": "",
+        "popularity": 0
+      },
+      {
+        "id": "17",
+        "title": "Sopa de Tomate y Albahaca",
+        "cuisine": "Mediterránea",
+        "ingredients": [
+          {"name": "Tomates", "quantity": "1", "unit": "kg"},
+          {"name": "Cebolla", "quantity": "1", "unit": "unidad"},
+          {"name": "Ajo", "quantity": "2", "unit": "dientes"},
+          {"name": "Caldo de verduras", "quantity": "1", "unit": "litro"},
+          {"name": "Albahaca", "quantity": "1", "unit": "manojo"},
+          {"name": "Aceite de oliva", "quantity": "3", "unit": "cucharadas"}
+        ],
+        "steps": "Corta los tomates y la cebolla en trozos. Sofríe el ajo en una olla con un poco de aceite. Agrega los tomates y la cebolla y cocina unos minutos. Añade el caldo de verduras y la albahaca. Cocina a fuego medio durante 20 minutos. Tritura la sopa y sirve caliente.",
+        "image": "https://www.recetasderechupete.com/wp-content/uploads/2016/09/sopa-de-tomate-y-albahaca-1-1920x1280.jpg",
+        "maxReadyTime": 30,
+        "intolerances": "",
+        "popularity": 0
+      },
+        {
+          "id": "18",
+          "title": "Tostadas de Aguacate",
+          "cuisine": "Internacional",
+          "ingredients": [
+            {"name": "Pan de molde", "quantity": "4", "unit": "rebanadas"},
+            {"name": "Aguacate", "quantity": "1", "unit": "unidad"},
+            {"name": "Limón", "quantity": "1/2", "unit": "unidad"},
+            {"name": "Sal", "quantity": "al gusto", "unit": ""},
+            {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
+          ],
+          "steps": "Tuesta las rebanadas de pan. Mientras tanto, machaca el aguacate con el zumo de limón, sal y pimienta. Unta el puré de aguacate sobre las tostadas y sirve.",
+          "image": "https://www.ecestaticos.com/imagestatic/clipping/7b7/eff/7b7eff6e9a48b37eab2dfb2aa857e0ed/las-5-recetas-de-tostadas-de-aguacate-que-puedes-preparar-en-menos-de-10-minutos.jpg?mtime=1570744397",
+          "maxReadyTime": 15,
+          "intolerances": "",
+          "popularity": 0
+        },
+        {
+          "id": "19",
+          "title": "Ensalada de Garbanzos",
+          "cuisine": "Mediterránea",
+          "ingredients": [
+            {"name": "Garbanzos", "quantity": "400", "unit": "gramos"},
+            {"name": "Pimiento rojo", "quantity": "1/2", "unit": "unidad"},
+            {"name": "Pimiento verde", "quantity": "1/2", "unit": "unidad"},
+            {"name": "Tomate", "quantity": "1", "unit": "unidad"},
+            {"name": "Cebolla morada", "quantity": "1/2", "unit": "unidad"},
+            {"name": "Aceitunas negras", "quantity": "50", "unit": "gramos"},
+            {"name": "Aceite de oliva", "quantity": "2", "unit": "cucharadas"},
+            {"name": "Vinagre de vino tinto", "quantity": "1", "unit": "cucharada"},
+            {"name": "Sal", "quantity": "al gusto", "unit": ""},
+            {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
+          ],
+          "steps": "Lava y corta las verduras en trozos pequeños. Mezcla con los garbanzos cocidos y las aceitunas. Aliña con aceite de oliva, vinagre, sal y pimienta. Mezcla bien y sirve.",
+          "image": "https://www.pequerecetas.com/wp-content/uploads/2019/01/ensalada-de-garbanzos-facil.jpg",
+          "maxReadyTime": 20,
+          "intolerances": "",
+          "popularity": 0
+        },
+        {
+          "id": "20",
+          "title": "Huevos Revueltos con Espinacas",
+          "cuisine": "Internacional",
+          "ingredients": [
+            {"name": "Huevo", "quantity": "4", "unit": "unidades"},
+            {"name": "Espinaca", "quantity": "100", "unit": "gramos"},
+            {"name": "Queso rallado", "quantity": "50", "unit": "gramos"},
+            {"name": "Sal", "quantity": "al gusto", "unit": ""},
+            {"name": "Pimienta", "quantity": "al gusto", "unit": ""},
+            {"name": "Aceite de oliva", "quantity": "2", "unit": "cucharadas"}
+          ],
+          "steps": "Saltea las espinacas en aceite de oliva hasta que se ablanden. Bate los huevos y mézclalos con las espinacas salteadas. Cocina a fuego lento hasta que los huevos estén cuajados. Agrega el queso rallado y mezcla bien. Sirve caliente.",
+          "image": "https://www.ecestaticos.com/image/clipping/11e1e1c9dcf6d4a94ec582e7b1eb68a7/asi-se-preparan-los-mejores-huevos-rezados-con-espinacas.jpg",
+          "maxReadyTime": 15,
+          "intolerances": "",
+          "popularity": 0
+          },
+          {
+            "id": "22",
+            "title": "Tostadas Francesas",
+            "cuisine": "Francesa",
+            "ingredients": [
+              {"name": "Pan de molde", "quantity": "4", "unit": "rebanadas"},
+              {"name": "Huevo", "quantity": "2", "unit": "unidades"},
+              {"name": "Leche", "quantity": "100", "unit": "mililitros"},
+              {"name": "Azúcar", "quantity": "2", "unit": "cucharadas"},
+              {"name": "Canela", "quantity": "1/2", "unit": "cucharadita"},
+              {"name": "Mantequilla", "quantity": "2", "unit": "cucharadas"}
+            ],
+            "steps": "Bate los huevos con la leche, el azúcar y la canela. Calienta la mantequilla en una sartén. Sumerge las rebanadas de pan en la mezcla de huevo y leche. Fríe en la sartén caliente hasta que estén doradas por ambos lados. Sirve caliente, espolvoreadas con azúcar glass y acompañadas de miel o sirope de arce.",
+            "image": "https://th.bing.com/th/id/OIP.W2H5Xms4P9a1CkN29MWFHgHaE8?w=236&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7",
+            "maxReadyTime": 20,
+            "intolerances": "",
+            "popularity": 0
+          },
+          {
+            "id": "23",
+            "title": "Quesadillas de Queso",
+            "cuisine": "Mexicana",
+            "ingredients": [
+              {"name": "Tortillas de maíz", "quantity": "4", "unit": "unidades"},
+              {"name": "Queso cheddar", "quantity": "200", "unit": "gramos"},
+              {"name": "Cebolla", "quantity": "1/2", "unit": "unidad"},
+              {"name": "Tomate", "quantity": "1", "unit": "unidad"},
+              {"name": "Aceite vegetal", "quantity": "2", "unit": "cucharadas"},
+              {"name": "Sal", "quantity": "al gusto", "unit": ""},
+              {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
+            ],
+            "steps": "Corta la cebolla y el tomate en juliana. Calienta una sartén y agrega un poco de aceite. Coloca una tortilla de maíz en la sartén y añade una capa de queso cheddar rallado, cebolla y tomate. Cubre con otra tortilla. Cocina hasta que el queso se derrita y la tortilla esté dorada por ambos lados. Repite el proceso con el resto de ingredientes. Corta las quesadillas en triángulos y sirve caliente.",
+            "image": "https://th.bing.com/th/id/OIP.v7xjHrrEjPUkG4Tm6thXNwHaJ4?pid=ImgDet&rs=1",
+            "maxReadyTime": 20,
+            "intolerances": "",
+            "popularity": 0
+          },
+          {
+            "id": "24",
+            "title": "Ensalada de Tomate y Mozzarella",
+            "cuisine": "Mediterránea",
+            "ingredients": [
+              {"name": "Tomate", "quantity": "2", "unit": "unidades"},
+              {"name": "Mozzarella", "quantity": "200", "unit": "gramos"},
+              {"name": "Albahaca", "quantity": "a gusto", "unit": ""},
+              {"name": "Aceite de oliva", "quantity": "2", "unit": "cucharadas"},
+              {"name": "Vinagre balsámico", "quantity": "1", "unit": "cucharada"},
+              {"name": "Sal", "quantity": "al gusto", "unit": ""},
+              {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
+            ],
+            "steps": "Corta los tomates y la mozzarella en rodajas. Alterna las rodajas de tomate y mozzarella en un plato. Espolvorea con hojas de albahaca fresca. Rocía con aceite de oliva y vinagre balsámico. Sazona con sal y pimienta al gusto.",
+            "image": "https://www.simplyrecipes.com/thmb/2uZc7BQiywHfq7w5d7tznJ3l0Wk=/2000x1333/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2006__07__caprese-salad-horiz-a-1600-29bfb370f2ed431e85a8e4b5373c6c92.jpg",
+            "maxReadyTime": 15,
+            "intolerances": "",
+            "popularity": 0
+          },
+          {
+            "id": "25",
+            "title": "Hummus Casero",
+            "cuisine": "Mediterránea",
+            "ingredients": [
+              {"name": "Garbanzos", "quantity": "400", "unit": "gramos"},
+              {"name": "Tahini", "quantity": "3", "unit": "cucharadas"},
+              {"name": "Ajo", "quantity": "1", "unit": "diente"},
+              {"name": "Zumo de limón", "quantity": "2", "unit": "cucharadas"},
+              {"name": "Comino molido", "quantity": "1/2", "unit": "cucharadita"},
+              {"name": "Aceite de oliva", "quantity": "2", "unit": "cucharadas"},
+              {"name": "Sal", "quantity": "al gusto", "unit": ""},
+              {"name": "Pimentón dulce", "quantity": "al gusto", "unit": ""},
+              {"name": "Perejil", "quantity": "al gusto", "unit": ""}
+            ],
+            "steps": "Tritura los garbanzos cocidos con tahini, ajo, zumo de limón, comino y aceite de oliva en un procesador de alimentos hasta obtener una textura suave. Ajusta la sal al gusto. Sirve en un plato, espolvorea con pimentón dulce y decora con perejil fresco. Rocía con un chorrito de aceite de oliva antes de servir.",
+            "image": "https://www.recetasdesbieta.com/wp-content/uploads/2018/01/hummus-casero.jpg",
+            "maxReadyTime": 15,
+            "intolerances": "",
+            "popularity": 0
+          }
+          
+            
 ]
