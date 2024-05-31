@@ -6,14 +6,8 @@ const router = express.Router()
 router.route('/popular').get(ctr.getRecipes)
 
 
-//Solicitud GET a /recipes/ingredients?ingredients=tomate,ajo,aceite.
-router.route('/ingredients').get(ctr.findRecipesByIngredients)
-router.route('/ingredients/:ingredient').get(ctr.getRecipeByIngredient)
-//Solicitud GET a /recipes/ingredients/filter?ingredients=tomate,ajo&maxReadyTime=25&cuisine=Mediterranea
-//router.route('/ingredients/filter').get(ctr.filterRecipes)
-
-//Solicitud GET a /recipes/filter?ingredients=tomate,ajo&maxReadyTime=25&cuisine=Mediterranea
-router.route('/filter').get(ctr.filterRecipes)
+//Solicitud GET a http://localhost:5000/api/recipes/find?ingredients=Pollo&cuisine=Internacional&maxReadyTime=30
+router.route('/find').get(ctr.getRecipeByIngredientAndFilter)
 
 
 
