@@ -33,9 +33,9 @@ export default function RecipeCardAll( { recipe }) {
         <motion.div whileHover={expanded ? {} : { scale: 1.1 }}  onClick={handleClick} className=" bg-orange-200 relative lg:h-96 lg:w-96  mx-14 my-14 rounded-md ">
             {recipe ? <img src={recipe.image} alt={recipe.title} className="h-3/5 w-full object-cover rounded-t-md" /> : 'Loading...'}
             <div className="p-4">
-                {recipe ? <h1 className="  text-[1.6rem]">{recipe.title}</h1> : 'Loading...'}
+                {recipe ? <h1 className="  text-[1.6rem]">{recipe.title.length > 26 ? recipe.title.substring(0, 26) + '...' : recipe.title}</h1> : 'Loading...'}
                 {recipe ? <p className="text-[1rem]">Tiempo estimado: {recipe.maxReadyTime} min</p> : 'Loading...'}
-                <Pill intolerancia={recipe ? recipe.intolerances : null} />
+                {recipe.intolerances !== "" ? <Pill intolerancia={recipe ? recipe.intolerances : null} /> : <Pill intolerancia={"Sin intolerancias"} />}
             </div>
             {expanded && <ExpandedCard recipe={recipe} closeCard={handleClose} />}
         </motion.div>

@@ -42,6 +42,7 @@ export const getRecipeById  = asyncHandler(async(req, res) => {
 })
 
 ////api/recipes/:id
+//api/recipes/incrementPopularity?id=123
 export const incrementPopularity  = asyncHandler(async(req, res) => {
 
     const id = req.params.id
