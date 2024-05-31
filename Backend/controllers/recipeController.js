@@ -3,8 +3,8 @@ import Recipe from '../models/recipesModel.js'
 import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
-import *  as api from './apiFunctions.js'
-
+import *  as API from './apiFunctions.js'
+import { searchRecipesAndTranslate } from './apiFunctions.js'; // Asegúrate de que la función esté correctamente importada
 
 
 
@@ -49,7 +49,7 @@ export const getRecipeByIngredientAndFilter  = asyncHandler(async(req, res) => {
     //console.log("ingredientes: " + ingredients)
     const cuisine = req.query.cuisine;
     const maxReadyTime = req.query.maxReadyTime ? parseInt(req.query.maxReadyTime) : null;
-    const APIEnabled = req.query.api === 'true'
+    const APIEnabled = req.query.api === 'True'; 
 
     if (ingredients.length === 0) {
         return res.status(400).json({ message: "Provea de por lo menos un ingrediente" });
@@ -61,17 +61,19 @@ export const getRecipeByIngredientAndFilter  = asyncHandler(async(req, res) => {
     try {
         
         const recetasBD = await obtenerRecetasConIngredientes(ingredients)
-        recetas = recetas.concat(recetasBD)
+        recetas = recetasBD;
         
         if(APIEnabled){
-            console.log("Hecho uso de API\n")
-            const recetasAPI = await api.searchRecipesAndTranslate(ingredients);
-            recetas.concat(recetasAPI)
+            console.log("Hecho uso de API\n");
+            const recetasAPI = await searchRecipesAndTranslate(ingredients);
+            //console.log(recetasAPI);
+            recetas = recetas.concat(recetasAPI);
+            //console.log(recetas);
         }
         
         if (recetas.length === 0) {
             res.status(404).json({ message: "No recipes found with all specified ingredients" });
-            return
+            return;
         } 
 
     } catch (error) {
@@ -87,7 +89,7 @@ export const getRecipeByIngredientAndFilter  = asyncHandler(async(req, res) => {
         return
     }
 
-    res.status(200).json(recetas)
+    return res.status(200).json(recetas)
 
 })
 
@@ -118,8 +120,6 @@ export const obtenerRecetasConIngrediente = async (ingredientName) => {
 };
 
     
-
-
 
 export const obtenerRecetasConIngredientes = async (ingredients) => {
     let recipes = []
@@ -306,6 +306,7 @@ export const addRecipe = asyncHandler(async (req, res) => {
     //TODO
 });
 
+///api/recipes/updateIngs
 // Asociar recetas a ingredientes
 export const updateIngredients = asyncHandler(async (req, res) => {
     try {
