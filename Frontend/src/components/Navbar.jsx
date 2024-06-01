@@ -16,7 +16,7 @@ export default function Navbar() {
     useEffect(() => {
         axios.get('http://localhost:5000/api/users/status', {withCredentials: true,})
             .then(response => {
-                if (response.loggedIn === true) {
+                if (response.data.loggedIn === true) {
                     setLogedIn(true)
                 }
             })
@@ -24,6 +24,14 @@ export default function Navbar() {
                 console.error('There was an error!', error);
             });
     }, []);
+
+
+    const logout = async () => {
+        const response = await axios.post('http://localhost:5000/api/users/logout', {}, {
+            withCredentials: true, // Esto debe ir aquí
+        });
+        console.log(response);
+    }
 
     return (
         <nav className=" flex justify-end w-full h-24">
@@ -43,7 +51,7 @@ export default function Navbar() {
                 </Link> : null}
 
 
-                { logedIn === true ? <Link to={'/test'} className=" mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574]">
+                { logedIn === true ? <Link onClick={logout} className=" mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574]">
                     <h1>Pruebote</h1>
                 </Link> : null}
 
