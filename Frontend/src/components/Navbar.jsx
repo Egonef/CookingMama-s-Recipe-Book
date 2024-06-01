@@ -30,29 +30,32 @@ export default function Navbar() {
         const response = await axios.post('http://localhost:5000/api/users/logout', {}, {
             withCredentials: true, // Esto debe ir aquí
         });
-        console.log(response);
+        window.location.href = '/';
     }
 
     return (
         <nav className=" flex justify-end w-full h-24">
             <div className=" flex flex-row mr-20 my-8 font-[italiana] font-medium text-2xl text text-[#2D3931] ">
                 <Link to={'/'} className=" mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574]">
-                    <h1>Home</h1>
+                    <h1>Inicio</h1>
                 </Link>
 
 
                 { logedIn === false ? <Link to={'/login'} className=" mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574]">
-                    <h1>Log in</h1>
+                    <h1>Iniciar Sesión</h1>
                 </Link> : null}
 
 
                 { logedIn === false ? <Link to={'/test2'} className="mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574]">
-                    <h1>Sign up</h1>
+                    <h1>Registrarse</h1>
                 </Link> : null}
 
+                { logedIn === true ? <Link to={'/profile'} className=" mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574]">
+                    <h1>Mi perfil</h1>
+                </Link> : null}
 
-                { logedIn === true ? <Link onClick={logout} className=" mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574]">
-                    <h1>Pruebote</h1>
+                { logedIn === true ? <Link to={'/'} onClick={logout} className=" mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574]">
+                    <h1>Cerrar Sesión</h1>
                 </Link> : null}
 
             </div>
