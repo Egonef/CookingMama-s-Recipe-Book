@@ -10,10 +10,9 @@ export default function ExpadedCard( { recipe, closeCard }) {
     const [id, setId] = useState(recipe._id);
 
     useEffect(() => {
-        console.log("Spawneo")
         axios.get(`http://localhost:5000/api/recipes/incrementPopularity/` + recipe._id)  // Reemplaza con la URL de tu API
         .then(response => {
-            console.log(response.data);
+            //console.log(response.data)
         })
         .catch(error => {
             console.error('There was an error!', error);

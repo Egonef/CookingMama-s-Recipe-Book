@@ -16,7 +16,6 @@ export default function Navbar() {
     useEffect(() => {
         axios.get('http://localhost:5000/api/users/status')
             .then(response => {
-                console.log(response)
                 setLogedIn(true)
             })
             .catch(error => {

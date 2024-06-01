@@ -8,24 +8,24 @@ export default function RecipeCardAll( { recipe }) {
     const [expandControl, setExpandControl] = useState(false);
 
     useState(() => {
-        console.log(recipe)
+        //console.log(recipe)
     })
 
 
     const handleClick = () => {
         if (expandControl === false) {
-            console.log(expandControl)
+            //console.log(expandControl)
             setExpanded(true);
             setExpandControl(true);
-            console.log(expandControl)
-            console.log("Tarjeta abierta")
+            //console.log(expandControl)
+            //console.log("Tarjeta abierta")
         }
     }
 
     const handleClose = async () => {
-        console.log(expandControl)
+        //console.log(expandControl)
         setExpanded(false);
-        console.log("Tarjeta cerrada")
+        //console.log("Tarjeta cerrada")
         setExpandControl(false);
     }
 
