@@ -28,8 +28,12 @@ const Tabs = ({ tabs , recipe }) => {
 				))}
 			</div>
 			<div className=" p-3 rounded-br-md whitespace-normal text-2xl">
-				Tab {activeTab} is Active { activeTab === 1 ?  <p>
-                    Ingredientes
+				{ activeTab === 1 ?  <p className=" text-sm">
+                    {recipe.ingredients.map((ingredient, index) => (
+						<p key={index}>
+							{ingredient.name}: {ingredient.quantity} {ingredient.unit}
+						</p>
+					))}
                 </p> : <p> {recipe.steps} </p>}
 			</div>
 		</div>
