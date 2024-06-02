@@ -97,7 +97,6 @@ export const logout = asyncHandler(async(req, res) =>{
 
 
 export const status = asyncHandler(async(req,res) => {
-    console.log(req.session.user)
     if (req.session.user != null) {
         res.status(200).json({ loggedIn: true, user: req.session.user });
     } else {

@@ -180,7 +180,7 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 ////api/recipes/saved
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {   
-    const userId = req.query.userID;
+    const userId = req.session.user._id;
         //console.log("User id" + userId);
         
         const user = await User.findById(userId);
