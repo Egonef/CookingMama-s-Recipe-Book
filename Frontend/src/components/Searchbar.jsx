@@ -16,7 +16,7 @@ export default function Searchbar () {
             <motion.input 
                 className="bg-transparent outline-none h-19 w-96 rounded-full" 
                 type="text"
-                placeholder="Search for recipes..."
+                placeholder="Pollo,Tomate,Queso,etc..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyPress={(e) => {

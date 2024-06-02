@@ -11,6 +11,7 @@ import RecipesHome from './routes/recipesHome';
 import Login from './routes/login';
 import Register from './routes/register';
 import SearchResults from './routes/searchResults'
+import Profile from './routes/profile';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/search",
     element: <SearchResults />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 
 ]);

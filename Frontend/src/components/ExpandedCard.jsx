@@ -10,10 +10,9 @@ export default function ExpadedCard( { recipe, closeCard }) {
     const [id, setId] = useState(recipe._id);
 
     useEffect(() => {
-        console.log("Spawneo")
         axios.get(`http://localhost:5000/api/recipes/incrementPopularity/` + recipe._id)  // Reemplaza con la URL de tu API
         .then(response => {
-            console.log(response.data);
+            //console.log(response.data)
         })
         .catch(error => {
             console.error('There was an error!', error);
@@ -27,7 +26,7 @@ export default function ExpadedCard( { recipe, closeCard }) {
 
     return (
         <motion.div className=" bg-orange-200 fixed xl:top-[10%] xl:left-[8%] 2xl:top-[10%] 2xl:left-[15%] z-50 xl:h-[28rem] xl:w-[70rem]  2xl:h-[50rem] 2xl:w-[85rem] rounded-md opacity-0" style={{opacity: 0}} initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 1}}>
-            <button className="absolute top-0 right-0 p-2" onClick={closeCard}>X</button>
+            <button className="absolute top-0 right-0 p-2 w-10 h-10 rounded-tr-md rounded-bl-md text-2xl bg-red-300" onClick={closeCard}>X</button>
             {recipe ? <img src={recipe.image} alt={recipe.title} className="h-3/5 w-full object-cover rounded-t-md" /> : 'Loading...'}
             <div className=" flex flex-row justify-between h-2/5">
                 <div className="p-4">

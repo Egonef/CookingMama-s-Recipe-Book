@@ -47,7 +47,7 @@ export const login  = asyncHandler(async(req, res) => {
     }
 
     req.session.user=existingUser;
-    console.log(existingUser.email)
+    console.log(req.session.user)
     res.status(201).json(existingUser);
 })
 
@@ -95,18 +95,14 @@ export const logout = asyncHandler(async(req, res) =>{
     });
 })
 
-/*
+
 export const status = asyncHandler(async(req,res) => {
+    console.log(req.session.user)
     if (req.session.user != null) {
         res.status(200).json({ loggedIn: true, user: req.session.user });
     } else {
         res.status(201).json({ loggedIn: false });
     }
 })
-*/
 
-export const status  = asyncHandler(async(req, res) => {
 
-    res.status(200).json({ loggedIn: true });
-
-})

@@ -4,7 +4,7 @@ const router = express.Router()
 
 
 router.route('/').get(ctr.getUsers)
-router.route('/:id').get(ctr.getUserById)
+
 
 router.route('/login').post(ctr.login)
 router.route('/register').post(ctr.register)
@@ -15,5 +15,6 @@ router.route('/logout').post(ctr.logout)
 
 router.route('/status').get(ctr.status)
 
+router.route('/:id').get(ctr.getUserById)
 
 export default router

@@ -4,6 +4,7 @@ import RecipeCardAll from "../components/RecipeCardAll";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import Searchbar from "../components/Searchbar";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -32,8 +33,11 @@ export default function SearchResults() {
 
     return (
         <div className="bg-[#C3B9AB]">
-            <div className="animate-fade-in">
+            <div className="animate-fade-in pl-5">
                 <Navbar />
+                <div className="flex flex-row items-center justify-left mx-16">
+                    <Searchbar />
+                </div>
                 <div className="flex flex-row justify-evenly items-center flex-wrap gap-x-1 gap-y-4 mt-16 mx-16">
                 {recipes && recipes.length > 0 ? (
                     recipes.map((recipe, i) => <RecipeCardAll key={i} recipe={recipe} />)
