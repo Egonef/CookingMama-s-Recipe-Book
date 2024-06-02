@@ -10,7 +10,7 @@ export default function ExpadedCard( { recipe, closeCard }) {
     const [id, setId] = useState(null);
     const [logedIn, setLogedIn] = useState(false);
     const [saved, setSaved] = useState(false);
-    var user = null;
+    //var user = null;
 
     useEffect(() => {
 
@@ -24,27 +24,29 @@ export default function ExpadedCard( { recipe, closeCard }) {
             });
 
 
-        axios.get('http://localhost:5000/api/users/status', {withCredentials: true,})
-            .then(response => {
-                if (response.data.loggedIn === true) {
-                    setLogedIn(true)
-                    console.log("valor del id user en response: " + response.data.user._id)
-                    console.log("Procedemos a sacar sus recetas guardadas")
-                    axios.get(`http://localhost:5000/api/recipes/saved?userID=${user._id}`)  // Reemplaza con la URL de tu API
-                        .then(response => {
-                            if (response.data.user.favoriteRecipes.includes(recipe._id)) {
-                                setSaved(true)
-                                console.log(saved)
-                            }
-                        })
-                        .catch(error => {
-                            console.error('There was an error!', error);
-                        });
-                }
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
+            axios.get('http://localhost:5000/api/users/status', {withCredentials: true,})
+                .then(response => {
+                    if (response.data.loggedIn === true) {
+                        setLogedIn(true)
+                        const userId = response.data.user._id;
+                        console.log("valor del id user en response: " + userId)
+                        console.log("Procedemos a sacar sus recetas guardadas")
+                        // Ahora usa 'userId' en lugar de 'user'
+                        axios.get(`http://localhost:5000/api/recipes/saved?userID=${userId}`)  // Reemplaza con la URL de tu API
+                            .then(response => {
+                                if (response.data.includes(recipe._id)) {
+                                    setSaved(true)
+                                    console.log(saved)
+                                }
+                            })
+                            .catch(error => {
+                                console.error('There was an error!', error);
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('There was an error!', error);
+                });
 
     }, [ ]);
 

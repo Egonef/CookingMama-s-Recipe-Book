@@ -195,7 +195,8 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res)  => {
     }
     const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
     console.log("Saved recipes" + recipes)
-    return res.status(200).json(recipes);
+    console.log("Saved recipes" + recipes.favoriteRecipes)
+    return res.status(200).json(recipes.favoriteRecipes);
 })
 
 ////api/recipes/saved

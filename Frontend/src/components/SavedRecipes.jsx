@@ -19,7 +19,7 @@ export default function SavedRecipes() {
         const fetchRecipes = async () => {
             try {
                 console.log("Fetching recipes");
-                const response = await axios.get(`http://192.168.1.33:5000/api/recipes/saved`);
+                const response = await axios.get(`http://locahost:5000/api/recipes/saved`);
                 setRecipes(response.data);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
