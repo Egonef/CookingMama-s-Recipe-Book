@@ -3,15 +3,16 @@ import {getAdmin} from '../controllers/userController.js'
 
 // Middleware de autenticación básico
 export function getAuth(req, res, next) {
+    console.log("Entro en getAuth")
     try {
         const { loggedIn } =  status(req, res);
         if (loggedIn === true) {
             next();
         } else {
-            return res.status(403).send({ error: 'Unauthorized content' });
+            next('route'); // Skip to next route
         }
     } catch (error) {
-        return res.status(403).send({ error: 'Unauthorized content' });
+        next('route'); // Skip to next route
     }
 }
 

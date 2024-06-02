@@ -179,19 +179,23 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 
 ////api/recipes/saved
 //Ver guardadas
-export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {   
+export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
+    console.log("Entro en funcion getRecipesSaved")
+    if (!req.session.user) {
+        return res.status(403).json({message: "Unauthorized content"});
+    }
+
+    console.log("User id" + req.session.user._id);
     const userId = req.session.user._id;
-        //console.log("User id" + userId);
+    console.log("User id" + userId);
+    const user = await User.findById(userId);
         
-        const user = await User.findById(userId);
-        
-        if(!user){
-            res.status(404)
-            return
-        }
-        const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
-        console.log("Saved recipes" + recipes)
-        return res.status(200)    
+    if(!user){
+        return res.status(404).json({message: "User not found"});
+    }
+    const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
+    console.log("Saved recipes" + recipes)
+    return res.status(200).json(recipes);
 })
 
 ////api/recipes/saved
