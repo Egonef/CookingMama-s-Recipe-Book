@@ -19,8 +19,8 @@ router.route('/saved').post(ctr.setRecipeSavedByUser)
 router.route('/saved').delete(auth.getAuth, ctr.setRecipeUnsavedByUser)
 
 //Rutas para recetas propias
-router.route('/myOwn/').get(auth.getAuth, ctr.getRecipesCreatedByUser)
-router.route('/myOwn/').post(auth.getAuth, ctr.publishRecipe)
+router.route('/myOwn/').get(ctr.getRecipesCreatedByUser)
+router.route('/myOwn/').post(auth.getAuth, ctr.addRecipe)
 router.route('/myOwn/').patch(auth.getAuth, ctr.draftRecipe)
 router.route('/myOwn/').delete(auth.getAuth, ctr.deleteOwnRecipe)
 

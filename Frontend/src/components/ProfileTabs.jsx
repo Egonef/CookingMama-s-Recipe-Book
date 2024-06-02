@@ -5,6 +5,7 @@ import Tab from "./Tab";
 import { Link, useNavigate, useLocation } from 'react-router-dom'; // Importa useNavigate y useLocation
 import '@fontsource/italiana';
 import SavedRecipes from "./SavedRecipes";
+import CreatedRecipes from "./CreatedRecipes";
 import axios from 'axios';
 import Navbar from "./Navbar";
 
@@ -47,8 +48,8 @@ const ProfileTabs = ({ tabs , rounded }) => {
 					/>
 				))}
 			</div>
-			<div className=" p-3 rounded-br-md whitespace-normal text-2xl">
-				{ activeTab === 1 ? <SavedRecipes />  : <p>Recetas Creadas</p>}
+			<div className=" p-3 rounded-br-md whitespace-normal text-2xl overflow-auto">
+				{ activeTab === 1 ? <SavedRecipes />  : <CreatedRecipes />}
 			</div>
 		</div>
 	);
