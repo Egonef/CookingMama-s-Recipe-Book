@@ -16,7 +16,7 @@ export default function Profile() {
         <div className="bg-[#C3B9AB] h-screen">
             <div className="animate-fade-in ">
                 <div className=" h-[90vh]">
-                    <ProfileTabs tabs={[ { label:"Recetas Guardadas"}, { label:"Recetas Creadas"}]} />
+                    <ProfileTabs tabs={[ { label:"Recetas Guardadas"}, { label:"Recetas Creadas"}]} rounded={true} />
                 </div>
             </div>
         </div>

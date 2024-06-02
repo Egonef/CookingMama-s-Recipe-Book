@@ -200,9 +200,10 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     if(userctrl.status()==true){
-        const userId = req.query.userID;
-        //console.log("user: " + userId)
-        const recipeId  = req.query.recipeID;
+        const userId = req.session.user._id;
+        console.log("user: " + userId)
+        const recipeId  = req.body;
+        console.log("receta: " + recipeId)
         
         try {
             // Encontrar al usuario por su ID

@@ -10,6 +10,7 @@ export default function ExpadedCard( { recipe, closeCard }) {
     const [id, setId] = useState(recipe._id);
 
     useEffect(() => {
+        setId(recipe._id)
         axios.get(`http://localhost:5000/api/recipes/incrementPopularity/` + recipe._id)  // Reemplaza con la URL de tu API
         .then(response => {
             //console.log(response.data)
@@ -22,6 +23,17 @@ export default function ExpadedCard( { recipe, closeCard }) {
 
     if (!recipe) {
         return null; // No renderizar nada hasta que los datos de la receta se hayan cargado
+    }
+
+
+    const handleSave = () => {
+        console.log("Guardando receta")
+        axios.post(`http://localhost:5000/api/recipes/saved/` , {id} , {
+            withCredentials: true, // Esto debe ir aquí
+        })// Reemplaza con la URL de tu API
+        .then(response => {
+            console.log(response.data)
+        })
     }
 
     return (
@@ -38,6 +50,7 @@ export default function ExpadedCard( { recipe, closeCard }) {
                     <Tabs tabs={[ { label:"Ingredientes"}, { label:"Instrucciones"}]} recipe={recipe} className="flex-grow" />
                 </div>
             </div>
+            <button className="absolute bottom-0 left-0 p-2 w-24 h-10 rounded-tr-md rounded-bl-md text-2xl bg-red-300" onClick={handleSave}>Guardar</button>
         </motion.div>
     )
 }
