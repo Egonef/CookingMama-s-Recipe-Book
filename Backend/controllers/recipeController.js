@@ -179,13 +179,15 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 
 ////api/recipes/saved
 //Ver guardadas
-export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
+export const getRecipesSavedByUser  = asyncHandler(async(req, res)  => {
     console.log("Entro en funcion getRecipesSaved")
 
+    const userId = req.query.userID;
+    /*
     console.log("req.session.user: ",req.session.user)
-    const userId = req.session.user._id;
+    
     console.log("user: " + userId)
-
+    */
     const user = await User.findById(userId);
 
     if(!user){
@@ -199,17 +201,17 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
-    
+
         const userId = req.session.user._id;
 
         console.log("user: " + userId)
         const recipeId  = req.body.id;
         console.log("receta: " + recipeId)
-        
+
         try {
             // Encontrar al usuario por su ID
             const user = await User.findById(userId);
-            
+
             if (!user || user.length==0) {
                 return res.status(404).json({ message: 'User not found' });
             }

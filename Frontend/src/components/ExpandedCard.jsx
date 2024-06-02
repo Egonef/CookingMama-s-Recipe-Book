@@ -7,11 +7,13 @@ import Tabs from "./Tabs";
 
 export default function ExpadedCard( { recipe, closeCard }) {
 
-    const [id, setId] = useState(recipe._id);
+    const [id, setId] = useState(null);
     const [logedIn, setLogedIn] = useState(false);
     const [saved, setSaved] = useState(false);
+    var user = null;
 
     useEffect(() => {
+
         setId(recipe._id)
         axios.get(`http://localhost:5000/api/recipes/incrementPopularity/` + recipe._id)  // Reemplaza con la URL de tu API
             .then(response => {
@@ -21,31 +23,30 @@ export default function ExpadedCard( { recipe, closeCard }) {
                 console.error('There was an error!', error);
             });
 
-        /*
+
         axios.get('http://localhost:5000/api/users/status', {withCredentials: true,})
             .then(response => {
                 if (response.data.loggedIn === true) {
                     setLogedIn(true)
-                }
-                if (response.data.user.favoriteRecipes.includes(recipe._id)) {
-                    setSaved(true)
-                }
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-        */
-        axios.get(`http://localhost:5000/api/recipes/saved/`)  // Reemplaza con la URL de tu API
-            .then(response => {
-                if (response.data.user.favoriteRecipes.includes(recipe._id)) {
-                    setSaved(true)
+                    console.log("valor del id user en response: " + response.data.user._id)
+                    console.log("Procedemos a sacar sus recetas guardadas")
+                    axios.get(`http://localhost:5000/api/recipes/saved?userID=${user._id}`)  // Reemplaza con la URL de tu API
+                        .then(response => {
+                            if (response.data.user.favoriteRecipes.includes(recipe._id)) {
+                                setSaved(true)
+                                console.log(saved)
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was an error!', error);
+                        });
                 }
             })
             .catch(error => {
                 console.error('There was an error!', error);
             });
 
-    }, []);
+    }, [ ]);
 
     if (!recipe) {
         return null; // No renderizar nada hasta que los datos de la receta se hayan cargado
