@@ -11,6 +11,10 @@ import session from 'express-session'
 
 const app = express()
 
+app.use((req, res, next) => {
+  console.log('Session desde app:', req.session);
+  next();
+});
 
 app.use(cors({
     origin: 'http://localhost:3000',
@@ -22,7 +26,7 @@ app.use(session({
     name: "nombre",
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { secure: false , sameSite: 'none'},
     maxAge: 600000
   }));

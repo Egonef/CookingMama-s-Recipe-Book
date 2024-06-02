@@ -8,16 +8,42 @@ import Tabs from "./Tabs";
 export default function ExpadedCard( { recipe, closeCard }) {
 
     const [id, setId] = useState(recipe._id);
+    const [logedIn, setLogedIn] = useState(false);
+    const [saved, setSaved] = useState(false);
 
     useEffect(() => {
         setId(recipe._id)
         axios.get(`http://localhost:5000/api/recipes/incrementPopularity/` + recipe._id)  // Reemplaza con la URL de tu API
-        .then(response => {
-            //console.log(response.data)
-        })
-        .catch(error => {
-            console.error('There was an error!', error);
-        });
+            .then(response => {
+                //console.log(response.data)
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+
+        /*
+        axios.get('http://localhost:5000/api/users/status', {withCredentials: true,})
+            .then(response => {
+                if (response.data.loggedIn === true) {
+                    setLogedIn(true)
+                }
+                if (response.data.user.favoriteRecipes.includes(recipe._id)) {
+                    setSaved(true)
+                }
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+        */
+        axios.get(`http://localhost:5000/api/recipes/saved/`)  // Reemplaza con la URL de tu API
+            .then(response => {
+                if (response.data.user.favoriteRecipes.includes(recipe._id)) {
+                    setSaved(true)
+                }
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
 
     }, []);
 
@@ -50,7 +76,7 @@ export default function ExpadedCard( { recipe, closeCard }) {
                     <Tabs tabs={[ { label:"Ingredientes"}, { label:"Instrucciones"}]} recipe={recipe} className="flex-grow" />
                 </div>
             </div>
-            <button className="absolute bottom-0 left-0 p-2 w-24 h-10 rounded-tr-md rounded-bl-md text-2xl bg-red-300" onClick={handleSave}>Guardar</button>
+            { saved !== true ? <button className="absolute bottom-0 left-0 p-2 w-24 h-10 rounded-tr-md rounded-bl-md text-2xl bg-red-300" onClick={handleSave}>Guardar</button> : <div className="absolute bottom-0 left-0 p-2 w-28 h-10 rounded-tr-md rounded-bl-md text-2xl bg-red-300" >Guardada</div>}
         </motion.div>
     )
 }
