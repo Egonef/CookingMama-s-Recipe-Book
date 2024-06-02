@@ -29,12 +29,14 @@ export default function ExpadedCard( { recipe, closeCard }) {
                     if (response.data.loggedIn === true) {
                         setLogedIn(true)
                         const userId = response.data.user._id;
+                        const recipeID = recipe._id;
                         console.log("valor del id user en response: " + userId)
                         console.log("Procedemos a sacar sus recetas guardadas")
                         // Ahora usa 'userId' en lugar de 'user'
                         axios.get(`http://localhost:5000/api/recipes/saved?userID=${userId}`)  // Reemplaza con la URL de tu API
                             .then(response => {
-                                if (response.data.includes(recipe._id)) {
+                                console.log("id de la receta que vamos a comparar: " + recipeID)
+                                if (response.data.some(recipe => recipeID === recipe._id)) {
                                     setSaved(true)
                                     console.log(saved)
                                 }
