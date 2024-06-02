@@ -16,7 +16,6 @@ export default function LoginForm() {
     const [isImageFocused, setIsImageFocused] = useState(false);
     const [isMaxReadyTimeFocused, setIsMaxReadyTimeFocused] = useState(false);
     const [isIntolerancesFocused, setIsIntolerancesFocused] = useState(false);
-
     const handleMailInputChange = (event) => {
         setIsTitleFocused(event.target.value !== '');
         setEmail(event.target.value);
@@ -51,6 +50,10 @@ export default function LoginForm() {
     const handleIntolerancesChange = (event) => {
         setIsIntolerancesFocused(event.target.value !== '');
         setUserName(event.target.value);
+    }
+
+    const handleCuantityInputChange = (event) => {
+        
     }
 
     
@@ -88,48 +91,48 @@ export default function LoginForm() {
                 <div className="flex flex-col justify-around w-full h-auto mr-5">
                     <div className='flex flex-col mb-2 relative mt-10'>
                         <motion.label htmlFor="text" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                            animate={{ y: isNameFocused ? -30 : 0 , x: isNameFocused ? -15 : 0 , scale: isNameFocused ? 0.8 : 1}}
+                            animate={{ y: isTitleFocused ? -30 : 0 , x: isTitleFocused ? -15 : 0 , scale: isTitleFocused ? 0.8 : 1}}
                         >
                             Título
                         </motion.label>
-                        <input type="text"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsNameFocused(true)}
+                        <input type="text"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsTitleFocused(true)}
                         onChange={handleNameInputChange}
 
                         onBlur={(event) => {
                             if (event.target.value === '') {
-                                setIsNameFocused(false);
+                                setIsTitleFocused(false);
                             }
                         }}
                         />
                     </div>
                     <div className='flex flex-col mb-2 relative mt-10'>
                         <motion.label htmlFor="text" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                            animate={{ y: isLastNameFocused ? -30 : 0 , x: isLastNameFocused ? -15 : 0 , scale: isLastNameFocused ? 0.8 : 1}}
+                            animate={{ y: isCuisineFocused ? -30 : 0 , x: isCuisineFocused ? -15 : 0 , scale: isCuisineFocused ? 0.8 : 1}}
                         >
                             Cocina
                         </motion.label>
-                        <input type="text"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsLastNameFocused(true)}
+                        <input type="text"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsCuisineFocused(true)}
                         onChange={handleLastNameInputChange}
 
                         onBlur={(event) => {
                             if (event.target.value === '') {
-                                setIsLastNameFocused(false);
+                                setIsCuisineFocused(false);
                             }
                         }}
                         />
                     </div>
                     <div className='flex flex-col mb-2 relative mt-10'>
                         <motion.label htmlFor="text" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                            animate={{ y: isUserNameFocused ? -30 : 0 , x: isUserNameFocused ? -15 : 0 , scale: isUserNameFocused ? 0.8 : 1}}
+                            animate={{ y: isMaxReadyTimeFocused ? -30 : 0 , x: isMaxReadyTimeFocused ? -15 : 0 , scale: isMaxReadyTimeFocused ? 0.8 : 1}}
                         >
                             Tiempo de preparación
                         </motion.label>
-                        <input type="text"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsUserNameFocused(true)}
+                        <input type="text"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsMaxReadyTimeFocused(true)}
                         onChange={handleUserNameChange}
 
                         onBlur={(event) => {
                             if (event.target.value === '') {
-                                setIsUserNameFocused(false);
+                                setIsMaxReadyTimeFocused(false);
                             }
                         }}
                         />
@@ -137,52 +140,52 @@ export default function LoginForm() {
                     <div className='mb-2 relative mt-10'>
                     <div className='flex flex-col'>
                         <motion.label htmlFor="ingredient" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                            animate={{ y: isMailFocused ? -30 : 0 , x: isMailFocused ? -15 : 0 , scale: isMailFocused ? 0.8 : 1}}
+                            animate={{ y: isIngredientsFocused ? -30 : 0 , x: isIngredientsFocused ? -15 : 0 , scale: isIngredientsFocused ? 0.8 : 1}}
                         >
                         Ingrediente
                         </motion.label>
-                        <input type="text" id="ingredient" className="border-2 border-black rounded-lg h-10" onFocus={() => setIsMailFocused(true)}
+                        <input type="text" id="ingredient" className="border-2 border-black rounded-lg h-10" onFocus={() => setIsIngredientsFocused(true)}
                             onChange={handleMailInputChange}
                             onBlur={(event) => {
                                 if (event.target.value === '') {
-                                    setIsMailFocused(false);
+                                    setIsIngredientsFocused(false);
                                 }
                             }}
                         />
                     </div>
-                    {ingredient && (
-                        <div className='flex flex-col'>
-                        <motion.label htmlFor="quantity" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                            animate={{ y: isMailFocused ? -30 : 0 , x: isMailFocused ? -15 : 0 , scale: isMailFocused ? 0.8 : 1}}
-                        >
-                            Cantidad
-                        </motion.label>
-                        <input type="text" id="quantity" className="border-2 border-black rounded-lg h-10" onChange={handleQuantityInputChange} />
-                        </div>
-                    )}
+{/*
+                    <div className='flex flex-col'>
+                    <motion.label htmlFor="quantity" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
+                        animate={{ y: isIngredientsFocused ? -30 : 0 , x: isIngredientsFocused ? -15 : 0 , scale: isIngredientsFocused ? 0.8 : 1}}
+                    >
+                        Cantidad
+                    </motion.label>
+                    <input type="text" id="quantity" className="border-2 border-black rounded-lg h-10" onChange={handleQuantityInputChange} />
+                    </div>
                     {quantity && (
                         <div className='flex flex-col'>
                         <motion.label htmlFor="unit" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                            animate={{ y: isMailFocused ? -30 : 0 , x: isMailFocused ? -15 : 0 , scale: isMailFocused ? 0.8 : 1}}
+                            animate={{ y: isIngredientsFocused ? -30 : 0 , x: isIngredientsFocused ? -15 : 0 , scale: isIngredientsFocused ? 0.8 : 1}}
                         >
                             Unidad
                         </motion.label>
                         <input type="text" id="unit" className="border-2 border-black rounded-lg h-10" onChange={handleUnitInputChange} />
                         </div>
                     )}
+*/}
                     </div>
                     <div className='mb-2 relative mt-10'>
                         <div className='flex flex-col'>
                             <motion.label htmlFor="password" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                                animate={{ y: isPassFocused ? -30 : 0 , x: isPassFocused ? -15 : 0 , scale: isPassFocused ? 0.8 : 1}}
+                                animate={{ y: isStepsFocused ? -30 : 0 , x: isStepsFocused ? -15 : 0 , scale: isStepsFocused ? 0.8 : 1}}
                             >
                             Pasos
                             </motion.label>
-                            <input type="password" id="password" className="border-2 border-black rounded-lg h-16" onFocus={() => setIsPassFocused(true)}
+                            <input type="password" id="password" className="border-2 border-black rounded-lg h-16" onFocus={() => setIsStepsFocused(true)}
                                 onChange={handlePassInputChange}
                                 onBlur={(event) => {
                                     if (event.target.value === '') {
-                                        setIsPassFocused(false);
+                                        setIsStepsFocused(false);
                                     }
                                 }}
                             />
@@ -190,30 +193,30 @@ export default function LoginForm() {
                     </div>
                     <div className='flex flex-col mb-2 relative mt-10'>
                         <motion.label htmlFor="password" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                                animate={{ y: isPassFocused ? -30 : 0 , x: isPassFocused ? -15 : 0 , scale: isPassFocused ? 0.8 : 1}}
+                                animate={{ y: isIntolerancesFocused ? -30 : 0 , x: isIntolerancesFocused ? -15 : 0 , scale: isIntolerancesFocused ? 0.8 : 1}}
                         >
                             Intolerancias
                         </motion.label>
-                        <input type="password"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsPassFocused(true)}
-                        onChange={handlePassInputChange}
+                        <input type="password"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsIntolerancesFocused(true)}
+                        onChange={handleIntolerancesChange}
                         onBlur={(event) => {
                             if (event.target.value === '') {
-                                setIsPassFocused(false);
+                                setIsIntolerancesFocused(false);
                             }
                         }}
                         />
                     </div>
                     <div className='flex flex-col mb-2 relative mt-10'>
                         <motion.label htmlFor="password" className="block text-gray-700 text-lg font-bold mt-1 absolute ml-2"
-                                animate={{ y: isPassFocused ? -30 : 0 , x: isPassFocused ? -15 : 0 , scale: isPassFocused ? 0.8 : 1}}
+                                animate={{ y: isMaxReadyTimeFocused ? -30 : 0 , x: isMaxReadyTimeFocused ? -15 : 0 , scale: isMaxReadyTimeFocused ? 0.8 : 1}}
                         >
                             Imagen
                         </motion.label>
-                        <input type="password"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsPassFocused(true)}
-                        onChange={handlePassInputChange}
+                        <input type="password"  className="border-2 border-black rounded-lg h-10" onFocus={() => setIsStepsFocused(true)}
+                        onChange={handleMaxReadyTimeChange}
                         onBlur={(event) => {
                             if (event.target.value === '') {
-                                setIsPassFocused(false);
+                                setIsMaxReadyTimeFocused(false);
                             }
                         }}
                         />
