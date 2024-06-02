@@ -181,9 +181,6 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
     console.log("Entro en funcion getRecipesSaved")
-    if (!req.session.user) {
-        return res.status(403).json({message: "Unauthorized content"});
-    }
 
     console.log("User id" + req.session.user._id);
     const userId = req.session.user._id;
@@ -212,7 +209,7 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
             const user = await User.findById(userId);
             
             if (!user || user.length==0) {
-                return res.status(404).json({ message: 'Usuario no encontrado' });
+                return res.status(404).json({ message: 'User not found' });
             }
 
             const recipe = await Recipe.findById(recipeId);

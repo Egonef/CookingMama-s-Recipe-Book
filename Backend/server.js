@@ -2,8 +2,6 @@ import connectDB from './config/db.js'
 import app from './app.js'
 import dotenv  from 'dotenv'
 import cors from 'cors'
-import { databaseFunctions } from './scriptsmongodb/updateDatabase.js'
-
 //dotenv config
 dotenv.config()
 
@@ -14,9 +12,6 @@ app.use(cors({
 
 const PORT = process.env.PORT || 5000
 connectDB()
-//await databaseFunctions()
 
 //Express js listen method to run project on http://localhost:5000
 app.listen(PORT, console.log(`App is running in ${process.env.NODE_ENV} mode on port ${PORT}`))
-
-//databaseFunctions()
