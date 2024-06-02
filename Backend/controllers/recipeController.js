@@ -4,7 +4,8 @@ import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
 import *  as api from './apiFunctions.js'
-import userctrl from '../controllers/userController.js'
+import {status} from '../controllers/userController.js'
+import {getAdmin} from '../controllers/userController.js'
 
 
 // GETS GENERICOS
@@ -179,7 +180,7 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 ////api/recipes/saved
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
-    if(userctrl.status()==true){
+    if(status()==true){
         const userId = req.query.userID;
         //console.log("User id" + userId);
         
@@ -242,8 +243,8 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    if(userctrl.status()==true){
-        const userId = req.query.userID;
+    const userId = req.query.userID;
+    if(status(userId,res)==true){
         //console.log("user: " + userId)
         const recipeId  = req.query.recipeID;
         try {
@@ -282,7 +283,7 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
-    if(userctrl.status()==true){
+    if(status()==true){
 
         //cambiar como se recibe los argumentos
         const userId = req.query.userID;
@@ -321,7 +322,7 @@ export const draftRecipe  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Eliminar recetas propias
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
-    if(userctrl.status()==true){
+    if(status()==true){
 
         const recipeID = req.query.recipeID
         //borrar receta de propietarios
@@ -356,7 +357,7 @@ export const deleteOwnRecipe = asyncHandler(async(req, res) => {
 
 //Anadir receta (No existe como tal en los casos de uso. Sería de administrador)
 export const addRecipe = asyncHandler(async (req, res) => {
-    if(userctrl.status()==true && userctrl.getAdmin()==true){
+    if(status()==true && getAdmin()==true){
         const {
             title,
             cuisine,
