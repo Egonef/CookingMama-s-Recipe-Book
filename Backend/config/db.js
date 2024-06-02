@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
-//const mongoose = require('mongoose');
+import { databaseFunctions } from '../scriptsmongodb/updateDatabase.js'; // Ajusta la ruta según tu estructura de proyecto
+
 
 // URL de conexión a tu base de datos en MongoDB Atlas
 //const uri = 'mongodb+srv://i12gaava:ProjectCookingMama@cookingmama.ja3p6r6.mongodb.net/?retryWrites=true&w=majority&appName=CookingMama';
@@ -35,6 +36,9 @@ const connectDB = async () => {
         //database Name
         const databaseName='CookingMama';
         const con = await mongoose.connect(`mongodb://127.0.0.1:27017/${databaseName}`).then(console.log("Se ha inciado conexión base de datos"))
+        await databaseFunctions();
+        console.log('Database synchronization complete.');
+        return con;
     } catch (error) {
         console.error(`Error: ${error.message}`)
         process.exit(1)

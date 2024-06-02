@@ -20,7 +20,7 @@
       }
     ],
     "steps": "Precalienta el horno a 180°C. Corta las verduras y colócalas en una bandeja con el pollo. Hornea durante 45 minutos.",
-    "image": "https://www.bing.com/images/search?view=detailV2&ccid=B0odvtU6&id=0C04476577AB023732580CDAB067ABDECF369B42&thid=OIP.B0odvtU6vJ5v5ShPpfrDpAHaE8&mediaurl=https%3a%2f%2fwww.saluddiez.com%2fwp-content%2fuploads%2f2020%2f06%2ffried-meat-on-white-plate-2338407-1170x780.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.074a1dbed53abc9e6fe5284fa5fac3a4%3frik%3dQps2z96rZ7DaDA%26pid%3dImgRaw%26r%3d0&exph=780&expw=1170&q=pollo+al+horno&simid=608001691478999317&FORM=IRPRST&ck=16E5F4CC0D1FE6F89C481739D8D05755&selectedIndex=1&itb=0",
+    "image": "https://www.diabetes.ac/wp-content/uploads/Pollo-con-verduras-mixtas.jpg",
     "maxReadyTime": 60,
     "intolerances": "",
     "popularity": 0
@@ -54,7 +54,7 @@
     "steps": "Tuesta la rebanada de pan. Lava y corta la lechuga. Agrega el pollo cortado en trozos, el pan tostado y el aderezo César. Mezcla bien y sirve.",
     "image": "https://www.lavanguardia.com/files/og_thumbnail/uploads/2018/06/18/5e997e650c7b6.jpeg",
     "maxReadyTime": 30,
-    "intolerances": "",
+    "intolerances": "Gluten, Lactosa",
     "popularity": 0
   },
 
@@ -117,7 +117,7 @@
     "steps": "Corta los tomates, pepinos y cebolla. Mezcla con las aceitunas y el queso feta. Aliña con aceite de oliva, zumo de limón, orégano, sal y pimienta. Mezcla bien y sirve.",
     "image": "https://nutricionvitae.com/wp-content/uploads/2021/03/ensalada-griega.jpg",
     "maxReadyTime": 20,
-    "intolerances": "",
+    "intolerances": "Lactosa",
     "popularity": 0
   },
 
@@ -170,7 +170,7 @@
     "steps": "Corta las frutas en trozos. Mezcla con miel y zumo de limón. Decora con hojas de menta fresca. Sirve frío.",
     "image": "https://th.bing.com/th/id/OIP.7oRyfn4GFXCRCRVZJ1Ec7wHaFB?rs=1&pid=ImgDetMain",
     "maxReadyTime": 15,
-    "intolerances": "",
+    "intolerances": "Fructosa",
     "popularity": 0
     },
 
@@ -263,9 +263,9 @@
         }
       ],
       "steps": "Cocina la pechuga de pollo y córtala en tiras. Unta mayonesa y mostaza en las rebanadas de pan. Coloca las tiras de pollo, rodajas de aguacate, tomate y lechuga entre las rebanadas de pan. Sirve y disfruta.",
-      "image": "https://www.cocinacaserayfacil.net/wp-content/uploads/2017/06/sandwich-pollo-aguacate.jpg",
+      "image": "https://th.bing.com/th/id/OIP.xjJ6i54nPoMYhzK7YtuiLAHaEK?rs=1&pid=ImgDetMain",
       "maxReadyTime": 15,
-      "intolerances": "",
+      "intolerances": "Gluten, Lactosa",
       "popularity": 0
     },  
     {
@@ -401,7 +401,7 @@
     "steps": "Extiende la masa en un molde para tarta. Pela y corta las manzanas en rodajas finas y colócalas sobre la masa. Espolvorea con azúcar y canela. Agrega pequeños trozos de mantequilla por encima. Cubre con otra capa de masa. Pincela con huevo batido. Hornea a 180°C durante 40-45 minutos o hasta que esté dorada. Sirve fría.",
     "image": "https://1.bp.blogspot.com/-K0fEBDV7sjo/XaeG5KGQZyI/AAAAAAABxAw/8GAjHoS_TZIJHpjTzaUSuQdTd-g41YvNwCLcBGAsYHQ/s1600/DSC_0284.JPG",
     "maxReadyTime": 60,
-    "intolerances": "",
+    "intolerances": "Gluten, Lactosa",
     "popularity": 0
   },
   {
@@ -433,7 +433,7 @@
   "steps": "Funde el chocolate al baño María. Deja enfriar ligeramente. Separa las claras de las yemas. Monta las claras a punto de nieve con una pizca de sal. En otro recipiente, monta la nata con el azúcar. Agrega las yemas al chocolate fundido y mezcla bien. Incorpora las claras montadas con movimientos suaves y envolventes. Vierte la mezcla en copas individuales y refrigera durante al menos 4 horas antes de servir.",
   "image": "https://th.bing.com/th/id/OIP._CZ7dkAzcYYAtyCZpevd9wHaFN?rs=1&pid=ImgDetMain",
   "maxReadyTime": 240,
-  "intolerances": "",
+  "intolerances": "Lactosa",
   "popularity": 0
   },
     {
@@ -452,9 +452,9 @@
         {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
       ],
       "steps": "Cocina la pasta según las instrucciones del paquete. Corta el pollo en tiras y salpimienta. Saltea el pollo en mantequilla hasta que esté dorado. Agrega los champiñones y el ajo picado. Vierte la nata y deja cocinar a fuego lento hasta que la salsa espese. Incorpora la pasta cocida y escurrida. Mezcla bien y sirve con queso parmesano rallado por encima.",
-      "image": "https://www.ecestaticos.com/image/clipping/194/8ab0598d23d3c60e3c0d3ee4a438840f/una-pasta-alfredo.jpg",
+      "image": "https://th.bing.com/th/id/OIP.OMK_Y7a6rFkHbJWWz6a-XQHaEK?rs=1&pid=ImgDetMain",
       "maxReadyTime": 30,
-      "intolerances": "",
+      "intolerances": "Gluten, Lactosa",
       "popularity": 0
     },
     {
@@ -474,9 +474,9 @@
         {"name": "Jengibre", "quantity": "al gusto", "unit": ""}
       ],
       "steps": "Cocina el arroz y mézclalo con vinagre de arroz, azúcar y sal. Extiende una capa fina de arroz sobre el alga nori. Coloca tiras de salmón y aguacate en el centro. Enrolla con la ayuda de una esterilla de bambú. Corta en rodajas y sirve con salsa de soja, wasabi y jengibre encurtido.",
-      "image": "https://www.recetin.com/wp-content/uploads/2011/05/sushi-rolls.jpg",
+      "image": "https://th.bing.com/th/id/R.250d53d7623d6b3402b7cef674d59b6d?rik=v8Hnj0xpDD0upQ&pid=ImgRaw&r=0",
       "maxReadyTime": 40,
-      "intolerances": "",
+      "intolerances": "Pescado, Soja, Gluten",
       "popularity": 0
     },
     {
@@ -497,9 +497,9 @@
         {"name": "Cebolla morada", "quantity": "1", "unit": "unidad"}
       ],
       "steps": "Corta la paleta de cerdo en trozos grandes y sazona con sal y pimienta. Dora la carne en manteca de cerdo caliente. Agrega cebolla, ajo, jugo de naranja y jugo de limón. Cocina a fuego lento hasta que la carne esté tierna. Desmenuza la carne y sirve en tortillas de maíz con cilantro picado, salsa de tomate, aguacate y cebolla morada en rodajas.",
-      "image": "https://cocina-casera.com/wp-content/uploads/2020/05/tacos-de-carnitas-1200x600.jpg",
+      "image": "https://th.bing.com/th/id/R.0cece4787bb7c1dbb46b849d88439c8b?rik=BVT6cbC3QBhygA&pid=ImgRaw&r=0",
       "maxReadyTime": 50,
-      "intolerances": "",
+      "intolerances": "Cerdo, Cítricos",
       "popularity": 0
     },
     {
@@ -518,15 +518,15 @@
           {"name": "Pan", "quantity": "100", "unit": "gramos"}
         ],
         "steps": "Licua todos los ingredientes hasta obtener una textura homogénea. Ajusta la sal si es necesario. Sirve frío con trozos de pan.",
-        "image": "https://www.recetasderechupete.com/wp-content/uploads/2019/05/gazpacho-andaluz-600x400.jpg",
+        "image": "https://th.bing.com/th/id/R.2067c83e73fb0e4493f546e941f3f4ff?rik=c5fjKGrl%2baT3ag&pid=ImgRaw&r=0",
         "maxReadyTime": 20,
-        "intolerances": "",
+        "intolerances": "Solanáceas, Gluten",
         "popularity": 0
       },
       {
         "id": "15",
         "title": "Paella Valenciana",
-        "cuisine": "Mediterránea",
+        "cuisine": "Española,Mediterránea",
         "ingredients": [
           {"name": "Arroz", "quantity": "300", "unit": "gramos"},
           {"name": "Pollo", "quantity": "300", "unit": "gramos"},
@@ -541,9 +541,9 @@
           {"name": "Sal", "quantity": "al gusto", "unit": ""}
         ],
         "steps": "En una paellera, sofríe el pollo y el conejo troceados. Agrega las judías verdes, los guisantes, el pimiento y el tomate. Añade el arroz y el azafrán. Vierte el caldo caliente y cocina a fuego medio hasta que el arroz esté en su punto. Deja reposar unos minutos antes de servir.",
-        "image": "https://cdn.civitatis.com/espana/madrid/guia/paella-valenciana.jpg",
+        "image": "https://th.bing.com/th/id/OIP.1dNpcOqrTmpIBZW6b3-P0gHaFx?rs=1&pid=ImgDetMain",
         "maxReadyTime": 40,
-        "intolerances": "",
+        "intolerances": "Gluten, Legumbres, Solanáceas",
         "popularity": 0
       },
       {
@@ -559,9 +559,9 @@
           {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
         ],
         "steps": "Pela y corta las patatas y la cebolla en rodajas finas. Fríelas en abundante aceite hasta que estén doradas. Bate los huevos y añade las patatas y la cebolla. Vierte la mezcla en una sartén caliente y cocina a fuego lento hasta que cuaje por un lado. Dale la vuelta y cocina por el otro lado. Sirve caliente.",
-        "image": "https://cdn.shopify.com/s/files/1/0470/2959/7912/files/Tortilla_de_Patatas_Cuadrada.jpg?v=1608832000",
+        "image": "https://th.bing.com/th/id/OIP.m9EFeM8NrtrRkRyjs1cu0wHaE8?rs=1&pid=ImgDetMain",
         "maxReadyTime": 30,
-        "intolerances": "",
+        "intolerances": "Huevos, Solanáceas, Cebolla",
         "popularity": 0
       },
       {
@@ -577,9 +577,9 @@
           {"name": "Aceite de oliva", "quantity": "3", "unit": "cucharadas"}
         ],
         "steps": "Corta los tomates y la cebolla en trozos. Sofríe el ajo en una olla con un poco de aceite. Agrega los tomates y la cebolla y cocina unos minutos. Añade el caldo de verduras y la albahaca. Cocina a fuego medio durante 20 minutos. Tritura la sopa y sirve caliente.",
-        "image": "https://www.recetasderechupete.com/wp-content/uploads/2016/09/sopa-de-tomate-y-albahaca-1-1920x1280.jpg",
+        "image": "https://th.bing.com/th/id/OIP.gesmIH-6drnr0F-1VAX9sQHaE7?rs=1&pid=ImgDetMain",
         "maxReadyTime": 30,
-        "intolerances": "",
+        "intolerances": "Solanáceas, Cebolla",
         "popularity": 0
       },
         {
@@ -594,9 +594,9 @@
             {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
           ],
           "steps": "Tuesta las rebanadas de pan. Mientras tanto, machaca el aguacate con el zumo de limón, sal y pimienta. Unta el puré de aguacate sobre las tostadas y sirve.",
-          "image": "https://www.ecestaticos.com/imagestatic/clipping/7b7/eff/7b7eff6e9a48b37eab2dfb2aa857e0ed/las-5-recetas-de-tostadas-de-aguacate-que-puedes-preparar-en-menos-de-10-minutos.jpg?mtime=1570744397",
+          "image": "https://cdn2.actitudfem.com/media/files/styles/big_img/public/images/2013/09/aguacate_y_pan_tostado.jpg",
           "maxReadyTime": 15,
-          "intolerances": "",
+          "intolerances": "Gluten",
           "popularity": 0
         },
         {
@@ -616,9 +616,9 @@
             {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
           ],
           "steps": "Lava y corta las verduras en trozos pequeños. Mezcla con los garbanzos cocidos y las aceitunas. Aliña con aceite de oliva, vinagre, sal y pimienta. Mezcla bien y sirve.",
-          "image": "https://www.pequerecetas.com/wp-content/uploads/2019/01/ensalada-de-garbanzos-facil.jpg",
+          "image": "https://th.bing.com/th/id/OIP.zV5enIhGgNIVnNcl9roeKAHaE8?rs=1&pid=ImgDetMain",
           "maxReadyTime": 20,
-          "intolerances": "",
+          "intolerances": "Legumbres, Solanáceas, Cebolla, Aceitunas",
           "popularity": 0
         },
         {
@@ -634,9 +634,9 @@
             {"name": "Aceite de oliva", "quantity": "2", "unit": "cucharadas"}
           ],
           "steps": "Saltea las espinacas en aceite de oliva hasta que se ablanden. Bate los huevos y mézclalos con las espinacas salteadas. Cocina a fuego lento hasta que los huevos estén cuajados. Agrega el queso rallado y mezcla bien. Sirve caliente.",
-          "image": "https://www.ecestaticos.com/image/clipping/11e1e1c9dcf6d4a94ec582e7b1eb68a7/asi-se-preparan-los-mejores-huevos-rezados-con-espinacas.jpg",
+          "image": "https://th.bing.com/th/id/OIP.EjW0A9K-OBYTTkSifP-BpAHaDt?rs=1&pid=ImgDetMain",
           "maxReadyTime": 15,
-          "intolerances": "",
+          "intolerances": "Huevos, Lácteos, Espinacas",
           "popularity": 0
           },
           {
@@ -652,9 +652,9 @@
               {"name": "Mantequilla", "quantity": "2", "unit": "cucharadas"}
             ],
             "steps": "Bate los huevos con la leche, el azúcar y la canela. Calienta la mantequilla en una sartén. Sumerge las rebanadas de pan en la mezcla de huevo y leche. Fríe en la sartén caliente hasta que estén doradas por ambos lados. Sirve caliente, espolvoreadas con azúcar glass y acompañadas de miel o sirope de arce.",
-            "image": "https://th.bing.com/th/id/OIP.W2H5Xms4P9a1CkN29MWFHgHaE8?w=236&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7",
+            "image": "https://th.bing.com/th/id/OIP.c68PXlnjVB8fNkeHM_BV2AHaE8?rs=1&pid=ImgDetMain",
             "maxReadyTime": 20,
-            "intolerances": "",
+            "intolerances": "Gluten, Huevos, Lácteos",
             "popularity": 0
           },
           {
@@ -671,15 +671,15 @@
               {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
             ],
             "steps": "Corta la cebolla y el tomate en juliana. Calienta una sartén y agrega un poco de aceite. Coloca una tortilla de maíz en la sartén y añade una capa de queso cheddar rallado, cebolla y tomate. Cubre con otra tortilla. Cocina hasta que el queso se derrita y la tortilla esté dorada por ambos lados. Repite el proceso con el resto de ingredientes. Corta las quesadillas en triángulos y sirve caliente.",
-            "image": "https://th.bing.com/th/id/OIP.v7xjHrrEjPUkG4Tm6thXNwHaJ4?pid=ImgDet&rs=1",
+            "image": "https://3.bp.blogspot.com/-LkHN9R-A720/XG3t4GFRflI/AAAAAAAARX4/5I6OJ8-xxZAz4WhjtMG6ftHiHLQq65o8QCLcBGAs/s1600/840_560.jpg",
             "maxReadyTime": 20,
-            "intolerances": "",
+            "intolerances": "Lácteos, Solanáceas",
             "popularity": 0
           },
           {
             "id": "24",
-            "title": "Ensalada de Tomate y Mozzarella",
-            "cuisine": "Mediterránea",
+            "title": "Ensalada Caprese",
+            "cuisine": "Italiana,Mediterránea",
             "ingredients": [
               {"name": "Tomate", "quantity": "2", "unit": "unidades"},
               {"name": "Mozzarella", "quantity": "200", "unit": "gramos"},
@@ -690,9 +690,9 @@
               {"name": "Pimienta", "quantity": "al gusto", "unit": ""}
             ],
             "steps": "Corta los tomates y la mozzarella en rodajas. Alterna las rodajas de tomate y mozzarella en un plato. Espolvorea con hojas de albahaca fresca. Rocía con aceite de oliva y vinagre balsámico. Sazona con sal y pimienta al gusto.",
-            "image": "https://www.simplyrecipes.com/thmb/2uZc7BQiywHfq7w5d7tznJ3l0Wk=/2000x1333/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2006__07__caprese-salad-horiz-a-1600-29bfb370f2ed431e85a8e4b5373c6c92.jpg",
+            "image": "https://th.bing.com/th/id/OIP.cG0JPJzvblHV40apReY8lQHaE5?rs=1&pid=ImgDetMain",
             "maxReadyTime": 15,
-            "intolerances": "",
+            "intolerances": "Lácteos, Solanáceas, Vinagre balsámico",
             "popularity": 0
           },
           {
@@ -711,9 +711,9 @@
               {"name": "Perejil", "quantity": "al gusto", "unit": ""}
             ],
             "steps": "Tritura los garbanzos cocidos con tahini, ajo, zumo de limón, comino y aceite de oliva en un procesador de alimentos hasta obtener una textura suave. Ajusta la sal al gusto. Sirve en un plato, espolvorea con pimentón dulce y decora con perejil fresco. Rocía con un chorrito de aceite de oliva antes de servir.",
-            "image": "https://www.recetasdesbieta.com/wp-content/uploads/2018/01/hummus-casero.jpg",
+            "image": "https://th.bing.com/th/id/R.af2e725fcebacf462f7656af84937c67?rik=T4XGG74pHozIQQ&pid=ImgRaw&r=0",
             "maxReadyTime": 15,
-            "intolerances": "",
+            "intolerances": "Legumbres, Sésamo, Ajo",
             "popularity": 0
           },
 {
@@ -729,9 +729,9 @@
                 { "name": "Albahaca", "quantity": "al gusto", "unit": "" }
               ],
               "steps": "Corta los tomates en rodajas y colócalos en un plato. Desmenuza el queso feta por encima. Rocía con aceite de oliva y sazona con sal y pimienta. Decora con hojas de albahaca fresca.",
-              "image": "https://www.example.com/ensalada-tomate-queso-feta.jpg",
+              "image": "https://th.bing.com/th/id/OIP.HcrQKJ-KZLUELeYtfgHZbwHaE7?rs=1&pid=ImgDetMain",
               "maxReadyTime": 10,
-              "intolerances": "",
+              "intolerances": "Lácteos, Solanáceas",
               "popularity": 0
             },
             {
@@ -745,9 +745,9 @@
                 { "name": "Mantequilla", "quantity": "1", "unit": "cucharada" }
               ],
               "steps": "Unta las rebanadas de pan con mantequilla. Coloca el jamón y el queso entre las rebanadas de pan. Tuesta en una sartén hasta que el pan esté dorado y el queso derretido.",
-              "image": "https://www.example.com/sandwich-jamon-queso.jpg",
+              "image": "https://th.bing.com/th/id/OIP.LMemw2INQYPCjnDaht2dJwHaEQ?rs=1&pid=ImgDetMain",
               "maxReadyTime": 5,
-              "intolerances": "",
+              "intolerances": "Lácteos",
               "popularity": 0
             },
             {
@@ -760,9 +760,9 @@
                 { "name": "Nueces", "quantity": "30", "unit": "gramos" }
               ],
               "steps": "Coloca el yogur en un bol. Rocía con miel y añade las nueces por encima. Sirve inmediatamente.",
-              "image": "https://www.example.com/yogur-miel-nueces.jpg",
+              "image": "https://th.bing.com/th/id/R.8ae91581f0bbc2bc7ab23d1dea88ee8a?rik=gEyFisaGmPxSVw&riu=http%3a%2f%2fwww.mygreekdish.com%2fwp-content%2fuploads%2f2014%2f09%2fGreek-Yogurt-drizzled-with-Honey-and-Walnuts-Yiaourti-me-meli.jpg&ehk=EnZu4xvEnpt0ql0pEjYri87sBs7P6V7ywUc3ANGYc9g%3d&risl=&pid=ImgRaw&r=0",
               "maxReadyTime": 5,
-              "intolerances": "",
+              "intolerances": "Lácteos, Miel",
               "popularity": 0
             },
             {
@@ -776,9 +776,9 @@
                 { "name": "Miel", "quantity": "1", "unit": "cucharada" }
               ],
               "steps": "Coloca todos los ingredientes en una licuadora y mezcla hasta obtener una consistencia suave. Sirve frío.",
-              "image": "https://www.example.com/batido-platano-fresa.jpg",
+              "image": "https://th.bing.com/th/id/OIP.hsn16DECfLSH7wosPpMOrQHaE8?rs=1&pid=ImgDetMain",
               "maxReadyTime": 5,
-              "intolerances": "",
+              "intolerances": "Lácteos, Miel",
               "popularity": 0
             },
             {
@@ -794,9 +794,9 @@
                 { "name": "Perejil", "quantity": "al gusto", "unit": "" }
               ],
               "steps": "Cocina la pasta según las instrucciones del paquete. En una sartén, saltea el ajo picado en aceite de oliva. Añade la pasta cocida, sazona con sal y pimienta, y mezcla bien. Decora con perejil fresco picado.",
-              "image": "https://www.example.com/pasta-ajo-aceite.jpg",
+              "image": "https://th.bing.com/th/id/R.fecf3201b56eea1397fd6ef7264c5a78?rik=xtfI26i9kSezXw&pid=ImgRaw&r=0",
               "maxReadyTime": 15,
-              "intolerances": "",
+              "intolerances": "Gluten",
               "popularity": 0
             },
             {
@@ -811,9 +811,9 @@
                 { "name": "Mantequilla", "quantity": "1", "unit": "cucharadita" }
               ],
               "steps": "Bate los huevos con sal y pimienta. Derrite la mantequilla en una sartén y vierte los huevos batidos. Cocina a fuego medio y, cuando estén casi cuajados, añade el queso rallado. Dobla la omelette y cocina hasta que el queso se derrita.",
-              "image": "https://www.example.com/omelette-queso.jpg",
+              "image": "https://th.bing.com/th/id/OIP.TSubyrrh0xZsTMcgTbb-6AHaE8?rs=1&pid=ImgDetMain",
               "maxReadyTime": 10,
-              "intolerances": "",
+              "intolerances": "Huevos",
               "popularity": 0
 }         
             
