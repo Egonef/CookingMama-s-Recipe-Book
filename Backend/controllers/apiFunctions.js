@@ -103,7 +103,8 @@ export async function APIsearchRecipesByIngredients(ingredients) {
 
                     const recipeDetails = recipeDetailsResponse.data;
                     return {
-                        id: recipeDetails.id,
+                        //id: recipeDetails.id,
+                        id: "api",
                         title: recipeDetails.title,
                         instructions: recipeDetails.instructions,
                         ingredients: recipeDetails.extendedIngredients.map(ingredient => ingredient.original),
@@ -187,7 +188,6 @@ export async function searchRecipesAndTranslate(ingredients) {
                 recipe.ingredients.map(ingredient => translateText(ingredient, 'EN','ES'))
             );
             const translatedCuisine = recipe.cuisineType ? await translateText(recipe.cuisineType,'EN', 'ES') : '';
-
             return {
                 id: recipe.id,
                 title: translatedTitle,
