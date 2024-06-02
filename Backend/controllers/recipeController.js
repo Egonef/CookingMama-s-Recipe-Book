@@ -4,8 +4,7 @@ import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
 import *  as api from './apiFunctions.js'
-import { searchRecipesAndTranslate } from './apiFunctions.js'; // Asegúrate de que la función esté correctamente importada
-
+import userctrl from '../controllers/userController.js'
 
 
 // GETS GENERICOS
@@ -180,97 +179,99 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 ////api/recipes/saved
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
-    
-    const userId = req.query.userID;
-    //console.log("User id" + userId);
-    
-    const user = await User.findById(userId);
-    
-    if(!user){
-        res.status(404)
-        return
-    }
-    const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
-    console.log("Saved recipes" + recipes)
-    return res.status(200)
-   
+    if(userctrl.status()==true){
+        const userId = req.query.userID;
+        //console.log("User id" + userId);
+        
+        const user = await User.findById(userId);
+        
+        if(!user){
+            res.status(404)
+            return
+        }
+        const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
+        console.log("Saved recipes" + recipes)
+        return res.status(200)
+    } 
     
 })
 
 ////api/recipes/saved
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
-    
-    const userId = req.query.userID;
-    //console.log("user: " + userId)
-    const recipeId  = req.query.recipeID;
-    
-    try {
-        // Encontrar al usuario por su ID
-        const user = await User.findById(userId);
+    if(userctrl.status()==true){
+        const userId = req.query.userID;
+        //console.log("user: " + userId)
+        const recipeId  = req.query.recipeID;
         
-        if (!user || user.length==0) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
+        try {
+            // Encontrar al usuario por su ID
+            const user = await User.findById(userId);
+            
+            if (!user || user.length==0) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            const recipe = await Recipe.findById(recipeId);
+            
+            if(!recipe || recipe.length==0){
+                return res.status(404).json({ message: 'Receta no encontrada' });
+            }
+
+            
+            //TODO esta comprobación no funciona
+            // Verificar si la receta ya está guardada por el usuario
+            
+            if (user.favoriteRecipes.includes(recipeId)) {
+                return res.status(400).json({ message: 'Receta ya salvada por usuario' });
+            }
+
+            // Guardar la receta en el array de recetas guardadas del usuario
+            user.favoriteRecipes.push(recipeId);
+            await user.save();
+
+            res.status(200).json({ message: 'Recipe saved successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
         }
-
-        const recipe = await Recipe.findById(recipeId);
-        
-        if(!recipe || recipe.length==0){
-            return res.status(404).json({ message: 'Receta no encontrada' });
-        }
-
-        
-        //TODO esta comprobación no funciona
-        // Verificar si la receta ya está guardada por el usuario
-        
-        if (user.favoriteRecipes.includes(recipeId)) {
-            return res.status(400).json({ message: 'Receta ya salvada por usuario' });
-        }
-
-        // Guardar la receta en el array de recetas guardadas del usuario
-        user.favoriteRecipes.push(recipeId);
-        await user.save();
-
-        res.status(200).json({ message: 'Recipe saved successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
     }
 })
 
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    
-    const userId = req.query.userID;
-    //console.log("user: " + userId)
-    const recipeId  = req.query.recipeID;
-    try {
-        // Encontrar al usuario por su ID
-        const user = await User.findById(userId);
+    if(userctrl.status()==true){
+        const userId = req.query.userID;
+        //console.log("user: " + userId)
+        const recipeId  = req.query.recipeID;
+        try {
+            // Encontrar al usuario por su ID
+            const user = await User.findById(userId);
 
-        if (!user || user.length == 0 ) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
+            if (!user || user.length == 0 ) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            const recipe = await Recipe.findById(recipeId);
+
+            if(!recipe || recipe.length == 0){
+                return res.status(404).json({ message: 'Receta no encontrada' });
+            }
+            // Verificar si la receta no está guardada por el usuario
+            if (!user.favoriteRecipes.includes(recipeId)) {
+                return res.status(400).json({ message: 'Receta no salvada por el usuario' });
+            }
+
+            // Eliminar la receta del array de recetas guardadas del usuario
+            user.favoriteRecipes.remove(recipeId);
+            await user.save();
+
+            res.status(200).json({ message: 'Recipe saved successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
         }
-
-        const recipe = await Recipe.findById(recipeId);
-
-        if(!recipe || recipe.length == 0){
-            return res.status(404).json({ message: 'Receta no encontrada' });
-        }
-        // Verificar si la receta no está guardada por el usuario
-        if (!user.favoriteRecipes.includes(recipeId)) {
-            return res.status(400).json({ message: 'Receta no salvada por el usuario' });
-        }
-
-        // Eliminar la receta del array de recetas guardadas del usuario
-        user.favoriteRecipes.remove(recipeId);
-        await user.save();
-
-        res.status(200).json({ message: 'Recipe saved successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
     }
 })
 
