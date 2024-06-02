@@ -200,10 +200,10 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
-    if(userctrl.status()==true){
+    
         const userId = req.session.user._id;
         console.log("user: " + userId)
-        const recipeId  = req.body;
+        const recipeId  = req.body.id;
         console.log("receta: " + recipeId)
         
         try {
@@ -237,7 +237,7 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
         }
-    }
+    
 })
 
 ////api/recipes/saved
