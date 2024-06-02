@@ -1,6 +1,6 @@
 import * as ctr from "../controllers/recipeController.js";
 import express from 'express'
-import * as auth from "../controllers/autorizacionFunctions.js";
+import * as auth from "../controllers/userController.js";
 const router = express.Router()
 
 //Rutas de popularidad

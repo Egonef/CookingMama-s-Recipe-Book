@@ -19,10 +19,12 @@ app.use(cors({
 }));
 
 app.use(session({
+    name: "nombre",
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { secure: false , sameSite: 'none'},
+    maxAge: 600000
   }));
 
 app.use(express.json()) //Sirve para que se puedan conger argumentos del body directamente
