@@ -34,7 +34,7 @@ const Tabs = ({ tabs , recipe }) => {
 							{ingredient.name}: {ingredient.quantity} {ingredient.unit}
 						</p>
 					))}
-                </p> : <p> {recipe.steps} </p>}
+                </p> : <p className=" text-sm"> {recipe.steps} </p>}
 			</div>
 		</div>
 	);

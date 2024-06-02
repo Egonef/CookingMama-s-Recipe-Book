@@ -21,7 +21,7 @@ export default function SearchResults() {
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/recipes/find?ingredients=${searchTerm}`);
+                const response = await axios.get(`http://localhost:5000/api/recipes/find?ingredients=${searchTerm}&api=True`);
                 setRecipes(response.data);
             } catch (error) {
                 console.error("Error fetching recipes:", error);

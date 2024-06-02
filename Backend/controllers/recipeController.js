@@ -4,8 +4,8 @@ import User from '../models/usersModel.js'
 import Ingredient from '../models/ingredientsModel.js'
 import asyncHandler from 'express-async-handler'
 import *  as api from './apiFunctions.js'
-import { searchRecipesAndTranslate } from './apiFunctions.js'; // Asegúrate de que la función esté correctamente importada
-
+import {status} from '../controllers/userController.js'
+import {getAdmin} from '../controllers/userController.js'
 
 
 // GETS GENERICOS
@@ -180,20 +180,20 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 ////api/recipes/saved
 //Ver guardadas
 export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
-    
-    const userId = req.query.userID;
-    //console.log("User id" + userId);
-    
-    const user = await User.findById(userId);
-    
-    if(!user){
-        res.status(404)
-        return
-    }
-    const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
-    console.log("Saved recipes" + recipes)
-    return res.status(200)
-   
+    if(status()==true){
+        const userId = req.query.userID;
+        //console.log("User id" + userId);
+        
+        const user = await User.findById(userId);
+        
+        if(!user){
+            res.status(404)
+            return
+        }
+        const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
+        console.log("Saved recipes" + recipes)
+        return res.status(200)
+    } 
     
 })
 
@@ -201,76 +201,79 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
     
-    const userId = req.query.userID;
-    //console.log("user: " + userId)
-    const recipeId  = req.query.recipeID;
+        const userId = req.session.user._id;
+        console.log("user: " + userId)
+        const recipeId  = req.body.id;
+        console.log("receta: " + recipeId)
+        
+        try {
+            // Encontrar al usuario por su ID
+            const user = await User.findById(userId);
+            
+            if (!user || user.length==0) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            const recipe = await Recipe.findById(recipeId);
+            
+            if(!recipe || recipe.length==0){
+                return res.status(404).json({ message: 'Receta no encontrada' });
+            }
+
+            
+            //TODO esta comprobación no funciona
+            // Verificar si la receta ya está guardada por el usuario
+            
+            if (user.favoriteRecipes.includes(recipeId)) {
+                return res.status(400).json({ message: 'Receta ya salvada por usuario' });
+            }
+
+            // Guardar la receta en el array de recetas guardadas del usuario
+            user.favoriteRecipes.push(recipeId);
+            await user.save();
+
+            res.status(200).json({ message: 'Recipe saved successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
     
-    try {
-        // Encontrar al usuario por su ID
-        const user = await User.findById(userId);
-        
-        if (!user || user.length==0) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
-        }
-
-        const recipe = await Recipe.findById(recipeId);
-        
-        if(!recipe || recipe.length==0){
-            return res.status(404).json({ message: 'Receta no encontrada' });
-        }
-
-        
-        //TODO esta comprobación no funciona
-        // Verificar si la receta ya está guardada por el usuario
-        
-        if (user.favoriteRecipes.includes(recipeId)) {
-            return res.status(400).json({ message: 'Receta ya salvada por usuario' });
-        }
-
-        // Guardar la receta en el array de recetas guardadas del usuario
-        user.favoriteRecipes.push(recipeId);
-        await user.save();
-
-        res.status(200).json({ message: 'Recipe saved successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
 })
 
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    
     const userId = req.query.userID;
-    //console.log("user: " + userId)
-    const recipeId  = req.query.recipeID;
-    try {
-        // Encontrar al usuario por su ID
-        const user = await User.findById(userId);
+    if(status(userId,res)==true){
+        //console.log("user: " + userId)
+        const recipeId  = req.query.recipeID;
+        try {
+            // Encontrar al usuario por su ID
+            const user = await User.findById(userId);
 
-        if (!user || user.length == 0 ) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
+            if (!user || user.length == 0 ) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            const recipe = await Recipe.findById(recipeId);
+
+            if(!recipe || recipe.length == 0){
+                return res.status(404).json({ message: 'Receta no encontrada' });
+            }
+            // Verificar si la receta no está guardada por el usuario
+            if (!user.favoriteRecipes.includes(recipeId)) {
+                return res.status(400).json({ message: 'Receta no salvada por el usuario' });
+            }
+
+            // Eliminar la receta del array de recetas guardadas del usuario
+            user.favoriteRecipes.remove(recipeId);
+            await user.save();
+
+            res.status(200).json({ message: 'Recipe saved successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
         }
-
-        const recipe = await Recipe.findById(recipeId);
-
-        if(!recipe || recipe.length == 0){
-            return res.status(404).json({ message: 'Receta no encontrada' });
-        }
-        // Verificar si la receta no está guardada por el usuario
-        if (!user.favoriteRecipes.includes(recipeId)) {
-            return res.status(400).json({ message: 'Receta no salvada por el usuario' });
-        }
-
-        // Eliminar la receta del array de recetas guardadas del usuario
-        user.favoriteRecipes.remove(recipeId);
-        await user.save();
-
-        res.status(200).json({ message: 'Recipe saved successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
     }
 })
 
@@ -280,20 +283,23 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
-    //cambiar como se recibe los argumentos
-    const userId = req.query.userID;
-    try {
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
+    if(status()==true){
+
+        //cambiar como se recibe los argumentos
+        const userId = req.query.userID;
+        try {
+            const user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: 'Usuario no encontrado' });
+            }
+
+            const userRecipes = await Recipe.find({ _id: { $in: user.ownRecipes } });
+            res.status(200).json(userRecipes);
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
         }
-
-        const userRecipes = await Recipe.find({ _id: { $in: user.ownRecipes } });
-        res.status(200).json(userRecipes);
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
     }
     
 })
@@ -316,86 +322,89 @@ export const draftRecipe  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Eliminar recetas propias
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
-    const recipeID = req.query.recipeID
-    //borrar receta de propietarios
-    const propietarios = await User.find({ ownRecipes: { $in: recipeID } });
-    for (var propietario of propietarios){
-        propietario.ownRecipes = propietario.ownRecipes.filter(item => item !== recipeID);
-        propietario.save()
-    }
+    if(status()==true){
 
-    //borrar receta de quien tenga guardado la receta
-
-    const guardadores = await User.find({ favoriteRecipes: { $in: recipeID } });
-    for (var guardador of guardadores){
-        guardador.favoriteRecipes = guardador.favoriteRecipes.filter(item => item !== recipeID);
-        guardador.save()
-    }
-    //borrar ingredientes que referencien a esa receta
-    const ingredientes = await Ingredient.find({ recipeIds: { $in: recipeID } });
-    for(var ingrediente of ingredientes){
-        ingrediente.recipeIds = ingrediente.recipeIds.filter(item => item !== recipeID);
-        if(ingredient.recipeIds.length == 0 ){
-           Ingredient.deleteOne({_id:ingrediente._id})
-        }else{
-            ingrediente.save()
+        const recipeID = req.query.recipeID
+        //borrar receta de propietarios
+        const propietarios = await User.find({ ownRecipes: { $in: recipeID } });
+        for (var propietario of propietarios){
+            propietario.ownRecipes = propietario.ownRecipes.filter(item => item !== recipeID);
+            propietario.save()
         }
-    }
-    //borrar receta
-    await Recipe.deleteOne({_id:recipeID})
+
+        //borrar receta de quien tenga guardado la receta
+
+        const guardadores = await User.find({ favoriteRecipes: { $in: recipeID } });
+        for (var guardador of guardadores){
+            guardador.favoriteRecipes = guardador.favoriteRecipes.filter(item => item !== recipeID);
+            guardador.save()
+        }
+        //borrar ingredientes que referencien a esa receta
+        const ingredientes = await Ingredient.find({ recipeIds: { $in: recipeID } });
+        for(var ingrediente of ingredientes){
+            ingrediente.recipeIds = ingrediente.recipeIds.filter(item => item !== recipeID);
+            if(ingredient.recipeIds.length == 0 ){
+            Ingredient.deleteOne({_id:ingrediente._id})
+            }else{
+                ingrediente.save()
+            }
+        }
+        //borrar receta
+        await Recipe.deleteOne({_id:recipeID})
     //bo
+    }
 })
 
 //Anadir receta (No existe como tal en los casos de uso. Sería de administrador)
 export const addRecipe = asyncHandler(async (req, res) => {
+    if(status()==true && getAdmin()==true){
+        const {
+            title,
+            cuisine,
+            ingredients,
+            steps,
+            image,
+            maxReadyTime,
+            intolerances,
+            popularity,
+            userId,
+        } = req.body;
 
-    const {
-        title,
-        cuisine,
-        ingredients,
-        steps,
-        image,
-        maxReadyTime,
-        intolerances,
-        popularity,
-        userId,
-    } = req.body;
+        // Validate the required fields
+        if (!title || !cuisine || !ingredients || !steps || !image || !maxReadyTime) {
+            res.status(400).json({message: 'Please provide all required fields' })
+            throw new Error('Please provide all required fields');
+        }
 
-    // Validate the required fields
-    if (!title || !cuisine || !ingredients || !steps || !image || !maxReadyTime) {
-        res.status(400).json({message: 'Please provide all required fields' })
-        throw new Error('Please provide all required fields');
+        // Check if the user already exists
+        const user = await User.findById(userId);
+        
+        if(!user){
+            res.status(401).json({message: "El usuario al que se refiere no existe"})
+        }
+
+        // Create a new recipe
+        const recipe = new Recipe({
+            title,
+            cuisine,
+            ingredients,
+            steps,
+            image,
+            maxReadyTime,
+            intolerances,
+            popularity
+        });
+        // Save the recipe to the database
+        const createdRecipe = await recipe.save();
+
+        //asociar receta a usuario
+        user.ownRecipes.push(createdRecipe._id)
+        user.save()
+
+        //actualizar ingredientes
+        await actualizarIngredientes(createdRecipe)
+        res.status(201).json(createdRecipe);
     }
-
-    // Check if the user already exists
-    const user = await User.findById(userId);
-    
-    if(!user){
-        res.status(401).json({message: "El usuario al que se refiere no existe"})
-    }
-
-    // Create a new recipe
-    const recipe = new Recipe({
-        title,
-        cuisine,
-        ingredients,
-        steps,
-        image,
-        maxReadyTime,
-        intolerances,
-        popularity
-    });
-    // Save the recipe to the database
-    const createdRecipe = await recipe.save();
-
-    //asociar receta a usuario
-    user.ownRecipes.push(createdRecipe._id)
-    user.save()
-
-    //actualizar ingredientes
-    await actualizarIngredientes(createdRecipe)
-    res.status(201).json(createdRecipe);
-
 });
 
 ///api/recipes/updateIngs

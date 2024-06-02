@@ -8,7 +8,7 @@ import '@fontsource/italiana';
 
 
 
-const ProfileTabs = ({ tabs }) => {
+const ProfileTabs = ({ tabs , rounded }) => {
 
 	const navigate = useNavigate(); // Accede al objeto navigate
     const location = useLocation(); // Accede al objeto location
@@ -43,6 +43,7 @@ const ProfileTabs = ({ tabs }) => {
 							handleTabClick(index)
 						}
 						isActive={index === activeTab}
+						rounded={rounded}
 					/>
 				))}
 			</div>

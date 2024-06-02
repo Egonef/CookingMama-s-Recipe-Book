@@ -22,7 +22,7 @@ export default function SearchResults() {
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/recipes/popular`);
+                const response = await axios.get(`http://192.168.1.33:5000/api/recipes/popular`);
                 setRecipes(response.data);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
