@@ -29,7 +29,6 @@ const ProfileTabs = ({ tabs , rounded }) => {
 	return (
 		<div className=" flex flex-row rounded-br-md  h-screen bg-[#f88594]">
 			<div className=" flex-col bg-orange-200">
-				<Navbar />
 				<div className=" flex flex-row mr-20 py-9 font-[italiana] font-medium text-2xl text text-[#2D3931] ">
                     <Link to={location.pathname} onClick={handleBackClick} className=" mx-5 relative inline cursor-pointer font-medium before:bg-[#6B8574] before:absolute before:-bottom-1 before:block before:h-[5px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-500 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100 hover:text-[#6B8574] h-1/6"
                     >

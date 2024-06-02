@@ -44,8 +44,7 @@ export default function SavedRecipes() {
     return (
         <div className="bg-[#C3B9AB]">
             <div className="animate-fade-in">
-                <Navbar />
-                <div className="flex flex-row justify-evenly items-center flex-wrap gap-x-1 gap-y-4 mt-16 mx-16">
+                <div className="flex flex-row justify-evenly items-center flex-wrap gap-x-1 gap-y-4 mt-16 mx-16 overflow-auto">
                 {recipes && recipes.length > 0 ? (
                     recipes.map((recipe, i) => <RecipeCardAll key={i} recipe={recipe} />)
                 ) : (
