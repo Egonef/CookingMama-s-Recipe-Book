@@ -1,6 +1,4 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-import * as deepl from 'deepl-node';
 
 
 // FUNCIONES DE LLAMADA A LA API DE TRADUCCIÓN

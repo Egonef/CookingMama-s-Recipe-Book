@@ -1,5 +1,6 @@
 import * as ctr from "../controllers/recipeController.js";
 import express from 'express'
+import * as auth from "../controllers/autorizacionFunctions.js";
 const router = express.Router()
 
 //Rutas de popularidad
@@ -13,17 +14,15 @@ router.route('/find').get(ctr.getRecipeByIngredientAndFilter)
 
 
 // Rutas para salvar
-router.route('/saved').get(ctr.getRecipesCreatedByUser)
-
-router.route('/saved').post(ctr.setRecipeSavedByUser)
-router.route('/saved').delete(ctr.setRecipeUnsavedByUser)
+router.route('/saved').get(auth.getAuth, ctr.getRecipesCreatedByUser)
+router.route('/saved').post(auth.getAuth,ctr.setRecipeSavedByUser)
+router.route('/saved').delete(auth.getAuth, ctr.setRecipeUnsavedByUser)
 
 //Rutas para recetas propias
-router.route('/myOwn/').get(ctr.getRecipesCreatedByUser)
-
-router.route('/myOwn/').post(ctr.publishRecipe)
-router.route('/myOwn/').patch(ctr.draftRecipe)
-router.route('/myOwn/').delete(ctr.deleteOwnRecipe)
+router.route('/myOwn/').get(auth.getAuth, ctr.getRecipesCreatedByUser)
+router.route('/myOwn/').post(auth.getAuth, ctr.publishRecipe)
+router.route('/myOwn/').patch(auth.getAuth, ctr.draftRecipe)
+router.route('/myOwn/').delete(auth.getAuth, ctr.deleteOwnRecipe)
 
 //Rutas auxiliares
 router.route('/updateIngs').get(ctr.updateIngredients)

@@ -179,9 +179,8 @@ export const filtrarRecetas = (recipes,cuisine,maxReadyTime) => {
 
 ////api/recipes/saved
 //Ver guardadas
-export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
-    if(status()==true){
-        const userId = req.query.userID;
+export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {   
+    const userId = req.query.userID;
         //console.log("User id" + userId);
         
         const user = await User.findById(userId);
@@ -192,15 +191,12 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res) => {
         }
         const recipes = await User.findById(userId).populate('favoriteRecipes').exec();
         console.log("Saved recipes" + recipes)
-        return res.status(200)
-    } 
-    
+        return res.status(200)    
 })
 
 ////api/recipes/saved
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
-    if(userctrl.status()==true){
         const userId = req.session.user._id;
         console.log("user: " + userId)
         const recipeId  = req.body;
@@ -218,9 +214,7 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
             
             if(!recipe || recipe.length==0){
                 return res.status(404).json({ message: 'Receta no encontrada' });
-            }
-
-            
+            }      
             //TODO esta comprobación no funciona
             // Verificar si la receta ya está guardada por el usuario
             
@@ -237,14 +231,12 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
         }
-    }
 })
 
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
     const userId = req.query.userID;
-    if(status(userId,res)==true){
         //console.log("user: " + userId)
         const recipeId  = req.query.recipeID;
         try {
@@ -274,7 +266,6 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
         }
-    }
 })
 
 
@@ -283,8 +274,6 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
-    if(status()==true){
-
         //cambiar como se recibe los argumentos
         const userId = req.query.userID;
         try {
@@ -299,9 +288,7 @@ export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
-        }
-    }
-    
+        }    
 })
 
 ////api/recipes/myOwn
@@ -322,8 +309,6 @@ export const draftRecipe  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Eliminar recetas propias
 export const deleteOwnRecipe = asyncHandler(async(req, res) => {
-    if(status()==true){
-
         const recipeID = req.query.recipeID
         //borrar receta de propietarios
         const propietarios = await User.find({ ownRecipes: { $in: recipeID } });
@@ -351,13 +336,10 @@ export const deleteOwnRecipe = asyncHandler(async(req, res) => {
         }
         //borrar receta
         await Recipe.deleteOne({_id:recipeID})
-    //bo
-    }
 })
 
 //Anadir receta (No existe como tal en los casos de uso. Sería de administrador)
 export const addRecipe = asyncHandler(async (req, res) => {
-    if(status()==true && getAdmin()==true){
         const {
             title,
             cuisine,
@@ -404,7 +386,6 @@ export const addRecipe = asyncHandler(async (req, res) => {
         //actualizar ingredientes
         await actualizarIngredientes(createdRecipe)
         res.status(201).json(createdRecipe);
-    }
 });
 
 ///api/recipes/updateIngs
