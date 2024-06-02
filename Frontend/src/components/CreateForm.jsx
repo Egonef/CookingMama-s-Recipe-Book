@@ -18,30 +18,42 @@ export default function LoginForm() {
     const [isIntolerancesFocused, setIsIntolerancesFocused] = useState(false);
 
     const handleMailInputChange = (event) => {
-        setIsMailFocused(event.target.value !== '');
+        setIsTitleFocused(event.target.value !== '');
         setEmail(event.target.value);
     };
 
     const handlePassInputChange = (event) => {
-        setIsPassFocused(event.target.value !== '');
+        setIsCuisineFocused(event.target.value !== '');
         setPassword(event.target.value);
     };
 
     const handleNameInputChange = (event) => {
-        setIsNameFocused(event.target.value !== '');
+        setIsIngredientsFocused(event.target.value !== '');
         setFirstName(event.target.value);
         console.log(firstName);
     }
 
     const handleLastNameInputChange = (event) => {
-        setIsLastNameFocused(event.target.value !== '');
+        setIsStepsFocused(event.target.value !== '');
         setSecondName(event.target.value);
     }
 
     const handleUserNameChange = (event) => {
-        setIsUserNameFocused(event.target.value !== '');
+        setIsImageFocused(event.target.value !== '');
         setUserName(event.target.value);
     }
+
+    const handleMaxReadyTimeChange = (event) => {
+        setIsMaxReadyTimeFocused(event.target.value !== '');
+        setUserName(event.target.value);
+    }
+
+    const handleIntolerancesChange = (event) => {
+        setIsIntolerancesFocused(event.target.value !== '');
+        setUserName(event.target.value);
+    }
+
+    
 
     //Estados de los campos del registro
     const [firstName, setFirstName] = useState('');
