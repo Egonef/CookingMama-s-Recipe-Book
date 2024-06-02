@@ -27,6 +27,48 @@ describe('Performance Tests of Recipes', () => {
   });
 });
 
+describe('Performance Test for getRecipeByIngredientAndFilter', () => {
+  it('should measure the response time with APIEnabled=True', async () => {
+    const ingredients = "Pollo";
+    const cuisine = "Mediterránea";
+    const maxReadyTime = 60;
+    const APIEnabled = 'True';
+
+    const startTime = Date.now();
+    const response = await request(app)
+      .get(`/api/recipes/find`)
+      .query({ ingredients, cuisine, maxReadyTime, api: APIEnabled });
+    const endTime = Date.now();
+
+    const responseTime = endTime - startTime;
+    console.log(`Response time with APIEnabled=True: ${responseTime} ms`);
+
+    // Asegúrate de que la prueba espera un código de estado correcto según tu lógica
+    expect(response.statusCode).toBe(200);
+    expect(responseTime).toBeLessThan(5000);  // Ajusta este valor según tus necesidades de rendimiento
+  });
+
+  it('should measure the response time with APIEnabled=False', async () => {
+    const ingredients = "Pollo";
+    const cuisine = "Mediterránea";
+    const maxReadyTime = 60;
+    const APIEnabled = 'False';
+
+    const startTime = Date.now();
+    const response = await request(app)
+      .get(`/api/recipes/find`)
+      .query({ ingredients, cuisine, maxReadyTime, api: APIEnabled });
+    const endTime = Date.now();
+
+    const responseTime = endTime - startTime;
+    console.log(`Response time with APIEnabled=False: ${responseTime} ms`);
+
+    // Asegúrate de que la prueba espera un código de estado correcto según tu lógica
+    expect(response.statusCode).toBe(200);
+    expect(responseTime).toBeLessThan(2000);  // Ajusta este valor según tus necesidades de rendimiento
+  });
+});
+
 describe('Performance Tests of Login and Register', () => {
   it('should measure the response time for user login', async () => {
     const startTime = Date.now();
