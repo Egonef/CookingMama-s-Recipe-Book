@@ -202,19 +202,23 @@ export const getRecipesSavedByUser  = asyncHandler(async(req, res)  => {
 ////api/recipes/saved
 //Guardar
 export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
-
+        /*
         const userId = req.session.user._id;
 
         console.log("user: " + userId)
         const recipeId  = req.body.id;
         console.log("receta: " + recipeId)
+        */
+
+        const userId = req.query.userID
+        const recipeId = req.query.recipeID
 
         try {
             // Encontrar al usuario por su ID
             const user = await User.findById(userId);
 
             if (!user || user.length==0) {
-                return res.status(404).json({ message: 'User not found' });
+                return res.status(404).json({ message: 'Usuario no encontrado' });
             }
 
             const recipe = await Recipe.findById(recipeId);
@@ -244,9 +248,11 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/saved
 //Desguardar
 export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
-    const userId = req.query.userID;
+
+        const userId = req.query.userID;
         //console.log("user: " + userId)
         const recipeId  = req.query.recipeID;
+
         try {
             // Encontrar al usuario por su ID
             const user = await User.findById(userId);
@@ -282,8 +288,9 @@ export const setRecipeUnsavedByUser  = asyncHandler(async(req, res) => {
 ////api/recipes/myOwn
 // Ver recetas propias
 export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
-        //cambiar como se recibe los argumentos
+        
         const userId = req.query.userID;
+        
         try {
             const user = await User.findById(userId);
             if (!user) {

@@ -12,7 +12,7 @@ import session from 'express-session'
 const app = express()
 
 app.use((req, res, next) => {
-  console.log('Session desde app:', req.session);
+  //console.log('Session desde app:', req.session);
   next();
 });
 
