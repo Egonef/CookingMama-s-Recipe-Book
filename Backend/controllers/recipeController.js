@@ -222,13 +222,13 @@ export const setRecipeSavedByUser  = asyncHandler(async(req, res) => {
             }
 
             const recipe = await Recipe.findById(recipeId);
-            
+
             if(!recipe || recipe.length==0){
                 return res.status(404).json({ message: 'Receta no encontrada' });
-            }      
+            }
             //TODO esta comprobación no funciona
             // Verificar si la receta ya está guardada por el usuario
-            
+
             if (user.favoriteRecipes.includes(recipeId)) {
                 return res.status(400).json({ message: 'Receta ya salvada por usuario' });
             }
@@ -303,7 +303,7 @@ export const getRecipesCreatedByUser  = asyncHandler(async(req, res) => {
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
-        }    
+        }
 })
 
 ////api/recipes/myOwn

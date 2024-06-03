@@ -1,10 +1,12 @@
 
 // src/pages/SavedRecipes.js
-import RecipeCardAll from "../components/RecipeCardAll";
+import RecipeCardAll from "./RecipeCardAll";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import Navbar from "./Navbar";
+import CreateForm from "./CreateForm";
+
+
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -12,7 +14,7 @@ function useQuery() {
 
 export default function SavedRecipes() {
 
-
+    const [createform, setCreateForm] = useState(false);
     const [logedIn, setLogedIn] = useState(false);
     const [recipes, setRecipes] = useState([]);
     //const location = useLocation();
@@ -26,7 +28,7 @@ export default function SavedRecipes() {
                         console.log("valor del id user en response: " + userId)
                         console.log("Procedemos a sacar sus recetas guardadas")
                         // Ahora usa 'userId' en lugar de 'user'
-                        axios.get(`http://localhost:5000/api/recipes/saved?userID=${userId}`)  // Reemplaza con la URL de tu API
+                        axios.get(`http://localhost:5000/api/recipes/myOwn?userID=${userId}`)  // Reemplaza con la URL de tu API
                             .then(response => {
                                 console.log(response.data)
                                 setRecipes(response.data);
@@ -44,6 +46,11 @@ export default function SavedRecipes() {
     return (
         <div className="bg-[#C3B9AB] rounded-md p-5">
             <div className="animate-fade-in">
+                <div className="flex flex-row justify-evenly items-center flex-wrap gap-x-1 gap-y-4 mt-16 mx-16 pt-3 overflow-auto">
+                    <h3 className="">Crear Receta</h3>
+                    <button  className=" bg-orange-200 h-10 w-10 rounded-md">+</button>
+                </div>
+                {createform ? <CreateForm /> : null}
                 <div className="flex flex-row justify-evenly items-center flex-wrap gap-x-1 gap-y-4 mt-16 mx-16 overflow-auto">
                 {recipes && recipes.length > 0 ? (
                     recipes.map((recipe, i) => <RecipeCardAll key={i} recipe={recipe} />)
