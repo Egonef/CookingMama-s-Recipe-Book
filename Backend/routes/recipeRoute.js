@@ -15,7 +15,7 @@ router.route('/find').get(ctr.getRecipeByIngredientAndFilter)
 
 // Rutas para salvar
 router.route('/saved').get(ctr.getRecipesSavedByUser)
-router.route('/saved').post(ctr.setRecipeSavedByUser)
+router.route('/saved').post(auth.getAuth, ctr.setRecipeSavedByUser)
 router.route('/saved').delete(auth.getAuth, ctr.setRecipeUnsavedByUser)
 
 //Rutas para recetas propias
