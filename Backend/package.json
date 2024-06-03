@@ -21,6 +21,7 @@
     "express-session": "^1.18.0",
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.0",
+    "sharp": "^0.33.4",
     "supertest-session": "^5.0.1"
   },
   "devDependencies": {

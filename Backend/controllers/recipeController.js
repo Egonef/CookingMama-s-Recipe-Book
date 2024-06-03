@@ -69,6 +69,8 @@ export const getRecipeByIngredientAndFilter  = asyncHandler(async(req, res) => {
     //console.log("ingredientes: " + ingredients)
     const cuisine = req.query.cuisine;
     const maxReadyTime = req.query.maxReadyTime ? parseInt(req.query.maxReadyTime) : null;
+    console.log("cuisine: " + cuisine)
+    console.log("maxReadyTime: " + maxReadyTime)
     const APIEnabled = req.query.api === 'True'; 
 
     if (ingredients.length === 0) {

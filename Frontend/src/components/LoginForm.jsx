@@ -23,21 +23,31 @@ export default function LoginForm() {
     //Estados de los campos del registro
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const login = async () => {
-        const response = await axios.post('http://localhost:5000/api/users/login', {
+        try {
+            const response = await axios.post('http://localhost:5000/api/users/login', {
             email,
             password
-        }, {
-            withCredentials: true, // Esto debe ir aquí
-        });
-        console.log(response);
+            }, {
+                withCredentials: true, // Esto debe ir aquí
+            });
+            window.location.href = "/";
+            console.log(response);
+        } catch (response) {
+            setErrorMessage(response.response.data.message);
+        }
     }
 
 
     return (
         <div className="flex justify-center w-screen h-auto 2xl:mt-44 lg:mt-10">
+                {errorMessage && (
+                <div className="error-popup absolute top-20 p-5 rounded-lg bg-slate-600 text-slate-100">
+                    {errorMessage}
+                </div>
+                )}
             <form className=" flex flex-row justify-center shadow-md bg-[#F19CBB] w-1/2 h-96 rounded-md p-8 ">
                 <div className="flex flex-col justify-center w-1/2 h-auto mr-5">
                     <div className='flex flex-col mb-2 relative'>
@@ -74,11 +84,11 @@ export default function LoginForm() {
                         />
                     </div>
 
-                    <button type='button' className=" self-center bg-lime-700 text-white rounded-lg p-2 my-5 w-32 h-12" onClick={login}>Iniciar sesión</button>
-                    <Link to={"/register"} className="flex flex-row justify-center items-center">
+                    <button type='button' className=" flex items-center justify-center self-center bg-lime-700 text-white  rounded-lg p-2 my-5 w-32 h-12 cursor-pointer" onClick={login}>Iniciar sesión</button>
+                    <a href={"/register"} className="flex flex-row justify-center items-center">
                         <p className=' mx-2'>¿No tienes cuenta?</p>
                         <button className=" bg-transparent text-lime-900 rounded-lg p-2 my-2"><b>Regístrate</b></button>
-                    </Link>
+                    </a>
                     <div className="flex flex-col justify-center items-center my-2">
                         <p className=' text-center text-sm' >¿Olvidaste tu contraseña?</p>
                         <button className="bg-transparent text-lime-900 w-44 "><b>Recuperar contraseña</b></button>
