@@ -1,4 +1,5 @@
 import axios from 'axios';
+import sharp from 'sharp';
 
 
 // FUNCIONES DE LLAMADA A LA API DE TRADUCCIÓN
@@ -44,10 +45,24 @@ export async function translateIngredients(ingredients, idioma, targetLanguage) 
 
 // FUNCIONES DE LLAMADA A LA API DE RECETAS
 
+async function isImageResolutionAcceptable(url) {
+    try {
+        const response = await axios.get(url, { responseType: 'arraybuffer' });
+        const imageBuffer = Buffer.from(response.data);
+        const metadata = await sharp(imageBuffer).metadata();
+        console.log("This one has a resolution " + metadata.width + "x" + metadata.height )
+        return metadata.width >= 500 && metadata.height >= 350;
+    } catch {
+        return false;
+    }
+}
+
 const apiKeys = [
     process.env.apiKeysRecipe,
     process.env.apiKeysRecipe2,
-    process.env.apiKeysRecipe3
+    process.env.apiKeysRecipe3,
+    process.env.apiKeysRecipe4,
+    process.env.apiKeysRecipe5
 ];
 
 export async function APIsearchRecipesByIngredients(ingredients) {
@@ -56,7 +71,9 @@ export async function APIsearchRecipesByIngredients(ingredients) {
     const apiKeys = [
         process.env.apiKeysRecipe,
         process.env.apiKeysRecipe2,
-        process.env.apiKeysRecipe3
+        process.env.apiKeysRecipe3,
+        process.env.apiKeysRecipe4,
+        process.env.aoiKeysRecipe5
     ];
 
     // Primer ciclo: Buscar recetas por ingredientes
@@ -100,21 +117,27 @@ export async function APIsearchRecipesByIngredients(ingredients) {
                     });
 
                     const recipeDetails = recipeDetailsResponse.data;
-                    return {
-                        //id: recipeDetails.id,
-                        id: "api",
-                        title: recipeDetails.title,
-                        instructions: recipeDetails.instructions,
-                        ingredients: recipeDetails.extendedIngredients.map(ingredient => ingredient.original),
-                        photo: recipeDetails.image,
-                        cuisineType: recipeDetails.cuisines.join(', '),
-                        preparationTime: recipeDetails.readyInMinutes,
-                        allergens: recipeDetails.allergens || []
-                    };
+                    const isResolutionAcceptable = await isImageResolutionAcceptable(recipeDetails.image);
+
+                    if (isResolutionAcceptable) {
+                        return {
+                            id: "api",
+                            title: recipeDetails.title,
+                            instructions: recipeDetails.instructions,
+                            ingredients: recipeDetails.extendedIngredients.map(ingredient => ingredient.original),
+                            photo: recipeDetails.image,
+                            cuisineType: recipeDetails.cuisines.join(', '),
+                            preparationTime: recipeDetails.readyInMinutes,
+                            allergens: recipeDetails.allergens || []
+                        };
+                    } else {
+                        return null;
+                    }
                 });
 
                 // Esperar a que todas las solicitudes de recetas se completen
-                APIRecipes = await Promise.all(recipesPromises);
+                //APIRecipes = await Promise.all(recipesPromises);
+                APIRecipes = (await Promise.all(recipesPromises)).filter(recipe => recipe !== null);
                 break; // Sal del ciclo si la consulta fue exitosa
             } catch (error) {
                 if (error.response && error.response.status === 402) { // 402 Payment Required
