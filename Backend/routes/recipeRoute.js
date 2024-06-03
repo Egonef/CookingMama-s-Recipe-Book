@@ -24,11 +24,22 @@ router.route('/myOwn/').post(auth.getAuth, ctr.addRecipe)
 router.route('/myOwn/').patch(auth.getAuth, ctr.draftRecipe)
 router.route('/myOwn/').delete(auth.getAuth, ctr.deleteOwnRecipe)
 
+
+
 //Rutas auxiliares
 router.route('/updateIngs').get(ctr.updateIngredients)
 router.route('/:id').get(ctr.getRecipeById)
 
+//Rutas para hacer pruebas
+    router.route('/test/saved').get(ctr.getRecipesSavedByUser)
+    router.route('/test/saved').post(ctr.setRecipeSavedByUser)
+    router.route('/test/saved').delete(ctr.setRecipeUnsavedByUser)
 
+    //Rutas para recetas propias
+    router.route('/test/myOwn/').get(ctr.getRecipesCreatedByUser)
+    router.route('/test/myOwn/').post(ctr.publishRecipe)
+    router.route('/test/myOwn/').patch(ctr.draftRecipe)
+    router.route('/test/myOwn/').delete(ctr.deleteOwnRecipe)
 
 
 export default router

@@ -35,7 +35,7 @@ describe('Find', () => {
   it('should return the recipe if found', async () => {
 
     const response = await request(app).get("/api/recipes/find").query({ingredients: "pollo"})
-    console.log(response)
+    //console.log(response)
     expect(response.statusCode).toBe(200);
 
     expect(Array.isArray(response.body)).toBe(true);

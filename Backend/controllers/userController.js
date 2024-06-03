@@ -48,7 +48,7 @@ export const login  = asyncHandler(async(req, res) => {
 
     req.session.user=existingUser;
 
-    console.log(req.session.user)
+    //console.log(req.session.user)
     res.status(201).json(existingUser);
 })
 
@@ -127,10 +127,12 @@ export async function checkStatus(req) {
 
 
 export const getAuth = asyncHandler(async(req, res, next) => {
+    /*
     console.log("Entro en getAuth");
     console.log("Valor de req en auth: " + req)
     console.log("req.session: ",req.session)
     console.log("req.session.user: ",req.session.user)
+    */
     try {
         const loggedIn = await checkStatus(req); // Usar la nueva función de verificación
         console.log("loggedIn: ", loggedIn);

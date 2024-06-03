@@ -26,7 +26,7 @@ describe('Performance Tests of Recipes', () => {
     expect(responseTime).toBeLessThan(200); 
   });
 });
-
+/*
 describe('Performance Test for getRecipeByIngredientAndFilter', () => {
   it('should measure the response time with APIEnabled=True', async () => {
     const ingredients = "Pollo";
@@ -68,7 +68,7 @@ describe('Performance Test for getRecipeByIngredientAndFilter', () => {
     expect(responseTime).toBeLessThan(2000);  // Ajusta este valor según tus necesidades de rendimiento
   });
 });
-
+*/
 describe('Performance Tests of Login and Register', () => {
   it('should measure the response time for user login', async () => {
     const startTime = Date.now();

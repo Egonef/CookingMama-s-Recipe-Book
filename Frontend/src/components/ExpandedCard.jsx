@@ -59,12 +59,35 @@ export default function ExpadedCard( { recipe, closeCard }) {
 
     const handleSave = () => {
         console.log("Guardando receta")
+        /*
         axios.post(`http://localhost:5000/api/recipes/saved/` , {id} , {
             withCredentials: true, // Esto debe ir aquí
         })// Reemplaza con la URL de tu API
         .then(response => {
             console.log(response.data)
         })
+        */
+        axios.get('http://localhost:5000/api/users/status', {withCredentials: true,})
+        .then(response => {
+            if (response.data.loggedIn === true) {
+                setLogedIn(true)
+                const userId = response.data.user._id;
+                const recipeID = recipe._id;
+                console.log("valor del id user en response: " + userId)
+                console.log("Procedemos a sacar sus recetas guardadas")
+                // Ahora usa 'userId' en lugar de 'user'
+                axios.post(`http://localhost:5000/api/recipes/saved?userID=${userId}&recipeID=${id}`)  // Reemplaza con la URL de tu API
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.error('There was an error!', error);
+                    });
+            }
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
     }
 
     return (
