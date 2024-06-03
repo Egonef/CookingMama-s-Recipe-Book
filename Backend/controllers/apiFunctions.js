@@ -6,7 +6,6 @@ import sharp from 'sharp';
 
 export async function translateText(text, idioma, targetLanguage) {
     const apiKeyTranslation = process.env.apiKeyTranslation
-    //const translator = new deepl.Translator(apiKeyTranslation);
     //console.log(apiKeyTranslation);
     try {
         const response = await axios.post(`https://api-free.deepl.com/v2/translate`, null, {
@@ -17,8 +16,6 @@ export async function translateText(text, idioma, targetLanguage) {
                 auth_key: apiKeyTranslation
             }
         });
-
-        //const response = await translator.translateText(text, null, targetLanguage);
 
         //const translatedText = response.text;
         //console.log(response)
@@ -45,17 +42,18 @@ export async function translateIngredients(ingredients, idioma, targetLanguage) 
 
 // FUNCIONES DE LLAMADA A LA API DE RECETAS
 
-async function isImageResolutionAcceptable(url) {
+/*async function isImageResolutionAcceptable(url) {
     try {
         const response = await axios.get(url, { responseType: 'arraybuffer' });
         const imageBuffer = Buffer.from(response.data);
         const metadata = await sharp(imageBuffer).metadata();
         console.log("This one has a resolution " + metadata.width + "x" + metadata.height )
-        return metadata.width >= 500 && metadata.height >= 350;
+        return metadata.width >= 800 && metadata.height >= 600;
     } catch {
         return false;
     }
 }
+*/
 
 const apiKeys = [
     process.env.apiKeysRecipe,
@@ -73,7 +71,8 @@ export async function APIsearchRecipesByIngredients(ingredients) {
         process.env.apiKeysRecipe2,
         process.env.apiKeysRecipe3,
         process.env.apiKeysRecipe4,
-        process.env.aoiKeysRecipe5
+        process.env.apiKeysRecipe5,
+        process.env.apikeysRecipe6,
     ];
 
     // Primer ciclo: Buscar recetas por ingredientes
@@ -117,9 +116,9 @@ export async function APIsearchRecipesByIngredients(ingredients) {
                     });
 
                     const recipeDetails = recipeDetailsResponse.data;
-                    const isResolutionAcceptable = await isImageResolutionAcceptable(recipeDetails.image);
+                    //const isResolutionAcceptable = await isImageResolutionAcceptable(recipeDetails.image);
 
-                    if (isResolutionAcceptable) {
+                    //if (isResolutionAcceptable) {
                         return {
                             id: "api",
                             title: recipeDetails.title,
@@ -130,9 +129,9 @@ export async function APIsearchRecipesByIngredients(ingredients) {
                             preparationTime: recipeDetails.readyInMinutes,
                             allergens: recipeDetails.allergens || []
                         };
-                    } else {
-                        return null;
-                    }
+                    //} else {
+                    //   return null;
+                    //}
                 });
 
                 // Esperar a que todas las solicitudes de recetas se completen
