@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Searchbar () {
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();
-    const [selectedOptions, setSelectedOptions] = useState(null);
+    const [selectedOptions, setSelectedOptions] = useState("");
     const [readyToSelect, setReadyToSelect] = useState(false);
 
     useEffect(() => {
