@@ -7,7 +7,6 @@ import axios from 'axios';
 
 export default function LoginForm() {
 
-
     //Estados de los inputs
     const [isTitleFocused, setIsTitleFocused] = useState(false);
     const [isCuisineFocused, setIsCuisineFocused] = useState(false);
